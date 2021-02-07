@@ -15,12 +15,12 @@ const VARIABLETYPES = {
 }
 
 const Variable = ({ element }) => {
-    const { handleChange } = useContext(HtmlContext)
+    const { handleChangeVariable } = useContext(HtmlContext)
     const [editMode, setEditMode] = useState(false)
     const [selectValues, setSelectValues] = useState([])
     const [inputsValues, setValue] = useState({
         title: element.title,
-        [element.key]: element.key,
+        key: element.key,
         value: element.value
     })
 
@@ -29,17 +29,27 @@ const Variable = ({ element }) => {
         setSelectValues([...selectValuesToArr])
     }, [])
 
-    const _handelChange = (e) => {
+    const _handelChangeTitle = (e) => {
         e.preventDefault()
-        // setValue(e.target.value)
-        console.log('_handelChange e', e)
+        const newObj = {...inputsValues}
+        newObj.title = e.target.value
+        setValue({...newObj})
+    }
+
+    
+    const _handelChangeKey = (e) => {
+        e.preventDefault()
+        console.log('e target', e.target.value)
+        let newObj = {...inputsValues}
+        newObj = {...inputsValues, key: e.target.value}
+        setValue({...newObj})
     }
 
     const _handleSave = () => {
         if (!inputsValues.title.length) {
             return alert('text cant be empty')
         }
-        // handleChange({id: element.id, value: inputValue}) 
+        handleChangeVariable({id: element.id, value: inputsValues}) 
         // setEditMode(!editMode)
     }
 
@@ -61,8 +71,8 @@ const Variable = ({ element }) => {
             {
                 editMode ?
                     <>
-                        <input name={element.id} onChange={_handelChange} placeholder={inputsValues.title} value={inputsValues.title} />
-                        <select>
+                        <input name={element.id} onChange={_handelChangeTitle} placeholder={inputsValues.title} value={inputsValues.title} />
+                        <select onChange={_handelChangeKey} value={inputsValues.key} >
                             {selectValues.map(option => <option keys={Math.random() * 1000} >{option}</option>)}
                         </select>
                         <button type='button' onClick={_handleSave}>Save</button>

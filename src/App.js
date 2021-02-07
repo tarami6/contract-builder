@@ -15,78 +15,7 @@ function App() {
       "type": "body",
       "style": {},
       "children": [
-        {
-          "id": "4717cc6e251",
-          "type": "row",
-          "style": {},
-          "numOfClomuns": 2,
-          "children": [
-            {
-              "id": "717cc6e251d",
-              "type": "column",
-              "style": {},
-              "rowId": "4717cc6e251",
-              "children": [
-                {
-                  "id": "7cc6e251d92",
-                  "type": "text",
-                  "style": {},
-                  "content": "this is text"
-                }
-              ]
-            },
-            {
-              "id": "17cc6e251d9",
-              "type": "column",
-              "style": {},
-              "rowId": "4717cc6e251",
-              "children": [
-                {
-                  "id": "cc6e251d924",
-                  "type": "text",
-                  "style": {},
-                  "content": "this is text"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "c6e251d9246",
-          "type": "row",
-          "style": {},
-          "numOfClomuns": 2,
-          "children": [
-            {
-              "id": "6e251d92461",
-              "type": "column",
-              "style": {},
-              "rowId": "c6e251d9246",
-              "children": [
-                {
-                  "id": "251d9246179",
-                  "type": "text",
-                  "style": {},
-                  "content": "this is text"
-                }
-              ]
-            },
-            {
-              "id": "e251d924617",
-              "type": "column",
-              "style": {},
-              "rowId": "c6e251d9246",
-              "children": [
-                {
-                  "id": "51d92461797",
-                  "type": "text",
-                  "style": {},
-                  "content": "this is text"
-                }
-              ]
-            }
-          ]
-        }
+       
       ]
     }
   })
@@ -104,7 +33,7 @@ function App() {
     return <></>
   }
 
-  const handleChange = ({id, value}) => {
+  const _handleChangeText = ({id, value}) => {
     const vdom = {...html}
       if (vdom.body?.children.length) {
         vdom.body?.children.forEach((row, rowIndex) => {
@@ -114,6 +43,26 @@ function App() {
                 column.children.forEach((element, elementIndex) => {
                   if (element.id === id) {
                     element.content = value
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
+      setHtml(vdom)
+  }
+
+  const _handleChangeVariable = ({id, value}) => {
+    const vdom = {...html}
+      if (vdom.body?.children.length) {
+        vdom.body?.children.forEach((row, rowIndex) => {
+          if (row.children.length) {
+            row.children.forEach((column, columnIndex) => {
+              if (column.children.length) {
+                column.children.forEach((element, elementIndex) => {
+                  if (element.id === id) {
+                    vdom.body.children[rowIndex].children[columnIndex].children[elementIndex] = {...element, ...value}
                   }
                 })
               }
@@ -136,7 +85,8 @@ function App() {
         setHtml,
         modalOpenAddRow,
         modalAddRowToggle,
-        handleChange
+        handleChangeText: _handleChangeText,
+        handleChangeVariable: _handleChangeVariable
       }}
     >
       <div style={{

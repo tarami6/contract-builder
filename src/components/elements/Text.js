@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { HtmlContext } from '../../App'
 
 const Text = ({ element }) => {
-    const { handleChange } = useContext(HtmlContext)
+    const { handleChangeText } = useContext(HtmlContext)
     const [editMode, setEditMode] = useState(false)
     const [inputValue, setValue] = useState(element.content) 
 
@@ -15,7 +15,7 @@ const Text = ({ element }) => {
         if(!inputValue.length){
            return alert('text cant be empty')
         }
-        handleChange({id: element.id, value: inputValue}) 
+        handleChangeText({id: element.id, value: inputValue}) 
         setEditMode(!editMode)
     }
 
