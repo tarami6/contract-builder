@@ -3,7 +3,7 @@ import React from 'react';
  const ELEMENTTYPE = {
     row: 'row',
     text: 'text',
-    grid: 'grid',
+    variable: 'variable',
     img: 'img'
 }
 

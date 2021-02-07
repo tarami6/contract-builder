@@ -80,8 +80,8 @@ const ModalAddRow= () => {
     return (
         <div>
             <div >
-                <div onClick={() => addRow(context, 1)}>One section</div> 
-                <div onClick={() => addRow(context, 2)}>Tne section</div> 
+                <div onClick={() => addRow(context, 1)}>One Column</div> 
+                <div onClick={() => addRow(context, 2)}>Two Column</div> 
             </div>
             {/* <div onClick={() => addElement(context,ELEMENTTYPE.text)}>text</div>
             <div onClick={() => addElement(context,ELEMENTTYPE.grid)}>grid</div>

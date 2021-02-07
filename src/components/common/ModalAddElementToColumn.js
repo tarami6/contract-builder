@@ -16,13 +16,22 @@ const img = (id) => ({
     style: {},
 })
 
+const variable = (id) => ({
+    id,
+    type: 'variable',
+    style: {},
+    title: 'Title',
+    key: 'empty',
+    value: undefined
+})
+
 const addElement = (context, type, rowId, columnId) => {
     const { html, setHtml } = context
-    let vdom = {...html}
+    let vdom = { ...html }
     const path = vdom.body.children
     const indexOfRow = path.findIndex(row => row.id === rowId)
     const inedxOfColumn = path[indexOfRow].children.findIndex(column => column.id === columnId)
-    
+
     switch (type) {
         case ELEMENTTYPE.text:
             const textId = uid()
@@ -31,6 +40,10 @@ const addElement = (context, type, rowId, columnId) => {
         case ELEMENTTYPE.img:
             const imgId = uid()
             vdom.body.children[indexOfRow].children[inedxOfColumn].children.push(img(imgId))
+            break;
+        case ELEMENTTYPE.variable:
+            const variableId = uid()
+            vdom.body.children[indexOfRow].children[inedxOfColumn].children.push(variable(variableId))
             break;
         default:
             break;
@@ -48,6 +61,7 @@ const ModalAddElementToColumn = ({ open, rowId, columnId }) => {
         <div>
             <div onClick={() => addElement(context, ELEMENTTYPE.text, rowId, columnId)}>text</div>
             <div onClick={() => addElement(context, ELEMENTTYPE.img, rowId, columnId)}>img</div>
+            <div onClick={() => addElement(context, ELEMENTTYPE.variable, rowId, columnId)}>varibale</div>
         </div>
     )
 }

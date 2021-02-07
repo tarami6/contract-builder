@@ -5,6 +5,8 @@ import RemoveElementBtn from '../common/RemoveElementBtn'
 import ModalAddElementToColumn from '../common/ModalAddElementToColumn'
 import ELEMENTTYPE from '../common/moduleELementTypes'
 import Text from './Text'
+import Variable from './Variable'
+import Image from './Image'
 
 const getColumn = (context, id, rowId) => {
     const { html: { body: { children } } } = context
@@ -19,20 +21,17 @@ const getRow = (context, rowId) => {
     return currentRow
 }
 
-// const renderByElementType = (element) => {
-//     const { type }  = element
-//     switch(type){
-//         case 
-//     }
-// }
-
 const RenderElementByType = ({ element }) => {
     const { type } = element
     switch (type) {
         case ELEMENTTYPE.text:
             return <Text element={element} />
+        case ELEMENTTYPE.img:
+            return <Image element={element} />
+        case ELEMENTTYPE.variable:
+            return <Variable element={element} />
         default:
-            break;
+            return <p>Element type not found</p>
     }
 }
 
@@ -72,7 +71,7 @@ const Column = ({ id, rowId }) => {
                 justifyContent: "center",
                 minHeight: "inherit",
             }}>
-                <button onClick={() => toggleModal(!modalOpen)}>+</button>
+                <button type='button' onClick={() => toggleModal(!modalOpen)}>+</button>
             </div>
             <ModalAddElementToColumn open={modalOpen} rowId={rowId} columnId={id} />
         </div>
