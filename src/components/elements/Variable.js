@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { HtmlContext } from '../../App'
 
 const VARIABLETYPES = {
     empty: 'empty',
@@ -15,60 +14,61 @@ const VARIABLETYPES = {
 }
 
 const Variable = ({ element }) => {
-    const { handleChangeVariable } = useContext(HtmlContext)
-    const [editMode, setEditMode] = useState(false)
-    const [selectValues, setSelectValues] = useState([])
-    const [inputsValues, setValue] = useState({
-        title: element.title,
-        key: element.key,
-        value: element.value
-    })
+    // const { handleChangeVariable } = useContext(HtmlContext)
+    // const [editMode, setEditMode] = useState(false)
+    // const [selectValues, setSelectValues] = useState([])
+    // const [inputsValues, setValue] = useState({
+    //     title: element.title,
+    //     key: element.key,
+    //     value: element.value
+    // })
 
-    useEffect(() => {
-        const selectValuesToArr = Object.keys(VARIABLETYPES)
-        setSelectValues([...selectValuesToArr])
-    }, [])
+    // useEffect(() => {
+    //     const selectValuesToArr = Object.keys(VARIABLETYPES)
+    //     setSelectValues([...selectValuesToArr])
+    // }, [])
 
-    const _handelChangeTitle = (e) => {
-        e.preventDefault()
-        const newObj = {...inputsValues}
-        newObj.title = e.target.value
-        setValue({...newObj})
-    }
+    // const _handelChangeTitle = (e) => {
+    //     e.preventDefault()
+    //     const newObj = {...inputsValues}
+    //     newObj.title = e.target.value
+    //     setValue({...newObj})
+    // }
 
     
-    const _handelChangeKey = (e) => {
-        e.preventDefault()
-        console.log('e target', e.target.value)
-        let newObj = {...inputsValues}
-        newObj = {...inputsValues, key: e.target.value}
-        setValue({...newObj})
-    }
+    // const _handelChangeKey = (e) => {
+    //     e.preventDefault()
+    //     console.log('e target', e.target.value)
+    //     let newObj = {...inputsValues}
+    //     newObj = {...inputsValues, key: e.target.value}
+    //     setValue({...newObj})
+    // }
 
-    const _handleSave = () => {
-        if (!inputsValues.title.length) {
-            return alert('text cant be empty')
-        }
-        handleChangeVariable({id: element.id, value: inputsValues}) 
-        // setEditMode(!editMode)
-    }
+    // const _handleSave = () => {
+    //     if (!inputsValues.title.length) {
+    //         return alert('text cant be empty')
+    //     }
+    //     handleChangeVariable({id: element.id, value: inputsValues}) 
+    //     // setEditMode(!editMode)
+    // }
 
     const _handleDoubleClick = () => {
-        if(!editMode){
-            setEditMode(!editMode)
-        }
+        // if(!editMode){
+        //     setEditMode(!editMode)
+        // }
        console.log('_handleDoubleClick undefined')
     }
 
-    const _close = () => {
-        if(editMode){
-            setEditMode(!editMode)
-        }
-    }
+    // const _close = () => {
+    //     if(editMode){
+    //         setEditMode(!editMode)
+    //     }
+    // }
 
     return (
         <div onDoubleClick={_handleDoubleClick}>
-            {
+            <p>Variable</p>
+            {/* {
                 editMode ?
                     <>
                         <input name={element.id} onChange={_handelChangeTitle} placeholder={inputsValues.title} value={inputsValues.title} />
@@ -87,7 +87,7 @@ const Variable = ({ element }) => {
                             }}>{element.key}</p>
                         </div>
                     )
-            }
+            } */}
         </div>
     );
 };

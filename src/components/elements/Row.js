@@ -1,14 +1,12 @@
 import React, { useContext } from "react";
 import { HtmlContext } from '../../App'
+import { useSelector } from 'react-redux'
 import AddBtn from '../common/AddBtn'
-import RemoveElementBtn from '../common/RemoveElementBtn'
+import RemoveElementBtn from '../common/RemoveBtn'
 import Column from '../elements/Column'
 
-const Row = ({ id }) => {
-    const context = useContext(HtmlContext)
-    console.log('Rowcontext', context)
-    const _row = context.html.body.children.find(row => row.id === id)
-
+const Row = ({ rowId }) => {
+    const _row = useSelector(state => state.contractDom.rows[rowId])
     console.log('_row', _row)
     return (
         <div style={{
@@ -23,7 +21,7 @@ const Row = ({ id }) => {
                 alignItems: "center",
                 justifyContent: "flex-end",
                 padding: "0px 10px",}}>
-                <RemoveElementBtn id={id} />
+                <RemoveElementBtn row rowId={rowId} />
             </div>
 
             <div
@@ -37,7 +35,7 @@ const Row = ({ id }) => {
                     justifyContent: "space-around"
                 }}
             >
-                {_row.children.map(column => <Column key={column.id} id={column.id} rowId={_row.id} />)}
+                {_row.columns.map((columnId ) => <Column key={columnId} columnId={columnId}/>)}
             </div>
         </div>
     )

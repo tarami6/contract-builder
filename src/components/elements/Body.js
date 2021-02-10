@@ -1,11 +1,8 @@
 import React, { useContext } from 'react'
-import RenderRow from './RenderRow'
+import RenderRow from '../common/RenderRow'
 import AddBtn from '../common/AddBtn'
-import {HtmlContext} from '../../App'
 
 const Body = () => {
-    const context = useContext(HtmlContext);
-    const children = context?.html?.body?.children
     return (
         <div style={{
             width: "100%",
@@ -17,7 +14,7 @@ const Body = () => {
             alignItems: 'center',
             justifyContent: 'center'
             }}>
-            <RenderRow children={children}/>
+            <RenderRow />
             <AddBtn row/>
         </div>
     )

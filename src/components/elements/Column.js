@@ -1,48 +1,33 @@
-import Rect, { useContext, useEffect, useState } from 'react'
-import { HtmlContext } from '../../App'
-import AddBtn from '../common/AddBtn'
-import RemoveElementBtn from '../common/RemoveElementBtn'
+import Rect, { useEffect, useState } from 'react'
+import RemoveBtn from '../common/RemoveBtn'
 import ModalAddElementToColumn from '../common/ModalAddElementToColumn'
 import ELEMENTTYPE from '../common/moduleELementTypes'
 import Text from './Text'
 import Variable from './Variable'
 import Image from './Image'
+import { useSelector } from 'react-redux'
 
-const getColumn = (context, id, rowId) => {
-    const { html: { body: { children } } } = context
-    const currentRow = children.find(row => row.id === rowId)
-    const currentColumn = currentRow.children.find(column => column.id === id)
-    return currentColumn
-}
-
-const getRow = (context, rowId) => {
-    const { html: { body: { children } } } = context
-    const currentRow = children.find(row => row.id === rowId)
-    return currentRow
-}
-
-const RenderElementByType = ({ element }) => {
-    const { type } = element
-    switch (type) {
+const RenderElementByType = ({ elementId }) => {
+    const _type = useSelector(state => state.contractDom.elements[elementId].type)
+    switch (_type) {
         case ELEMENTTYPE.text:
-            return <Text element={element} />
-        case ELEMENTTYPE.img:
-            return <Image element={element} />
-        case ELEMENTTYPE.variable:
-            return <Variable element={element} />
+            return <Text elementId={elementId} />
+        // case ELEMENTTYPE.img:
+        //     return <Image element={element} rowIndex={rowIndex} columnIndex={columnIndex} />
+        // case ELEMENTTYPE.variable:
+        //     return <Variable element={element} rowIndex={rowIndex} columnIndex={columnIndex} />
         default:
             return <p>Element type not found</p>
     }
 }
 
-const Column = ({ id, rowId }) => {
-    const context = useContext(HtmlContext)
-    const _column = getColumn(context, id, rowId)
-    const _children = _column.children
-    const _row = getRow(context, rowId)
-    const numOfColumnInRow = _row.numOfClomuns
-
-    const [modalOpen, toggleModal] = useState(false)
+const Column = ({ columnId }) => {
+    const _column = useSelector(state => state.contractDom.columns[columnId])
+    const _elementsIds = _column.elements 
+    const _row = useSelector(state => state.contractDom.rows[_column.rowId])
+    const numOfColumnsInRow = _row.numOfColumns
+    useEffect(() => console.log('_column',_column), [_column])
+    const [modalOpen, setModalOpen] = useState(false)
 
     return (
         <div style={{
@@ -60,20 +45,21 @@ const Column = ({ id, rowId }) => {
                 padding: "0px 10px",
             }}>
                 {
-                    numOfColumnInRow > 1 &&
-                    <RemoveElementBtn id={id} rowId={rowId} />
+                    numOfColumnsInRow > 1 &&
+                    <RemoveBtn  columnId={columnId} rowId={_row.id} column={true} />
                 }
             </div>
-            {_children.map(element => <RenderElementByType key={element.id} element={element} />)}
+            <p>Column</p>
+            {_elementsIds.map((elementId, index) => <RenderElementByType key={columnId} elementId={elementId} />)}
             <div style={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 minHeight: "inherit",
             }}>
-                <button type='button' onClick={() => toggleModal(!modalOpen)}>+</button>
+                <button type='button' onClick={() => setModalOpen(!modalOpen)}>+</button>
             </div>
-            <ModalAddElementToColumn open={modalOpen} rowId={rowId} columnId={id} />
+            <ModalAddElementToColumn open={modalOpen} columnId={columnId}  />
         </div>
     )
 }

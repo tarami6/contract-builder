@@ -1,10 +1,13 @@
 import React, { useContext, useState } from "react";
-import { HtmlContext } from '../../App'
+import { editElementText, removeElement } from '../../redux/actionsContractDom'
 
-const Text = ({ element }) => {
-    const { handleChangeText } = useContext(HtmlContext)
+import { useSelector, useDispatch } from 'react-redux'
+
+const Text = ({ elementId }) => {
+    const _element = useSelector(state => state.contractDom.elements[elementId])
+    const dispatch = useDispatch()
     const [editMode, setEditMode] = useState(false)
-    const [inputValue, setValue] = useState(element.content) 
+    const [inputValue, setValue] = useState(_element.content)
 
     const _handelChange = (e) => {
         e.preventDefault()
@@ -12,33 +15,38 @@ const Text = ({ element }) => {
     }
 
     const _handleSave = () => {
-        if(!inputValue.length){
-           return alert('text cant be empty')
+        if (!inputValue.length) {
+            return alert('text cant be empty')
         }
-        handleChangeText({id: element.id, value: inputValue}) 
+        console.log('save action')
+        dispatch(editElementText(elementId, inputValue))
         setEditMode(!editMode)
     }
 
     const _handleDoubleClick = () => {
-        if(!editMode){
+        if (!editMode) {
             setEditMode(!editMode)
         }
-       console.log('_handleDoubleClick undefined')
     }
 
     const _close = () => {
-        if(editMode){
+        if (editMode) {
             setEditMode(!editMode)
         }
+    }
+
+    const _delete = () => {
+        dispatch(removeElement(_element.id, _element.columnId))
     }
 
     return (
         <div onDoubleClick={_handleDoubleClick} onBlur={() => console.log('onBlur')} >
             {editMode ?
                 <>
-                    <input  name={element.id} onChange={_handelChange} placeholder={element.content} value={inputValue} />
-                    <button type='button' onClick={_handleSave}>Save</button>  
+                    <input name={_element.id} onChange={_handelChange} placeholder={_element.content} value={inputValue} />
+                    <button type='button' onClick={_handleSave}>Save</button>
                     <button type='button' onClick={_close}>Close</button>
+                    <button type='button' onClick={_delete}>Delete Element</button>
                 </>
                 : <p>{inputValue}</p>}
 

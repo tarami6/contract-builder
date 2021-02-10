@@ -1,67 +1,18 @@
-import React, { useContext } from "react";
-import { uid } from 'uid'
-import { HtmlContext } from '../../App'
+import React from "react";
 import ELEMENTTYPE from './moduleELementTypes'
+import { addElement } from '../../redux/actionsContractDom'
+import { useDispatch, useSelector } from 'react-redux'
 
-const text = (id) => ({
-    id,
-    type: 'text',
-    style: {},
-    content: 'this is text'
-})
-
-const img = (id) => ({
-    id,
-    type: 'img',
-    style: {},
-})
-
-const variable = (id) => ({
-    id,
-    type: 'variable',
-    style: {},
-    title: 'Title',
-    key: 'empty',
-    value: undefined
-})
-
-const addElement = (context, type, rowId, columnId) => {
-    const { html, setHtml } = context
-    let vdom = { ...html }
-    const path = vdom.body.children
-    const indexOfRow = path.findIndex(row => row.id === rowId)
-    const inedxOfColumn = path[indexOfRow].children.findIndex(column => column.id === columnId)
-
-    switch (type) {
-        case ELEMENTTYPE.text:
-            const textId = uid()
-            vdom.body.children[indexOfRow].children[inedxOfColumn].children.push(text(textId))
-            break;
-        case ELEMENTTYPE.img:
-            const imgId = uid()
-            vdom.body.children[indexOfRow].children[inedxOfColumn].children.push(img(imgId))
-            break;
-        case ELEMENTTYPE.variable:
-            const variableId = uid()
-            vdom.body.children[indexOfRow].children[inedxOfColumn].children.push(variable(variableId))
-            break;
-        default:
-            break;
-    }
-    setHtml(vdom)
-}
-
-
-const ModalAddElementToColumn = ({ open, rowId, columnId }) => {
-    const context = useContext(HtmlContext)
+const ModalAddElementToColumn = ({open, rowIndex, columnId }) => {
+    const dispatch = useDispatch()
 
     if (!open)
         return <></>
     return (
         <div>
-            <div onClick={() => addElement(context, ELEMENTTYPE.text, rowId, columnId)}>text</div>
-            <div onClick={() => addElement(context, ELEMENTTYPE.img, rowId, columnId)}>img</div>
-            <div onClick={() => addElement(context, ELEMENTTYPE.variable, rowId, columnId)}>varibale</div>
+            <div onClick={() => dispatch(addElement(ELEMENTTYPE.text, columnId))}>text</div>
+            <div onClick={() => dispatch(addElement(ELEMENTTYPE.img, columnId))}>img</div>
+            <div onClick={() => dispatch(addElement(ELEMENTTYPE.variable, columnId))}>varibale</div>
         </div>
     )
 }
