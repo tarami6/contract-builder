@@ -1,6 +1,6 @@
 import {TOGGLE_ADD_ROW} from '../actionTypes'
 const initialState = {
-    addRow: false
+    addRow: true
 }
 
 export default function (state = initialState, action) {

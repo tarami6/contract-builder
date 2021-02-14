@@ -11,10 +11,9 @@ const ButtonToPrint = () => {
                 trigger={() => <button>Print this out!</button>}
                 content={() => componentRef.current}
             />
-            <div style={{ display: "none" }}>
-            <ComponentToPrint ref={componentRef} />
-            </div>
-            
+            {/* <div style={{ display: "none" }}> */}
+                <ComponentToPrint ref={componentRef} />
+            {/* </div> */}
         </div>
     )
 }

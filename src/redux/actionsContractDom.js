@@ -1,4 +1,13 @@
-import { ADD_ROW, REMOVE_ROW, REMOVE_COLUMN, ADD_ELEMENT, EDIT_ELEMENT_TEXT, REMOVE_ELEMENT } from './actionTypes'
+import {
+    ADD_ROW,
+    REMOVE_ROW,
+    REMOVE_COLUMN,
+    ADD_ELEMENT,
+    EDIT_ELEMENT_TEXT,
+    REMOVE_ELEMENT,
+    EDIT_ELEMENT_VARIABLE
+} from './actionTypes'
+
 import { uid } from 'uid'
 import ELEMENTTYPE from '../components/common/moduleELementTypes'
 
@@ -115,6 +124,16 @@ export const addElement = (type, columnId) => {
 export const editElementText = (id, value) => {
     return {
         type: EDIT_ELEMENT_TEXT,
+        payload: {
+            id,
+            value
+        }
+    }
+}
+
+export const editElementVariable = (id, value) => {
+    return {
+        type: EDIT_ELEMENT_VARIABLE,
         payload: {
             id,
             value

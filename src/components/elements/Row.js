@@ -35,7 +35,11 @@ const Row = ({ rowId }) => {
                     justifyContent: "space-around"
                 }}
             >
-                {_row.columns.map((columnId ) => <Column key={columnId} columnId={columnId}/>)}
+                {_row.columns.map((columnId ) =>{
+                    console.log('columnId',columnId)
+
+return <Column key={columnId} columnId={columnId}/>
+                } )}
             </div>
         </div>
     )

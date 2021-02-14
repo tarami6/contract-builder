@@ -1,4 +1,12 @@
-import { ADD_ROW, REMOVE_ROW, REMOVE_COLUMN, ADD_ELEMENT, EDIT_ELEMENT_TEXT, REMOVE_ELEMENT } from "../actionTypes"
+import {
+    ADD_ROW,
+    REMOVE_ROW,
+    REMOVE_COLUMN,
+    ADD_ELEMENT,
+    EDIT_ELEMENT_TEXT,
+    REMOVE_ELEMENT,
+    EDIT_ELEMENT_VARIABLE
+} from "../actionTypes"
 
 const initialState = {
     body: {
@@ -112,7 +120,7 @@ const removeElement = (state, action) => {
     return {
         ...state,
         columns: {
-            ...state.colunms,
+            ...state.columns,
             [action.payload.columnId]: {
                 ...state.columns[action.payload.columnId],
                 elements: [...state.columns[action.payload.columnId].elements.filter(id => id !== action.payload.id)]
@@ -122,6 +130,22 @@ const removeElement = (state, action) => {
     }
 }
 
+const editElementVariable = (state, action) => {
+    return {
+        ...state,
+        elements: {
+            ...state.elements,
+            [action.payload.id]: {
+                ...state.elements[action.payload.id],
+                title: action.payload.value.title,
+                key: action.payload.value.key
+            }
+        }
+    }
+}
+
+
+
 export default function contractDom(state = initialState, action) {
     switch (action.type) {
         case ADD_ROW: return addRow(state, action)
@@ -130,6 +154,7 @@ export default function contractDom(state = initialState, action) {
         case ADD_ELEMENT: return addElement(state, action)
         case EDIT_ELEMENT_TEXT: return editElementText(state, action)
         case REMOVE_ELEMENT: return removeElement(state, action)
+        case EDIT_ELEMENT_VARIABLE: return editElementVariable(state, action)
         default:
             return state
     }

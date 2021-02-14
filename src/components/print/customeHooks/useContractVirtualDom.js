@@ -1,0 +1,56 @@
+import { fromPairs } from 'lodash';
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import {cloneDeep} from 'lodash'
+
+const useContractVirtualDom = () => {
+    const body = useSelector(state => state.contractDom.body)
+    const rows = useSelector(state => state.contractDom.rows)
+    const columns = useSelector(state => state.contractDom.columns)
+    const elements = useSelector(state => state.contractDom.elements)
+    const [cVDom, setCVDom ] = useState(body)
+
+
+    useEffect(() => {
+        setCVDom(buildDom())
+    }, [body, rows, columns, elements])
+
+
+    const buildDom = () => {
+        let vdom = cloneDeep(body)
+        let _rows = cloneDeep(rows)
+        let _columns = cloneDeep(columns)
+        let _elements = cloneDeep(elements)
+        vdom.rows = vdom.rows.map(rowOrId =>{
+            if(typeof rowOrId === 'string'){
+                return _rows[rowOrId]
+            }
+            else return _rows[rowOrId.id]
+        } )
+        vdom.rows.forEach(row => {
+            row.columns = row.columns.map(columnId => {
+                if(typeof columnId === 'string'){
+                    return _columns[columnId]
+                }
+                else return  _columns[columnId.id]
+            })
+        });
+        vdom.rows.forEach(row => {
+            row.columns?.forEach(column => {
+                if(column?.elements){
+                    column.elements = column.elements.map(elementOrId =>{
+                        if(typeof elementOrId === 'string'){
+                            return _elements[elementOrId]
+                        }
+                        else return _elements[elementOrId.id] 
+                    } )
+                }
+            });
+        })
+        return vdom
+    }
+    
+    return cVDom
+};
+
+export default useContractVirtualDom;

@@ -1,16 +1,16 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import useContractVirtualDom from './customeHooks/useContractVirtualDom'
 
-const ComponentToPrint = React.forwardRef((props, ref) => {
-  const text = useSelector(state => state.contractDom.elements, () => {})
-  console.log('text', text)
-  let first = Object.keys(text)
-  let content = text[first[0]]?.content ?? 'hello'
-  return (
-  <div ref={ref} >
-    <p>{content}</p>
-  </div>
-  )
+import Row from './components/Row'
+
+const ComponentToPrint = React.forwardRef((_, ref) => {
+    const { rows } = useContractVirtualDom()
+
+    return (
+        <div ref={ref} >
+            {rows.map(row => <Row key={row.id} row={row} />)}
+        </div>
+    )
 });
 
 

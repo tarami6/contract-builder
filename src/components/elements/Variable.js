@@ -1,4 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { removeElement , editElementVariable} from '../../redux/actionsContractDom'
 
 const VARIABLETYPES = {
     empty: 'empty',
@@ -13,70 +15,75 @@ const VARIABLETYPES = {
     agentName: 'agentName'
 }
 
-const Variable = ({ element }) => {
-    // const { handleChangeVariable } = useContext(HtmlContext)
-    // const [editMode, setEditMode] = useState(false)
-    // const [selectValues, setSelectValues] = useState([])
-    // const [inputsValues, setValue] = useState({
-    //     title: element.title,
-    //     key: element.key,
-    //     value: element.value
-    // })
+const Variable = ({ elementId }) => {
+    const _element = useSelector(state => state.contractDom.elements[elementId])
+    const dispatch = useDispatch()
+    const [editMode, setEditMode] = useState(false)
+    const [selectValues, setSelectValues] = useState([])
+    const [inputsValues, setValue] = useState({
+        title: _element.title,
+        key: _element.key,
+        value: _element.value
+    })
 
-    // useEffect(() => {
-    //     const selectValuesToArr = Object.keys(VARIABLETYPES)
-    //     setSelectValues([...selectValuesToArr])
-    // }, [])
+    useEffect(() => {
+        const selectValuesToArr = Object.keys(VARIABLETYPES)
+        setSelectValues([...selectValuesToArr])
+    }, [])
 
-    // const _handelChangeTitle = (e) => {
-    //     e.preventDefault()
-    //     const newObj = {...inputsValues}
-    //     newObj.title = e.target.value
-    //     setValue({...newObj})
-    // }
+    const _handelChangeTitle = (e) => {
+        e.preventDefault()
+        const newObj = {...inputsValues}
+        newObj.title = e.target.value
+        setValue({...newObj})
+    }
 
     
-    // const _handelChangeKey = (e) => {
-    //     e.preventDefault()
-    //     console.log('e target', e.target.value)
-    //     let newObj = {...inputsValues}
-    //     newObj = {...inputsValues, key: e.target.value}
-    //     setValue({...newObj})
-    // }
+    const _handelChangeKey = (e) => {
+        e.preventDefault()
+        console.log('e target', e.target.value)
+        let newObj = {...inputsValues}
+        newObj = {...inputsValues, key: e.target.value}
+        setValue({...newObj})
+    }
 
-    // const _handleSave = () => {
-    //     if (!inputsValues.title.length) {
-    //         return alert('text cant be empty')
-    //     }
-    //     handleChangeVariable({id: element.id, value: inputsValues}) 
-    //     // setEditMode(!editMode)
-    // }
+    const _handleSave = () => {
+        if (!inputsValues.title.length) {
+            return alert('text cant be empty')
+        }
+        dispatch(editElementVariable(_element.id, inputsValues)) 
+        setEditMode(!editMode)
+    }
 
     const _handleDoubleClick = () => {
-        // if(!editMode){
-        //     setEditMode(!editMode)
-        // }
+        if(!editMode){
+            setEditMode(!editMode)
+        }
        console.log('_handleDoubleClick undefined')
     }
 
-    // const _close = () => {
-    //     if(editMode){
-    //         setEditMode(!editMode)
-    //     }
-    // }
+    const _close = () => {
+        if(editMode){
+            setEditMode(!editMode)
+        }
+    }
+
+    const _delete = () => {
+        dispatch(removeElement(_element.id, _element.columnId))
+    }
 
     return (
         <div onDoubleClick={_handleDoubleClick}>
-            <p>Variable</p>
-            {/* {
+            {
                 editMode ?
                     <>
-                        <input name={element.id} onChange={_handelChangeTitle} placeholder={inputsValues.title} value={inputsValues.title} />
+                        <input name={_element.id} onChange={_handelChangeTitle} placeholder={inputsValues.title} value={inputsValues.title} />
                         <select onChange={_handelChangeKey} value={inputsValues.key} >
-                            {selectValues.map(option => <option keys={Math.random() * 1000} >{option}</option>)}
+                            {selectValues.map(option => <option key={Math.random() * 1000} >{option}</option>)}
                         </select>
                         <button type='button' onClick={_handleSave}>Save</button>
                         <button type='button' onClick={_close}>Close</button>
+                        <button type='button' onClick={_delete}>Delete Element</button>
                     </>
                     : (
                         <div style={{ display: "flex" }}>
@@ -84,10 +91,10 @@ const Variable = ({ element }) => {
                             <p style={{
                                 marginLeft: "30px",
                                 fontWeight: "bolder",
-                            }}>{element.key}</p>
+                            }}>{_element.key}</p>
                         </div>
                     )
-            } */}
+            }
         </div>
     );
 };

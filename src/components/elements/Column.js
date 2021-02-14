@@ -12,10 +12,10 @@ const RenderElementByType = ({ elementId }) => {
     switch (_type) {
         case ELEMENTTYPE.text:
             return <Text elementId={elementId} />
-        // case ELEMENTTYPE.img:
-        //     return <Image element={element} rowIndex={rowIndex} columnIndex={columnIndex} />
-        // case ELEMENTTYPE.variable:
-        //     return <Variable element={element} rowIndex={rowIndex} columnIndex={columnIndex} />
+        case ELEMENTTYPE.img:
+            return <Image elementId={elementId} />
+        case ELEMENTTYPE.variable:
+            return <Variable elementId={elementId} />
         default:
             return <p>Element type not found</p>
     }
@@ -23,14 +23,15 @@ const RenderElementByType = ({ elementId }) => {
 
 const Column = ({ columnId }) => {
     const _column = useSelector(state => state.contractDom.columns[columnId])
-    const _elementsIds = _column.elements 
-    const _row = useSelector(state => state.contractDom.rows[_column.rowId])
-    const numOfColumnsInRow = _row.numOfColumns
+    const _elementsIds = _column?.elements 
+    const _row = useSelector(state => state.contractDom.rows[_column?.rowId])
+    const numOfColumnsInRow = _row?.numOfColumns
     useEffect(() => console.log('_column',_column), [_column])
-    const [modalOpen, setModalOpen] = useState(false)
+    const [modalOpen, setModalOpen] = useState(true)
 
     return (
-        <div style={{
+        <div 
+        style={{
             minHeight: "6vh",
             width: "100%",
             height: "100%",
@@ -49,8 +50,7 @@ const Column = ({ columnId }) => {
                     <RemoveBtn  columnId={columnId} rowId={_row.id} column={true} />
                 }
             </div>
-            <p>Column</p>
-            {_elementsIds.map((elementId, index) => <RenderElementByType key={columnId} elementId={elementId} />)}
+            {_elementsIds?.map((elementId, index) => <RenderElementByType key={elementId} elementId={elementId} />)}
             <div style={{
                 display: "flex",
                 alignItems: "center",

@@ -7,7 +7,7 @@ const RenderRow = () => {
     console.log('rows', rows)
     if (!rows || !rows?.length )
         return <></>
-    return rows?.map((rowId, index) => <Row key={index} index={index} rowId={rowId} /> )
+    return rows?.map((rowId, index) => <Row key={rowId} index={index} rowId={rowId} /> )
 }
 
 
