@@ -12,15 +12,14 @@ const Row = ({ rowId }) => {
         <div style={{
             width: "100%",
             minHeight: "50px",
-            backgroundColor: "lightblue",
-            border: "1px solid gray",
         }}>
             <div style={{
                 minHeight: "30px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "flex-end",
-                padding: "0px 10px",}}>
+                padding: "0px 10px",
+            }}>
                 <RemoveElementBtn row rowId={rowId} />
             </div>
 
@@ -28,18 +27,16 @@ const Row = ({ rowId }) => {
                 style={{
                     width: "100%",
                     minHeight: "50px",
-                    backgroundColor: "lightblue",
-                    border: "1px solid gray",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-around"
                 }}
             >
-                {_row.columns.map((columnId ) =>{
-                    console.log('columnId',columnId)
+                {_row.columns.map((columnId) => {
+                    console.log('columnId', columnId)
 
-return <Column key={columnId} columnId={columnId}/>
-                } )}
+                    return <Column key={columnId} columnId={columnId} />
+                })}
             </div>
         </div>
     )

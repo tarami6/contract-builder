@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { removeRow, removeColumn } from '../../redux/actionsContractDom'
 import { useDispatch } from 'react-redux'
+import { Trash } from 'react-bootstrap-icons'
 
 const RemoveElementBtn = ({ row, column, rowId, columnId }) => {
     const dispatch = useDispatch()
-    const [deleteMode, setDeleteMode] = useState('row')
+    const [deleteMode, setDeleteMode] = useState('Row')
 
     useEffect(() => {
         if (column) {
-            setDeleteMode('column')
+            setDeleteMode('Column')
         } else {
-            setDeleteMode('row')
+            setDeleteMode('Row')
         }
     }, [column, row])
 
@@ -23,19 +24,19 @@ const RemoveElementBtn = ({ row, column, rowId, columnId }) => {
     }
 
     const removeByMode = () => {
-        if (deleteMode === 'row') {
+        if (deleteMode === 'Row') {
             removeByRow()
-        } else if (deleteMode === 'column') {
+        } else if (deleteMode === 'Column') {
             removeByColumn()
         }
     }
 
     return (
-        <button onClick={removeByMode} type={'button'} style={{
-
+        <div onClick={removeByMode}  style={{
+            cursor: 'pointer'
         }}>
-            Remove {deleteMode}
-        </button>
+            <Trash width='20' height='20' /> 
+        </div>
     )
 }
 

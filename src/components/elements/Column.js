@@ -6,6 +6,7 @@ import Text from './Text'
 import Variable from './Variable'
 import Image from './Image'
 import { useSelector } from 'react-redux'
+import {NodePlus} from 'react-bootstrap-icons'
 
 const RenderElementByType = ({ elementId }) => {
     const _type = useSelector(state => state.contractDom.elements[elementId].type)
@@ -35,7 +36,6 @@ const Column = ({ columnId }) => {
             minHeight: "6vh",
             width: "100%",
             height: "100%",
-            border: "1px solid gray",
         }}>
 
             <div style={{
@@ -57,7 +57,7 @@ const Column = ({ columnId }) => {
                 justifyContent: "center",
                 minHeight: "inherit",
             }}>
-                <button type='button' onClick={() => setModalOpen(!modalOpen)}>+</button>
+                <div  onClick={() => setModalOpen(!modalOpen)}><NodePlus width='34' height='34' style={{color: '#FF5C04'}} /> </div>
             </div>
             <ModalAddElementToColumn open={modalOpen} columnId={columnId}  />
         </div>

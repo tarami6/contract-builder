@@ -8,7 +8,7 @@ const Body = () => {
             width: "100%",
             backgroundColor: "rgb(255,255,255)",
             border: "1px solid lightgrey",
-            minHeight: '50px',
+            minHeight: '100px',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
