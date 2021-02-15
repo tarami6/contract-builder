@@ -26,9 +26,10 @@ function App() {
     >
       <p>Contract builder</p>
       <div style={{
-        width: "60%",
+        width: "70%",
         minHeight: "100vh",
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        padding: "0 15px",
       }}>
         <form onSubmit={_handleSubmit}>
           <HtmlMirror />

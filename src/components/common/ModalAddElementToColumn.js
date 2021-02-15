@@ -2,18 +2,33 @@ import React from "react";
 import ELEMENTTYPE from './moduleELementTypes'
 import { addElement } from '../../redux/actionsContractDom'
 import { useDispatch, useSelector } from 'react-redux'
+import { Modal, Button, Row, Col, Container } from 'react-bootstrap'
+import { FileFont, FileImage, FileEarmarkMedical } from 'react-bootstrap-icons'
 
-const ModalAddElementToColumn = ({open, rowIndex, columnId }) => {
+const ModalAddElementToColumn = ({ open, onClick, columnId }) => {
     const dispatch = useDispatch()
+    const _handleClose = () => onClick()
+    const _addElement = (type) => {
+        dispatch(addElement(type, columnId))
+        _handleClose()
+    }
 
-    if (!open)
-        return <></>
     return (
-        <div>
-            <div onClick={() => dispatch(addElement(ELEMENTTYPE.text, columnId))}>text</div>
-            <div onClick={() => dispatch(addElement(ELEMENTTYPE.img, columnId))}>img</div>
-            <div onClick={() => dispatch(addElement(ELEMENTTYPE.variable, columnId))}>varibale</div>
-        </div>
+        <Modal show={open} animation={false} onHide={_handleClose}>
+            <Modal.Header closeButton>
+                <Modal.Title>Add Element</Modal.Title>
+            </Modal.Header>
+            <Modal.Body style={{ display: "flex", flexDirection: 'column' }}>
+                <div onClick={() => _addElement(ELEMENTTYPE.text)} style={{display: 'flex', alignItems: "center", margin: '15px 0'}}><FileFont width='20' height='20' /> Add Text</div>
+                <div onClick={() => _addElement(ELEMENTTYPE.img)} style={{display: 'flex', alignItems: "center", margin: '15px 0'}}><FileImage width='20' height='20' />  Add Image</div>
+                <div onClick={() => _addElement(ELEMENTTYPE.variable)}style={{display: 'flex', alignItems: "center", margin: '15px 0'}}><FileEarmarkMedical width='20' height='20' /> Add Varibale</div>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={_handleClose}>
+                    Close
+          </Button>
+            </Modal.Footer>
+        </Modal >
     )
 }
 

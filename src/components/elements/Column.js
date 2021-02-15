@@ -6,7 +6,7 @@ import Text from './Text'
 import Variable from './Variable'
 import Image from './Image'
 import { useSelector } from 'react-redux'
-import {NodePlus} from 'react-bootstrap-icons'
+import { PlusCircle } from 'react-bootstrap-icons'
 
 const RenderElementByType = ({ elementId }) => {
     const _type = useSelector(state => state.contractDom.elements[elementId].type)
@@ -24,19 +24,19 @@ const RenderElementByType = ({ elementId }) => {
 
 const Column = ({ columnId }) => {
     const _column = useSelector(state => state.contractDom.columns[columnId])
-    const _elementsIds = _column?.elements 
+    const _elementsIds = _column?.elements
     const _row = useSelector(state => state.contractDom.rows[_column?.rowId])
     const numOfColumnsInRow = _row?.numOfColumns
-    useEffect(() => console.log('_column',_column), [_column])
-    const [modalOpen, setModalOpen] = useState(true)
+    useEffect(() => console.log('_column', _column), [_column])
+    const [modalOpen, setModalOpen] = useState(false)
 
     return (
-        <div 
-        style={{
-            minHeight: "6vh",
-            width: "100%",
-            height: "100%",
-        }}>
+        <div
+            style={{
+                minHeight: "40px",
+                width: "100%",
+                height: "100%",
+            }}>
 
             <div style={{
                 minHeight: "30px",
@@ -45,9 +45,10 @@ const Column = ({ columnId }) => {
                 justifyContent: "flex-end",
                 padding: "0px 10px",
             }}>
+                <div onClick={() => setModalOpen(!modalOpen)}><PlusCircle width='20' height='20' style={{ color: '#FF5C04', marginRight: '15px' }} /> </div>
                 {
                     numOfColumnsInRow > 1 &&
-                    <RemoveBtn  columnId={columnId} rowId={_row.id} column={true} />
+                    <RemoveBtn columnId={columnId} rowId={_row.id} column={true} />
                 }
             </div>
             {_elementsIds?.map((elementId, index) => <RenderElementByType key={elementId} elementId={elementId} />)}
@@ -57,9 +58,8 @@ const Column = ({ columnId }) => {
                 justifyContent: "center",
                 minHeight: "inherit",
             }}>
-                <div  onClick={() => setModalOpen(!modalOpen)}><NodePlus width='34' height='34' style={{color: '#FF5C04'}} /> </div>
             </div>
-            <ModalAddElementToColumn open={modalOpen} columnId={columnId}  />
+            <ModalAddElementToColumn open={modalOpen} columnId={columnId} onClick={() => setModalOpen(!modalOpen)} />
         </div>
     )
 }

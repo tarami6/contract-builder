@@ -2,8 +2,8 @@ import React from 'react';
 
 const Text = ({element}) => {
     return (
-        <div>
-            {element.content}
+        <div >
+            <p style={{fontSize: '24px'}}>{element.content}</p>
         </div>
     );
 };

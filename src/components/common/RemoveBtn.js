@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { removeRow, removeColumn } from '../../redux/actionsContractDom'
 import { useDispatch } from 'react-redux'
-import { Trash } from 'react-bootstrap-icons'
+import { Trash, Square } from 'react-bootstrap-icons'
 
 const RemoveElementBtn = ({ row, column, rowId, columnId }) => {
     const dispatch = useDispatch()
@@ -35,7 +35,8 @@ const RemoveElementBtn = ({ row, column, rowId, columnId }) => {
         <div onClick={removeByMode}  style={{
             cursor: 'pointer'
         }}>
-            <Trash width='20' height='20' /> 
+            {deleteMode === 'Row' ? <Trash width='20' height='20' />  : <Square width='20' height='20' />}
+            
         </div>
     )
 }

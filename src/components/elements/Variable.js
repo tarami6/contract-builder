@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { removeElement , editElementVariable} from '../../redux/actionsContractDom'
+import { removeElement, editElementVariable } from '../../redux/actionsContractDom'
+import { CheckCircle, XCircle, Trash2 } from 'react-bootstrap-icons'
 
 const VARIABLETYPES = {
     empty: 'empty',
@@ -33,37 +34,37 @@ const Variable = ({ elementId }) => {
 
     const _handelChangeTitle = (e) => {
         e.preventDefault()
-        const newObj = {...inputsValues}
+        const newObj = { ...inputsValues }
         newObj.title = e.target.value
-        setValue({...newObj})
+        setValue({ ...newObj })
     }
 
-    
+
     const _handelChangeKey = (e) => {
         e.preventDefault()
         console.log('e target', e.target.value)
-        let newObj = {...inputsValues}
-        newObj = {...inputsValues, key: e.target.value}
-        setValue({...newObj})
+        let newObj = { ...inputsValues }
+        newObj = { ...inputsValues, key: e.target.value }
+        setValue({ ...newObj })
     }
 
     const _handleSave = () => {
         if (!inputsValues.title.length) {
             return alert('text cant be empty')
         }
-        dispatch(editElementVariable(_element.id, inputsValues)) 
+        dispatch(editElementVariable(_element.id, inputsValues))
         setEditMode(!editMode)
     }
 
     const _handleDoubleClick = () => {
-        if(!editMode){
+        if (!editMode) {
             setEditMode(!editMode)
         }
-       console.log('_handleDoubleClick undefined')
+        console.log('_handleDoubleClick undefined')
     }
 
     const _close = () => {
-        if(editMode){
+        if (editMode) {
             setEditMode(!editMode)
         }
     }
@@ -76,15 +77,17 @@ const Variable = ({ elementId }) => {
         <div onDoubleClick={_handleDoubleClick}>
             {
                 editMode ?
-                    <>
+                    <div >
                         <input name={_element.id} onChange={_handelChangeTitle} placeholder={inputsValues.title} value={inputsValues.title} />
-                        <select onChange={_handelChangeKey} value={inputsValues.key} >
-                            {selectValues.map(option => <option key={Math.random() * 1000} >{option}</option>)}
-                        </select>
-                        <button type='button' onClick={_handleSave}>Save</button>
-                        <button type='button' onClick={_close}>Close</button>
-                        <button type='button' onClick={_delete}>Delete Element</button>
-                    </>
+                        <div style={{ display: 'flex' }}>
+                            <select onChange={_handelChangeKey} value={inputsValues.key} >
+                                {selectValues.map(option => <option key={Math.random() * 1000} >{option}</option>)}
+                            </select>
+                            <div onClick={_handleSave} style={{ margin: '0 5px' }}><CheckCircle width='20' height='20' /></div>
+                            <div onClick={_close} style={{ margin: '0 5px' }}><XCircle width='20' height='20' /></div>
+                            <div onClick={_delete} style={{ margin: '0 5px' }}><Trash2 width='22' height='22' /></div>
+                        </div>
+                    </div>
                     : (
                         <div style={{ display: "flex" }}>
                             <p >{inputsValues.title}</p>

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { editElementText, removeElement } from '../../redux/actionsContractDom'
-
 import { useSelector, useDispatch } from 'react-redux'
+import { CheckCircle, XCircle, Trash2} from 'react-bootstrap-icons'
 
 const Text = ({ elementId }) => {
     const _element = useSelector(state => state.contractDom.elements[elementId])
@@ -42,12 +42,12 @@ const Text = ({ elementId }) => {
     return (
         <div onDoubleClick={_handleDoubleClick} onBlur={() => console.log('onBlur')} >
             {editMode ?
-                <>
+                <div style={{display: 'flex'}}> 
                     <input name={_element.id} onChange={_handelChange} placeholder={_element.content} value={inputValue} />
-                    <button type='button' onClick={_handleSave}>Save</button>
-                    <button type='button' onClick={_close}>Close</button>
-                    <button type='button' onClick={_delete}>Delete Element</button>
-                </>
+                    <div onClick={_handleSave} style={{margin: '0 5px'}}><CheckCircle width='20' height='20' /></div>
+                    <div onClick={_close} style={{margin: '0 5px'}}><XCircle width='20' height='20' /></div>
+                    <div onClick={_delete} style={{margin: '0 5px'}}><Trash2 width='22' height='22' /></div>
+                </div>
                 : <p>{inputValue}</p>}
 
         </div>

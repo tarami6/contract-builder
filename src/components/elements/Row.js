@@ -28,7 +28,7 @@ const Row = ({ rowId }) => {
                     width: "100%",
                     minHeight: "50px",
                     display: "flex",
-                    alignItems: "center",
+                    alignItems: "flexStart",
                     justifyContent: "space-around"
                 }}
             >
