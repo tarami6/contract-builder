@@ -13,7 +13,7 @@ const ButtonToPrint = () => {
                 content={() => componentRef.current}
             />
             <div style={{ display: "none" }}>
-            <ComponentToPrint ref={componentRef} />
+                <ComponentToPrint ref={componentRef} />
             </div>
         </div>
     )

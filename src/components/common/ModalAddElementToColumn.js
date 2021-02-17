@@ -3,7 +3,7 @@ import ELEMENTTYPE from './moduleELementTypes'
 import { addElement } from '../../redux/actionsContractDom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Modal, Button, Row, Col, Container } from 'react-bootstrap'
-import { FileFont, FileImage, FileEarmarkMedical } from 'react-bootstrap-icons'
+import { FileFont, FileImage, FileEarmarkMedical, PencilSquare } from 'react-bootstrap-icons'
 
 const ModalAddElementToColumn = ({ open, onClick, columnId }) => {
     const dispatch = useDispatch()
@@ -22,6 +22,7 @@ const ModalAddElementToColumn = ({ open, onClick, columnId }) => {
                 <div onClick={() => _addElement(ELEMENTTYPE.text)} style={{display: 'flex', alignItems: "center", margin: '15px 0'}}><FileFont width='20' height='20' /> Add Text</div>
                 <div onClick={() => _addElement(ELEMENTTYPE.img)} style={{display: 'flex', alignItems: "center", margin: '15px 0'}}><FileImage width='20' height='20' />  Add Image</div>
                 <div onClick={() => _addElement(ELEMENTTYPE.variable)}style={{display: 'flex', alignItems: "center", margin: '15px 0'}}><FileEarmarkMedical width='20' height='20' /> Add Varibale</div>
+                <div onClick={() => _addElement(ELEMENTTYPE.signature)}style={{display: 'flex', alignItems: "center", margin: '15px 0'}}><PencilSquare width='20' height='20' /> Add Signature</div>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={_handleClose}>

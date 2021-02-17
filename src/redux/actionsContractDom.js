@@ -33,14 +33,23 @@ const _text = (id, columnId) => ({
     id,
     columnId,
     type: 'text',
-    style: {},
-    content: 'this is text'
+    style: {
+        fontSize: '150%'
+    },
+    content: 'Double click for edit'
 })
 
 const _img = (id, columnId) => ({
     id,
     columnId,
     type: 'img',
+    style: {},
+})
+
+const _signature = (id, columnId) => ({
+    id,
+    columnId,
+    type: 'signature',
     style: {},
 })
 
@@ -107,6 +116,9 @@ export const addElement = (type, columnId) => {
             break;
         case ELEMENTTYPE.variable:
             element = _variable(id, columnId)
+            break;
+        case ELEMENTTYPE.signature:
+            element = _signature(id, columnId)
             break;
         default:
             break;

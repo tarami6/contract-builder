@@ -1,6 +1,7 @@
 import Text from '../components/Text'
 import Variable from '../components/Variable'
 import Image from '../components/Image'
+import Signature from '../components/Signature'
 
 
 const RenderELemenBYType = ({ element }) => {
@@ -11,6 +12,8 @@ const RenderELemenBYType = ({ element }) => {
             return <Variable element={element} />
         case 'img':
             return <Image element={element} />
+        case 'signature':
+            return <Signature element={element} />
         default:
             return <div />
     }
