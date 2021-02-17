@@ -4,7 +4,8 @@ import React from 'react';
     row: 'row',
     text: 'text',
     variable: 'variable',
-    img: 'img'
+    img: 'img',
+    signature: 'signature'
 }
 
 export default ELEMENTTYPE;

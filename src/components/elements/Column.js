@@ -1,26 +1,12 @@
 import Rect, { useEffect, useState } from 'react'
 import RemoveBtn from '../common/RemoveBtn'
 import ModalAddElementToColumn from '../common/ModalAddElementToColumn'
-import ELEMENTTYPE from '../common/moduleELementTypes'
-import Text from './Text'
-import Variable from './Variable'
-import Image from './Image'
 import { useSelector } from 'react-redux'
 import { PlusCircle } from 'react-bootstrap-icons'
 
-const RenderElementByType = ({ elementId }) => {
-    const _type = useSelector(state => state.contractDom.elements[elementId].type)
-    switch (_type) {
-        case ELEMENTTYPE.text:
-            return <Text elementId={elementId} />
-        case ELEMENTTYPE.img:
-            return <Image elementId={elementId} />
-        case ELEMENTTYPE.variable:
-            return <Variable elementId={elementId} />
-        default:
-            return <p>Element type not found</p>
-    }
-}
+import RenderElement from '../common/RenderElement'
+
+
 
 const Column = ({ columnId }) => {
     const _column = useSelector(state => state.contractDom.columns[columnId])
@@ -51,7 +37,7 @@ const Column = ({ columnId }) => {
                     <RemoveBtn columnId={columnId} rowId={_row.id} column={true} />
                 }
             </div>
-            {_elementsIds?.map((elementId, index) => <RenderElementByType key={elementId} elementId={elementId} />)}
+            {_elementsIds?.map((elementId, index) => <RenderElement key={elementId} elementId={elementId} />)}
             <div style={{
                 display: "flex",
                 alignItems: "center",

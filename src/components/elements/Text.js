@@ -40,7 +40,7 @@ const Text = ({ elementId }) => {
     }
 
     return (
-        <div onDoubleClick={_handleDoubleClick} onBlur={() => console.log('onBlur')} >
+        <div onDoubleClick={_handleDoubleClick}  >
             {editMode ?
                 <div style={{display: 'flex'}}> 
                     <input name={_element.id} onChange={_handelChange} placeholder={_element.content} value={inputValue} />
@@ -48,7 +48,7 @@ const Text = ({ elementId }) => {
                     <div onClick={_close} style={{margin: '0 5px'}}><XCircle width='20' height='20' /></div>
                     <div onClick={_delete} style={{margin: '0 5px'}}><Trash2 width='22' height='22' /></div>
                 </div>
-                : <p>{inputValue}</p>}
+                : <p style={_element.style}>{inputValue}</p>}
 
         </div>
 
