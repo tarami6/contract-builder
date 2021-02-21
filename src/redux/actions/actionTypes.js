@@ -8,6 +8,8 @@ export const CHANGE_TEXT = "CHANGE_TEXT";
 export const EDIT_ELEMENT_TEXT = "EDIT_ELEMENT_TEXT";
 export const REMOVE_ELEMENT = "REMOVE_ELEMENT";
 export const EDIT_ELEMENT_VARIABLE = "EDIT_ELEMENT_VARIABLE";
+// edit 
+export const CURRENT_STYBLE = "CURRENT_STYBLE";
 
 // modals
 export const TOGGLE_ADD_ROW = "TOGGLE_ADD_ROW";

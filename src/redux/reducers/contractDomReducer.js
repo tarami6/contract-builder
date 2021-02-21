@@ -6,7 +6,7 @@ import {
     EDIT_ELEMENT_TEXT,
     REMOVE_ELEMENT,
     EDIT_ELEMENT_VARIABLE
-} from "../actionTypes"
+} from "../actions/actionTypes"
 
 const initialState = {
     body: {

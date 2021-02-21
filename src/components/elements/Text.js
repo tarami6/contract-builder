@@ -1,11 +1,14 @@
-import React, { useContext, useState } from "react";
-import { editElementText, removeElement } from '../../redux/actionsContractDom'
+import React, { useState } from "react";
+import { editElementText, removeElement } from '../../redux/actions/actionsContractDom'
 import { useSelector, useDispatch } from 'react-redux'
-import { CheckCircle, XCircle, Trash2} from 'react-bootstrap-icons'
+import { CheckCircle, XCircle } from 'react-bootstrap-icons'
+import { Card } from '@material-ui/core'
+import { setCurrentEditable } from '../../redux/actions/actionsEditable'
 
 const Text = ({ elementId }) => {
-    const _element = useSelector(state => state.contractDom.elements[elementId])
     const dispatch = useDispatch()
+    const _element = useSelector(state => state.contractDom.elements[elementId])
+    const { currentId } = useSelector(state => state.editable)
     const [editMode, setEditMode] = useState(false)
     const [inputValue, setValue] = useState(_element.content)
 
@@ -18,7 +21,6 @@ const Text = ({ elementId }) => {
         if (!inputValue.length) {
             return alert('text cant be empty')
         }
-        console.log('save action')
         dispatch(editElementText(elementId, inputValue))
         setEditMode(!editMode)
     }
@@ -35,22 +37,26 @@ const Text = ({ elementId }) => {
         }
     }
 
-    const _delete = () => {
-        dispatch(removeElement(_element.id, _element.columnId))
+    const editElement = (e) => {
+        e.stopPropagation()
+        dispatch(setCurrentEditable(_element))
     }
 
     return (
-        <div onDoubleClick={_handleDoubleClick}  >
+        <Card
+            onClick={editElement}
+            onDoubleClick={_handleDoubleClick}
+            style={{ padding: '3px', width: 'fit-content', margin: '2px' }}
+            elevation={elementId === currentId ? 3 : 0}
+        >
             {editMode ?
-                <div style={{display: 'flex'}}> 
+                <div style={{ display: 'flex' }}>
                     <input name={_element.id} onChange={_handelChange} placeholder={_element.content} value={inputValue} />
-                    <div onClick={_handleSave} style={{margin: '0 5px'}}><CheckCircle width='20' height='20' /></div>
-                    <div onClick={_close} style={{margin: '0 5px'}}><XCircle width='20' height='20' /></div>
-                    <div onClick={_delete} style={{margin: '0 5px'}}><Trash2 width='22' height='22' /></div>
+                    <div onClick={_handleSave} style={{ margin: '0 5px' }}><CheckCircle width='20' height='20' /></div>
+                    <div onClick={_close} style={{ margin: '0 5px' }}><XCircle width='20' height='20' /></div>
                 </div>
                 : <p style={_element.style}>{inputValue}</p>}
-
-        </div>
+        </Card>
 
     )
 }

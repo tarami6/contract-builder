@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
-import { editElementText, removeElement } from '../../redux/actionsContractDom'
+import React, {  useState } from "react";
+import { removeElement } from '../../redux/actions/actionsContractDom'
 import { useSelector, useDispatch } from 'react-redux'
-import { CheckCircle, XCircle, Trash2 } from 'react-bootstrap-icons'
+import {  XCircle, Trash2 } from 'react-bootstrap-icons'
 
 const Signature = ({ elementId }) => {
-    const _element = useSelector(state => state.contractDom.elements[elementId])
+    const _signature = useSelector(state => state.contractDom.elements[elementId])
     const dispatch = useDispatch()
     const [editMode, setEditMode] = useState(false)
 
@@ -22,13 +22,13 @@ const Signature = ({ elementId }) => {
     }
 
     const _delete = () => {
-        dispatch(removeElement(_element.id, _element.columnId))
+        dispatch(removeElement(_signature.id, _signature.columnId))
     }
 
     return (
         <div onDoubleClick={_handleDoubleClick}   >
             <p>Signature</p>
-            <div style={{ width: '160px', height: '80px', border: '1px solid' }}  >
+            <div style={{ ..._signature.style }}  >
                 {editMode ?
                     <div style={{ display: 'flex' }}>
                         <div onClick={_close} style={{ margin: '0 5px' }}><XCircle width='20' height='20' /></div>
