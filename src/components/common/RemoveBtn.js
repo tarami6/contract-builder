@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { removeRow, removeColumn } from '../../redux/actionsContractDom'
+import { removeRow, removeColumn } from '../../redux/actions/actionsContractDom'
 import { useDispatch } from 'react-redux'
 import { Trash, XSquare } from 'react-bootstrap-icons'
 

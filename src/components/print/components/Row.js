@@ -1,9 +1,13 @@
 import React from 'react'
-import Column from './Component'
+import Column from './Column'
 
 const Row = ({ row }) => {
     if (row.type === 'row') {
-        return <div style={{ minHeight: '80px', display: "flex" }}>
+        return <div style={{  width: "100%",
+        minHeight: "50px",
+        display: "flex",
+        alignItems: "flexStart",
+        justifyContent: "space-around"}}>
             {row.columns.map((column, index) => {
                 if (column) {
                     return <Column key={column.id} column={column} />

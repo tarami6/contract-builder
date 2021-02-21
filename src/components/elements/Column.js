@@ -1,52 +1,60 @@
-import Rect, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { setCurrentEditable } from '../../redux/actions/actionsEditable'
 import RemoveBtn from '../common/RemoveBtn'
 import ModalAddElementToColumn from '../common/ModalAddElementToColumn'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { PlusCircle } from 'react-bootstrap-icons'
+import { Card, Typography } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles';
 
 import RenderElement from '../common/RenderElement'
 
-
+const useStyle = makeStyles((theme) => ({
+    title: {
+        fontSize: '20px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        color: '#505b75',
+        opacity: '0.1'
+    }
+}))
 
 const Column = ({ columnId }) => {
+    const classes = useStyle()
+    const dispatch = useDispatch()
     const _column = useSelector(state => state.contractDom.columns[columnId])
     const _elementsIds = _column?.elements
     const _row = useSelector(state => state.contractDom.rows[_column?.rowId])
-    const numOfColumnsInRow = _row?.numOfColumns
-    useEffect(() => console.log('_column', _column), [_column])
+    const { currentType, currentId, rowId } = useSelector(state => state.editable)
     const [modalOpen, setModalOpen] = useState(false)
 
-    return (
-        <div
-            style={{
-                minHeight: "40px",
-                width: "100%",
-                height: "100%",
-            }}>
+    const editColumn = (e) => {
+        dispatch(setCurrentEditable(_column))
+    }
 
+    return (
+        <Card
+            style={{ ..._column.style, padding: '5px', margin: '1px' }}
+            elevation={columnId === currentId ? 3 : 0}
+            onClick={editColumn}
+        >
             <div style={{
-                minHeight: "30px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "flex-end",
                 padding: "0px 10px",
             }}>
-                <div onClick={() => setModalOpen(!modalOpen)}><PlusCircle width='20' height='20' style={{ color: '#FF5C04', marginRight: '15px' }} /> </div>
-                {
-                    numOfColumnsInRow > 1 &&
-                    <RemoveBtn columnId={columnId} rowId={_row.id} column={true} />
-                }
             </div>
+            {
+                !_elementsIds.length && (
+                    <Typography variant='h6' className={classes.title}>Clean Column</Typography>
+                )
+            }
             {_elementsIds?.map((elementId, index) => <RenderElement key={elementId} elementId={elementId} />)}
-            <div style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                minHeight: "inherit",
-            }}>
-            </div>
-            <ModalAddElementToColumn open={modalOpen} columnId={columnId} onClick={() => setModalOpen(!modalOpen)} />
-        </div>
+            <ModalAddElementToColumn open={modalOpen} rowId={_row.id} columnId={columnId} onClick={() => setModalOpen(!modalOpen)} />
+        </Card>
     )
 }
 export default Column

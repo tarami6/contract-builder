@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux'
 
-import ELEMENTTYPE from './moduleELementTypes'
+import { ELEMENTTYPE } from '../../redux/config/elementSchema'
 import Text from '../elements/Text'
 import Variable from '../elements/Variable'
 import Image from '../elements/Image'

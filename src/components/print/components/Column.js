@@ -2,7 +2,7 @@
 import RenderELemenBYType from "../renders/RenderELemenBYType";
 
 const Column = ({ column }) => {
-    return <div style={{ width: '100%' }}>
+    return <div style={{ ...column.style }}>
         {column.elements.map(element => <RenderELemenBYType key={element.id} element={element} />)}
     </div>
 }

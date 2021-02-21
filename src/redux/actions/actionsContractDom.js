@@ -1,3 +1,4 @@
+import { uid } from 'uid'
 import {
     ADD_ROW,
     REMOVE_ROW,
@@ -7,78 +8,33 @@ import {
     REMOVE_ELEMENT,
     EDIT_ELEMENT_VARIABLE
 } from './actionTypes'
-
-import { uid } from 'uid'
-import ELEMENTTYPE from '../components/common/moduleELementTypes'
-
-const _column = rowId => (
-    {
-        id: uid(),
-        rowId,
-        type: 'column',
-        style: {},
-        elements: []
-    }
-)
-
-const _row = (id, numOfColumns, columnsIds) => ({
-    id,
-    type: 'row',
-    style: {},
-    numOfColumns,
-    columns: [...columnsIds]
-})
-
-const _text = (id, columnId) => ({
-    id,
-    columnId,
-    type: 'text',
-    style: {
-        fontSize: '150%'
-    },
-    content: 'Double click for edit'
-})
-
-const _img = (id, columnId) => ({
-    id,
-    columnId,
-    type: 'img',
-    style: {},
-})
-
-const _signature = (id, columnId) => ({
-    id,
-    columnId,
-    type: 'signature',
-    style: {},
-})
-
-const _variable = (id, columnId) => ({
-    id,
-    columnId,
-    type: 'variable',
-    style: {},
-    title: 'Title',
-    key: 'empty'
-})
+import {
+    ELEMENTTYPE,
+    columnConstructor,
+    rowContsructor,
+    textContstractor,
+    imgConstractor,
+    signatureConstractor,
+    variableConstractor
+} from '../config/elementSchema'
 
 export const addRow = numOfColumns => {
     const columnsIds = []
     const columns = {}
     const rowId = uid()
-    const column = _column(rowId)
+    const column = columnConstructor(rowId)
     columnsIds.push(column.id)
     columns[column.id] = { ...column }
 
     if (numOfColumns === 2) {
-        const column2 = _column(rowId)
+        const column2 = columnConstructor(rowId)
         columnsIds.push(column2.id)
         columns[column2.id] = { ...column2 }
     }
     return {
         type: ADD_ROW,
         payload: {
-            row: _row(rowId, numOfColumns, columnsIds),
+            row: rowContsructor(rowId, numOfColumns, columnsIds),
             columns: { ...columns }
         }
     }
@@ -103,22 +59,22 @@ export const removeColumn = (rowId, columnId) => {
     }
 }
 
-export const addElement = (type, columnId) => {
+export const addElement = (type, columnId, rowId) => {
     let element;
     let id = uid()
 
     switch (type) {
         case ELEMENTTYPE.text:
-            element = _text(id, columnId)
+            element = textContstractor(id, columnId, rowId)
             break;
         case ELEMENTTYPE.img:
-            element = _img(id, columnId)
+            element = imgConstractor(id, columnId, rowId)
             break;
         case ELEMENTTYPE.variable:
-            element = _variable(id, columnId)
+            element = variableConstractor(id, columnId, rowId)
             break;
         case ELEMENTTYPE.signature:
-            element = _signature(id, columnId)
+            element = signatureConstractor(id, columnId, rowId)
             break;
         default:
             break;

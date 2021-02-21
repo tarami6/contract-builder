@@ -4,7 +4,7 @@ const Variable = ({ element }) => {
     const valueIt = () => {
         switch (element.key) {
             case 'empty':
-                return <div style={{ width: '50px', height: '1px', borderBottom: '1px solid black' }} />
+                return <span style={{ width: '50px', height: '1px', borderBottom: '1px solid black' }} />
             case 'userName':
                 return 'Csr Agent'
             case 'fullName':
@@ -22,13 +22,14 @@ const Variable = ({ element }) => {
             case 'agentName':
                 return 'Philipe Lopez'
             default:
-                return <div />
+                return ''
         }
     }
 
     return (
         <div style={{ display: "flex", alignItems: "flex-end", }}>
-            {element.title} - {valueIt()}
+            <p style={{ ...element.style.title }} >{element.title}</p>
+            <p style={{ ...element.style.key }}>{valueIt()}</p>
         </div>
     );
 };

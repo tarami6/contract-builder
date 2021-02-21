@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { addRow } from '../../redux/actionsContractDom'
-import { toggleAddRow } from '../../redux/actionsModals'
+import { addRow } from '../../redux/actions/actionsContractDom'
+import { toggleAddRow } from '../../redux/actions/actionsModals'
 import { Modal, Button, Row, Col, Container } from 'react-bootstrap'
 import { LayoutSplit, Square } from 'react-bootstrap-icons'
 

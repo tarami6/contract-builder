@@ -1,19 +1,18 @@
-import React, { useContext } from "react";
-import { HtmlContext } from '../../App'
+import React from "react";
 import { useSelector } from 'react-redux'
-import AddBtn from '../common/AddBtn'
 import RemoveElementBtn from '../common/RemoveBtn'
 import Column from '../elements/Column'
+import { Card } from '@material-ui/core'
 
 const Row = ({ rowId }) => {
+    const { currentType, currentId } = useSelector(state => state.editable)
     const _row = useSelector(state => state.contractDom.rows[rowId])
-    console.log('_row', _row)
     return (
-        <div style={{
-            width: "100%",
-            minHeight: "50px",
-        }}>
-            <div style={{
+        <Card
+         style={{ width: _row.style.width, padding: '5px', marginTop: '2px' }}
+         elevation={rowId === currentId ? 3 : 0}
+          >
+            {/* <div style={{
                 minHeight: "30px",
                 display: "flex",
                 alignItems: "center",
@@ -21,24 +20,17 @@ const Row = ({ rowId }) => {
                 padding: "0px 10px",
             }}>
                 <RemoveElementBtn row rowId={rowId} />
-            </div>
+                <RemoveElementBtn row rowId={rowId} />
+            </div> */}
 
             <div
-                style={{
-                    width: "100%",
-                    minHeight: "50px",
-                    display: "flex",
-                    alignItems: "flexStart",
-                    justifyContent: "space-around"
-                }}
+                style={{ ..._row.style }}
             >
                 {_row.columns.map((columnId) => {
-                    console.log('columnId', columnId)
-
                     return <Column key={columnId} columnId={columnId} />
                 })}
             </div>
-        </div>
+        </Card>
     )
 }
 

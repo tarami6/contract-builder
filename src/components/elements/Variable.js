@@ -1,30 +1,21 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { removeElement, editElementVariable } from '../../redux/actionsContractDom'
+import { VARIABLETYPES } from '../../redux/config/elementSchema'
+import { removeElement, editElementVariable } from '../../redux/actions/actionsContractDom'
 import { CheckCircle, XCircle, Trash2 } from 'react-bootstrap-icons'
-
-const VARIABLETYPES = {
-    empty: 'empty',
-    userName: 'userName',
-    fullName: 'fullName',
-    phone: 'phone',
-    address: 'address',
-    accountBalance: 'accountBalance',
-    paymentNow: 'paymentNow',
-    product: 'product',
-    storeName: 'storeName',
-    agentName: 'agentName'
-}
+import { Card } from '@material-ui/core'
+import { setCurrentEditable } from '../../redux/actions/actionsEditable'
 
 const Variable = ({ elementId }) => {
-    const _element = useSelector(state => state.contractDom.elements[elementId])
     const dispatch = useDispatch()
+    const _variable = useSelector(state => state.contractDom.elements[elementId])
+    const { currentId } = useSelector(state => state.editable)
     const [editMode, setEditMode] = useState(false)
     const [selectValues, setSelectValues] = useState([])
     const [inputsValues, setValue] = useState({
-        title: _element.title,
-        key: _element.key,
-        value: _element.value
+        title: _variable.title,
+        key: _variable.key,
+        value: _variable.value
     })
 
     useEffect(() => {
@@ -41,8 +32,8 @@ const Variable = ({ elementId }) => {
 
 
     const _handelChangeKey = (e) => {
+        e.stopPropagation()
         e.preventDefault()
-        console.log('e target', e.target.value)
         let newObj = { ...inputsValues }
         newObj = { ...inputsValues, key: e.target.value }
         setValue({ ...newObj })
@@ -52,7 +43,7 @@ const Variable = ({ elementId }) => {
         if (!inputsValues.title.length) {
             return alert('text cant be empty')
         }
-        dispatch(editElementVariable(_element.id, inputsValues))
+        dispatch(editElementVariable(_variable.id, inputsValues))
         setEditMode(!editMode)
     }
 
@@ -60,7 +51,6 @@ const Variable = ({ elementId }) => {
         if (!editMode) {
             setEditMode(!editMode)
         }
-        console.log('_handleDoubleClick undefined')
     }
 
     const _close = () => {
@@ -70,15 +60,26 @@ const Variable = ({ elementId }) => {
     }
 
     const _delete = () => {
-        dispatch(removeElement(_element.id, _element.columnId))
+        dispatch(removeElement(_variable.id, _variable.columnId))
+    }
+
+    const editElement = (e) => {
+        e.stopPropagation()
+        if (_variable.id !== currentId)
+            dispatch(setCurrentEditable(_variable))
     }
 
     return (
-        <div onDoubleClick={_handleDoubleClick}>
+        <Card
+            onClick={editElement}
+            onDoubleClick={_handleDoubleClick}
+            style={{ padding: '3px', width: 'fit-content', margin: '2px' }}
+            elevation={elementId === currentId ? 3 : 0}
+        >
             {
                 editMode ?
                     <div >
-                        <input name={_element.id} onChange={_handelChangeTitle} placeholder={inputsValues.title} value={inputsValues.title} />
+                        <input name={_variable.id} onChange={_handelChangeTitle} placeholder={inputsValues.title} value={inputsValues.title} />
                         <div style={{ display: 'flex' }}>
                             <select onChange={_handelChangeKey} value={inputsValues.key} >
                                 {selectValues.map(option => <option key={Math.random() * 1000} >{option}</option>)}
@@ -90,15 +91,12 @@ const Variable = ({ elementId }) => {
                     </div>
                     : (
                         <div style={{ display: "flex" }}>
-                            <p >{inputsValues.title}</p>
-                            <p style={{
-                                marginLeft: "30px",
-                                fontWeight: "bolder",
-                            }}>{_element.key}</p>
+                            <p style={{ ..._variable.style.title }} >{_variable.title}</p>
+                            <p style={{ ..._variable.style.key }}>{_variable.key}</p>
                         </div>
                     )
             }
-        </div>
+        </Card>
     );
 };
 

@@ -1,4 +1,4 @@
-import {TOGGLE_ADD_ROW} from '../actionTypes'
+import { TOGGLE_ADD_ROW } from '../actions/actionTypes'
 const initialState = {
     addRow: false
 }
