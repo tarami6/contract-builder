@@ -4,7 +4,7 @@ import { Typography } from '@material-ui/core';
 import AddRow from '../../common/AddRow'
 import ButtonToPrint from '../../print/ButtonToPrint'
 import Button from '@material-ui/core/Button';
-import Editor from '../../edit/Editor'
+import Editor from '../../edit/editElements/Editor'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     width: '100%',
     position: 'absolute',
-    bottom: '10vh'
+    bottom: '100px'
   },
   btn: {
     margin: '0 10px',

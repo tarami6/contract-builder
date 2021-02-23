@@ -1,5 +1,8 @@
 import {
-    CURRENT_STYBLE
+    CURRENT_STYBLE,
+    EDIT_STYLE_ROW,
+    EDIT_STYLE_COLUMN,
+    EDIT_STYLE_ELEMENT
 } from "./actionTypes"
 import {
     ELEMENTTYPE
@@ -12,7 +15,7 @@ export const setCurrentEditable = (element) => {
         id,
         type
     } = element
-    const itsLement = type === ELEMENTTYPE.text || type === ELEMENTTYPE.img || type === ELEMENTTYPE.signature || type === ELEMENTTYPE.variable
+    const isElement = type === ELEMENTTYPE.text || type === ELEMENTTYPE.img || type === ELEMENTTYPE.signature || type === ELEMENTTYPE.variable
     const isColumn = type === ELEMENTTYPE.column
     const isRow = type === ELEMENTTYPE.row
     
@@ -21,9 +24,40 @@ export const setCurrentEditable = (element) => {
         payload: {
             rowId: isRow ? id : rowId,
             columnId: isColumn ? id : columnId,
-            elementId: itsLement ? id : undefined,
+            elementId: isElement ? id : undefined,
             currentId: id,
             currentType: type
         }
     }
 }
+
+export const editStyleRow = (rowId, style) => {
+    return {
+        type: EDIT_STYLE_ROW,
+        payload: {
+            rowId,
+            style
+        }
+    }
+}
+
+export const editStyleColumn = (columnId, style) => {
+    return {
+        type: EDIT_STYLE_COLUMN,
+        payload: {
+            columnId,
+            style
+        }
+    }
+}
+
+export const editStyleElement = (elementId, style) => {
+    return {
+        type: EDIT_STYLE_ELEMENT,
+        payload: {
+            elementId,
+            style
+        }
+    }
+}
+

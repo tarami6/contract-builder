@@ -32,6 +32,14 @@ export const columnConstructor = rowId => (
             minHeight: "50px",
             width: "100%",
             height: "100%",
+            marginTop: '2px',
+            marginBottom: '2px',
+            marginLeft: '2px',
+            marginRight: '2px',
+            paddingTop: '2px',
+            paddingBottom: '2px',
+            paddingLeft: '2px',
+            paddingRight: '2px',
         },
         elements: []
     }
@@ -45,7 +53,15 @@ export const rowContsructor = (id, numOfColumns, columnsIds) => ({
         minHeight: "50px",
         display: "flex",
         alignItems: "flexStart",
-        justifyContent: "space-around"
+        justifyContent: "space-around",
+        marginTop: '2px',
+        marginBottom: '2px',
+        marginLeft: '2px',
+        marginRight: '2px',
+        paddingTop: '2px',
+        paddingBottom: '2px',
+        paddingLeft: '2px',
+        paddingRight: '2px',
     },
     numOfColumns,
     columns: [...columnsIds]
@@ -63,7 +79,15 @@ export const textContstractor = (id, columnId, rowId) => ({
         justifyContent: 'center',
         padding: "0",
         margin: '0',
-        width: 'fit-content'
+        width: 'fit-content',
+        marginTop: '2px',
+        marginBottom: '2px',
+        marginLeft: '2px',
+        marginRight: '2px',
+        paddingTop: '2px',
+        paddingBottom: '2px',
+        paddingLeft: '2px',
+        paddingRight: '2px',
     },
     content: 'Double click for edit'
 })
@@ -84,7 +108,7 @@ export const signatureConstractor = (id, columnId, rowId) => ({
     style: {
         width: '160px',
         height: '80px',
-        border: '1px solid'
+        border: '2px solid'
     },
 })
 
@@ -99,18 +123,31 @@ export const variableConstractor = (id, columnId, rowId) => ({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: "0",
-            margin: '0',
+            marginTop: '2px',
+            marginBottom: '2px',
+            marginLeft: '2px',
+            marginRight: '2px',
+            paddingTop: '2px',
+            paddingBottom: '2px',
+            paddingLeft: '2px',
+            paddingRight: '2px',
         },
         key: {
             fontSize: '150%',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: "0",
-            margin: '0',
             marginLeft: "30px",
-            fontWeight: "bolder"
+            fontWeight: "bolder",
+            marginTop: '2px',
+            marginBottom: '2px',
+            marginLeft: '2px',
+            marginRight: '2px',
+            paddingTop: '2px',
+            paddingBottom: '2px',
+            paddingLeft: '2px',
+            paddingRight: '2px',
+
         }
     },
     title: 'Title',

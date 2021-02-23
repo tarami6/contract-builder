@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles, Typography } from '@material-ui/core'
-import { setCurrentEditable } from '../../redux/actions/actionsEditable'
-import { removeRow } from '../../redux/actions/actionsContractDom'
+import { setCurrentEditable } from '../../../redux/actions/actionsEditable'
+import { removeRow } from '../../../redux/actions/actionsContractDom'
 import { SettingsApplications, ExitToApp, DeleteOutline } from '@material-ui/icons'
-import EditColumn from './editColumn/EditColumn'
+import EditColumn from './EditColumn'
 
 const useStyles = makeStyles((theme) => ({
     row: {

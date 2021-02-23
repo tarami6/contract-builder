@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ModalAddRow from '../common/ModalAddRow'
 import ModalAddElementToColumn from '../common/ModalAddElementToColumn'
 import ButtonToPrint from '../print/ButtonToPrint'
-import DynamicStyle from '../common/DynamicStyle'
+import DynamicStyle from '../edit/style/DynamicStyle'
 import { Button, Container, Row, Col } from 'react-bootstrap'
 
 const useStyle = makeStyles((theme) => ({
@@ -32,29 +32,7 @@ const MainBuilder = () => {
       }}>
         <form onSubmit={_handleSubmit}>
           <ContractBody />
-          {/* <Container fluid>
-            <Row style={{
-              isplay: "flex",
-              minHeight: "80px",
-              justifyContent: "center",
-              alignItems: "center",
-            }}>
-              <Col style={{
-                display: "flex",
-                justifyContent: "center"
-              }}>
-                <ButtonToPrint />
-              </Col>
-              <Col style={{
-                display: "flex",
-                justifyContent: "center"
-              }}>
-                <Button type="submit" variant="outline-light" style={{ backgroundImage: "linear-gradient(to right,orange,red)" }}>Save Contract</Button>
-              </Col>
-            </Row>
-          </Container> */}
         </form>
-        {/* <ModalAddRow /> */}
         <ModalAddElementToColumn />
 
         {/* <Test /> */}

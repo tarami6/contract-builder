@@ -1,35 +1,40 @@
-import React from "react";
-import { useSelector } from 'react-redux'
-import RemoveElementBtn from '../common/RemoveBtn'
+import React, { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux'
+import { setCurrentEditable } from '../../redux/actions/actionsEditable'
 import Column from '../elements/Column'
 import { Card } from '@material-ui/core'
 
 const Row = ({ rowId }) => {
+    const dispatch = useDispatch()
     const { currentType, currentId } = useSelector(state => state.editable)
     const _row = useSelector(state => state.contractDom.rows[rowId])
+    const [hover, setHover] = useState(false)
+
+    const onLeave = (e) => {
+        e.stopPropagation()
+        setHover(false)
+    }
+
+    const onEnter = (e) => {
+        e.stopPropagation()
+        setHover(true)
+    }
+
+    const editRow = (e) => {
+        e.stopPropagation()
+        dispatch(setCurrentEditable(_row))
+    }
     return (
         <Card
-         style={{ width: _row.style.width, padding: '5px', marginTop: '2px' }}
-         elevation={rowId === currentId ? 3 : 0}
-          >
-            {/* <div style={{
-                minHeight: "30px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-end",
-                padding: "0px 10px",
-            }}>
-                <RemoveElementBtn row rowId={rowId} />
-                <RemoveElementBtn row rowId={rowId} />
-            </div> */}
-
-            <div
-                style={{ ..._row.style }}
-            >
-                {_row.columns.map((columnId) => {
-                    return <Column key={columnId} columnId={columnId} />
-                })}
-            </div>
+            style={{ ..._row.style }}
+            elevation={(rowId === currentId || hover) ? 3 : 0}
+            onClick={editRow}
+            onMouseOver={onEnter}
+            onMouseOut={onLeave}
+        >
+            {_row.columns.map((columnId) => {
+                return <Column key={columnId} columnId={columnId} />
+            })}
         </Card>
     )
 }
