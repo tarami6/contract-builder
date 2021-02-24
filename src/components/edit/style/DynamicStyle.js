@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         height: '100%',
         position: 'fixed',
         marginLeft: '80%',
-        backgroundColor: '#2A3140'
+        backgroundColor: '#333C4D'
     },
     input: {
         width: '50px'

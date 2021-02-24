@@ -2,9 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux'
 import { editStyleElement } from '../../../redux/actions/actionsEditable'
-import { ArrowUpward, ArrowDownward, ArrowBack, ArrowForward, TextFields, TextFormat } from '@material-ui/icons'
+import { ArrowUpward, ArrowDownward, ArrowBack, ArrowForward, TextFields, TextFormat, KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons'
 import { Typography } from '@material-ui/core';
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -41,6 +40,11 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "14px",
         fontWeight: "600",
     },
+    iconArrow: {
+        color: "#b9b9b9",
+        fontSize: "14px",
+        fontWeight: "600",
+    },
     title: {
         fontSize: '22px',
         display: 'flex',
@@ -61,7 +65,6 @@ const useStyles = makeStyles((theme) => ({
         cursor: 'pointer',
         '&:hover': {
             background: '#2a3040',
-            border: 'none'
         },
         '& > div': {
             display: 'flex',
@@ -84,6 +87,11 @@ const StyleText = () => {
     const _element = useSelector(state => state.contractDom.elements)
     const [_currentElement, setCurrentElement] = useState(undefined)
     const [_currentStyle, setCurrentStyle] = useState({})
+    const [openedSections, setOpenedSections] = useState({
+        margin: true,
+        padding: false,
+        font: false
+    })
 
     useEffect(() => {
         setCurrentElement(_element[currentId])
@@ -143,6 +151,10 @@ const StyleText = () => {
         dispatch(editStyleElement(_currentElement.id, { [name]: `${value}` }))
     }
 
+    const openSections = (key) => {
+        setOpenedSections({ ...openedSections, [key]: !openedSections[key] })
+    }
+
     return (
         <div>
             <div className={classes.title}>
@@ -152,114 +164,141 @@ const StyleText = () => {
             </div>
             <div
                 className={classes.row}
+                onClick={() => openSections('margin')}
             >
                 <div>
                     <Typography variant='h6' className={classes.text}>
                         Margin
-                 </Typography>
+                    </Typography>
                 </div>
+                {openedSections.margin ?
+                    <KeyboardArrowDown className={classes.iconArrow} />
+                    :
+                    <KeyboardArrowUp className={classes.iconArrow} />
+                }
+
             </div>
-            <div className={classes.inputsContainer}>
-                <div className={classes.iconContainer}>
-                    <input
-                        className={classes.input}
-                        type='number'
-                        name='marginTop'
-                        onChange={changeStyle}
-                        value={getStyleValue('marginTop')}
-                    />
-                    <ArrowUpward className={classes.icon} />
-                </div>
-                <div className={classes.iconContainer}>
-                    <input
-                        className={classes.input}
-                        type='number'
-                        name='marginBottom'
-                        onChange={changeStyle}
-                        value={getStyleValue('marginBottom')}
-                    />
-                    <ArrowDownward className={classes.icon} />
-                </div>
-            </div>
-            <div className={classes.row} >
+            {openedSections.margin &&
+                <div className={classes.inputsContainer}>
+                    <div className={classes.iconContainer}>
+                        <input
+                            className={classes.input}
+                            type='number'
+                            name='marginTop'
+                            onChange={changeStyle}
+                            value={getStyleValue('marginTop')}
+                        />
+                        <ArrowUpward className={classes.icon} />
+                    </div>
+                    <div className={classes.iconContainer}>
+                        <input
+                            className={classes.input}
+                            type='number'
+                            name='marginBottom'
+                            onChange={changeStyle}
+                            value={getStyleValue('marginBottom')}
+                        />
+                        <ArrowDownward className={classes.icon} />
+                    </div>
+                </div>}
+            <div
+                className={classes.row}
+                onClick={() => openSections('padding')}
+            >
                 <div>
                     <Typography variant='h6' className={classes.text}>
                         Padding
                  </Typography>
                 </div>
+                {openedSections.padding ?
+                    <KeyboardArrowDown className={classes.iconArrow} />
+                    :
+                    <KeyboardArrowUp className={classes.iconArrow} />
+                }
             </div>
-            <div className={classes.inputsContainer}>
-                <div className={classes.iconContainer}>
-                    <input
-                        className={classes.input}
-                        type='number'
-                        name='paddingTop'
-                        onChange={changeStyle}
-                        value={getStyleValue('paddingTop')}
-                    />
-                    <ArrowUpward className={classes.icon} />
+            {openedSections.padding &&
+                <div className={classes.inputsContainer}>
+                    <div className={classes.iconContainer}>
+                        <input
+                            className={classes.input}
+                            type='number'
+                            name='paddingTop'
+                            onChange={changeStyle}
+                            value={getStyleValue('paddingTop')}
+                        />
+                        <ArrowUpward className={classes.icon} />
+                    </div>
+                    <div className={classes.iconContainer}>
+                        <input
+                            className={classes.input}
+                            type='number'
+                            name='paddingBottom'
+                            onChange={changeStyle}
+                            value={getStyleValue('paddingBottom')}
+                        />
+                        <ArrowDownward className={classes.icon} />
+                    </div>
+                    <div className={classes.iconContainer}>
+                        <input
+                            className={classes.input}
+                            type='number'
+                            name='paddingLeft'
+                            onChange={changeStyle}
+                            value={getStyleValue('paddingLeft')}
+                        />
+                        <ArrowBack className={classes.icon} />
+                    </div>
+                    <div className={classes.iconContainer}>
+                        <input
+                            className={classes.input}
+                            type='number'
+                            name='paddingRight'
+                            onChange={changeStyle}
+                            value={getStyleValue('paddingRight')}
+                        />
+                        <ArrowForward className={classes.icon} />
+                    </div>
                 </div>
-                <div className={classes.iconContainer}>
-                    <input
-                        className={classes.input}
-                        type='number'
-                        name='paddingBottom'
-                        onChange={changeStyle}
-                        value={getStyleValue('paddingBottom')}
-                    />
-                    <ArrowDownward className={classes.icon} />
-                </div>
-                <div className={classes.iconContainer}>
-                    <input
-                        className={classes.input}
-                        type='number'
-                        name='paddingLeft'
-                        onChange={changeStyle}
-                        value={getStyleValue('paddingLeft')}
-                    />
-                    <ArrowBack className={classes.icon} />
-                </div>
-                <div className={classes.iconContainer}>
-                    <input
-                        className={classes.input}
-                        type='number'
-                        name='paddingRight'
-                        onChange={changeStyle}
-                        value={getStyleValue('paddingRight')}
-                    />
-                    <ArrowForward className={classes.icon} />
-                </div>
-            </div>
-            <div className={classes.row} >
+            }
+            <div
+                className={classes.row}
+                onClick={() => openSections('font')}
+            >
                 <div>
                     <Typography variant='h6' className={classes.text}>
                         Font
                     </Typography>
                 </div>
+                {openedSections.font ?
+                    <KeyboardArrowDown className={classes.iconArrow} />
+                    :
+                    <KeyboardArrowUp className={classes.iconArrow} />
+                }
             </div>
-            <div className={classes.inputsContainer}>
-                <div className={classes.iconContainer}>
-                    <input
-                        className={classes.input}
-                        type='number'
-                        name='fontSize'
-                        onChange={changeStyleFontSize}
-                        value={getStyleValueFontSize('fontSize')}
-                    />
-                    <TextFields className={classes.icon} />
+            {openedSections.font &&
+                <div className={classes.inputsContainer}>
+                    <div className={classes.iconContainer}>
+                        <input
+                            className={classes.input}
+                            type='number'
+                            name='fontSize'
+                            onChange={changeStyleFontSize}
+                            value={getStyleValueFontSize('fontSize')}
+                        />
+                        <TextFields className={classes.icon} />
+                    </div>
+                    <div className={classes.iconContainer}>
+                        <input
+                            className={classes.input}
+                            type='color'
+                            name='color'
+                            onChange={changeStyleFontColor}
+                            value={getStyleValueFontColor('color')}
+                        />
+                        <TextFormat className={classes.icon} />
+                    </div>
                 </div>
-                <div className={classes.iconContainer}>
-                    <input
-                        className={classes.input}
-                        type='color'
-                        name='color'
-                        onChange={changeStyleFontColor}
-                        value={getStyleValueFontColor('color')}
-                    />
-                    <TextFormat className={classes.icon} />
-                </div>
-            </div>
-
+            }
         </div>
     );
 };

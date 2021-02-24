@@ -3,11 +3,7 @@ import Column from './Column'
 
 const Row = ({ row }) => {
     if (row.type === 'row') {
-        return <div style={{  width: "100%",
-        minHeight: "50px",
-        display: "flex",
-        alignItems: "flexStart",
-        justifyContent: "space-around"}}>
+        return <div style={{  ...row.style }}>
             {row.columns.map((column, index) => {
                 if (column) {
                     return <Column key={column.id} column={column} />

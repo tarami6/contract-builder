@@ -57,7 +57,7 @@ const Text = ({ elementId }) => {
         <Card
             onClick={editElement}
             onDoubleClick={_handleDoubleClick}
-            style={{ padding: '3px', width: 'fit-content', margin: '2px' }}
+            style={{ width: 'fit-content',display: 'flex', alignItems: 'center', ..._element.style, fontSize: '' }}
             elevation={(elementId === currentId || hover) ? 3 : 0}
             onMouseOver={onEnter}
             onMouseOut={onLeave}
@@ -68,7 +68,7 @@ const Text = ({ elementId }) => {
                     <div onClick={_handleSave} style={{ margin: '0 5px' }}><CheckCircle width='20' height='20' /></div>
                     <div onClick={_close} style={{ margin: '0 5px' }}><XCircle width='20' height='20' /></div>
                 </div>
-                : <p style={_element.style}>{inputValue}</p>}
+                : <p style={{margin: '0', fontSize: _element.style.fontSize, color: _element.style.color}}>{inputValue}</p>}
         </Card>
 
     )

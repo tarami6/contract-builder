@@ -21,6 +21,8 @@ const Variable = ({ element }) => {
                 return 'Super Phones'
             case 'agentName':
                 return 'Philipe Lopez'
+            case 'phone':
+                return '0542291101'
             default:
                 return ''
         }

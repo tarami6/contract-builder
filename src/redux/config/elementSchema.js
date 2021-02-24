@@ -141,7 +141,6 @@ export const variableConstractor = (id, columnId, rowId) => ({
             fontWeight: "bolder",
             marginTop: '2px',
             marginBottom: '2px',
-            marginLeft: '2px',
             marginRight: '2px',
             paddingTop: '2px',
             paddingBottom: '2px',
