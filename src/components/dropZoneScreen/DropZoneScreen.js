@@ -4,7 +4,7 @@ import AppBar from './appBar/AppBar';
 import Logo from './appBar/Logo';
 import NavBar from './navBar/NavBar';
 import MainBuilder from '../mainBuilder/MainBuilder'
-import DynamicStyle from '../common/DynamicStyle'
+import DynamicStyle from '../edit/style/DynamicStyle'
 
 const useStyles = makeStyles((theme) => ({
   root: {

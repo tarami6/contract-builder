@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles, Typography } from '@material-ui/core'
-import { setCurrentEditable } from '../../redux/actions/actionsEditable'
-import { removeElement } from '../../redux/actions/actionsContractDom'
+import { setCurrentEditable } from '../../../redux/actions/actionsEditable'
+import { removeElement } from '../../../redux/actions/actionsContractDom'
 import { DeleteOutline, ExitToApp, SettingsApplications } from '@material-ui/icons'
 
 const useStyles = makeStyles((theme) => ({

@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react'
 import { setCurrentEditable } from '../../redux/actions/actionsEditable'
-import RemoveBtn from '../common/RemoveBtn'
 import ModalAddElementToColumn from '../common/ModalAddElementToColumn'
 import { useDispatch, useSelector } from 'react-redux'
-import { PlusCircle } from 'react-bootstrap-icons'
 import { Card, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -18,6 +16,15 @@ const useStyle = makeStyles((theme) => ({
         position: 'relative',
         color: '#505b75',
         opacity: '0.1'
+    },
+    emptyContainer:{
+        width: "100%",
+        minHeight: "50px",
+        margin: "1px",
+        padding: "1px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
     }
 }))
 
@@ -27,29 +34,38 @@ const Column = ({ columnId }) => {
     const _column = useSelector(state => state.contractDom.columns[columnId])
     const _elementsIds = _column?.elements
     const _row = useSelector(state => state.contractDom.rows[_column?.rowId])
-    const { currentType, currentId, rowId } = useSelector(state => state.editable)
+    const { currentId } = useSelector(state => state.editable)
     const [modalOpen, setModalOpen] = useState(false)
+    const [hover, setHover] = useState(false)
 
     const editColumn = (e) => {
+        e.stopPropagation()
         dispatch(setCurrentEditable(_column))
+    }
+
+    const onLeave = (e) => {
+        e.stopPropagation()
+        setHover(false)
+    }
+
+    const onEnter = (e) => {
+        e.stopPropagation()
+        setHover(true)
     }
 
     return (
         <Card
-            style={{ ..._column.style, padding: '5px', margin: '1px' }}
-            elevation={columnId === currentId ? 3 : 0}
+            style={{ ..._column.style }}
             onClick={editColumn}
+            elevation={(columnId === currentId || hover) ? 3 : 0}
+            onMouseOver={onEnter}
+            onMouseOut={onLeave}
         >
-            <div style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-end",
-                padding: "0px 10px",
-            }}>
-            </div>
             {
                 !_elementsIds.length && (
-                    <Typography variant='h6' className={classes.title}>Clean Column</Typography>
+                    <div className={classes.emptyContainer}>
+                        <Typography variant='h6' className={classes.title}>Clean Column</Typography>
+                    </div>
                 )
             }
             {_elementsIds?.map((elementId, index) => <RenderElement key={elementId} elementId={elementId} />)}

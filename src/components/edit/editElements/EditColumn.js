@@ -7,10 +7,10 @@ import { PlusCircle, XCircle } from 'react-bootstrap-icons'
 import { DeleteOutline, ExitToApp, SettingsApplications } from '@material-ui/icons'
 import { FileFont, FileImage, FileEarmarkMedical, PencilSquare } from 'react-bootstrap-icons'
 import { ELEMENTTYPE } from '../../../redux/config/elementSchema'
-import EditText from '../EditText'
-import EditImg from '../EditImg'
-import EditVariable from '../EditVariable'
-import EditSignature from '../EditSignature'
+import EditText from './EditText'
+import EditImg from './EditImg'
+import EditVariable from './EditVariable'
+import EditSignature from './EditSignature'
 
 const useStyles = makeStyles((theme) => ({
     row: {

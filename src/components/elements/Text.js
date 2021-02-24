@@ -10,6 +10,7 @@ const Text = ({ elementId }) => {
     const _element = useSelector(state => state.contractDom.elements[elementId])
     const { currentId } = useSelector(state => state.editable)
     const [editMode, setEditMode] = useState(false)
+    const [hover, setHover] = useState(false)
     const [inputValue, setValue] = useState(_element.content)
 
     const _handelChange = (e) => {
@@ -42,12 +43,24 @@ const Text = ({ elementId }) => {
         dispatch(setCurrentEditable(_element))
     }
 
+    const onLeave = (e) => {
+        e.stopPropagation()
+        setHover(false)
+    }
+
+    const onEnter = (e) => {
+        e.stopPropagation()
+        setHover(true)
+    }
+
     return (
         <Card
             onClick={editElement}
             onDoubleClick={_handleDoubleClick}
-            style={{ padding: '3px', width: 'fit-content', margin: '2px' }}
-            elevation={elementId === currentId ? 3 : 0}
+            style={{ width: 'fit-content',display: 'flex', alignItems: 'center', ..._element.style, fontSize: '' }}
+            elevation={(elementId === currentId || hover) ? 3 : 0}
+            onMouseOver={onEnter}
+            onMouseOut={onLeave}
         >
             {editMode ?
                 <div style={{ display: 'flex' }}>
@@ -55,7 +68,7 @@ const Text = ({ elementId }) => {
                     <div onClick={_handleSave} style={{ margin: '0 5px' }}><CheckCircle width='20' height='20' /></div>
                     <div onClick={_close} style={{ margin: '0 5px' }}><XCircle width='20' height='20' /></div>
                 </div>
-                : <p style={_element.style}>{inputValue}</p>}
+                : <p style={{margin: '0', fontSize: _element.style.fontSize, color: _element.style.color}}>{inputValue}</p>}
         </Card>
 
     )

@@ -1,10 +1,10 @@
 import React from 'react';
 import {
     ELEMENTTYPE
-} from "../../redux/config/elementSchema"
+} from "../../../redux/config/elementSchema"
 import { useSelector } from 'react-redux'
 import EditRow from './EditRow'
-import EditColumn from './editColumn/EditColumn'
+import EditColumn from './EditColumn'
 import EditText from './EditText'
 import EditImg from './EditImg'
 import EditVariable from './EditVariable'

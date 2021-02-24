@@ -5,7 +5,10 @@ import {
     ADD_ELEMENT,
     EDIT_ELEMENT_TEXT,
     REMOVE_ELEMENT,
-    EDIT_ELEMENT_VARIABLE
+    EDIT_ELEMENT_VARIABLE,
+    EDIT_STYLE_ROW,
+    EDIT_STYLE_COLUMN,
+    EDIT_STYLE_ELEMENT
 } from "../actions/actionTypes"
 
 const initialState = {
@@ -144,7 +147,53 @@ const editElementVariable = (state, action) => {
     }
 }
 
+const editStyleRow = (state, action) => {
+    return{
+        ...state,
+        rows:{
+            ...state.rows,
+            [action.payload.rowId]:{
+                ...state.rows[action.payload.rowId],
+                style:{
+                    ...state.rows[action.payload.rowId].style,
+                    ...action.payload.style
+                }
+            }
+        }
+    }
+}
 
+const editStyleColumn= (state, action) => {
+    return{
+        ...state,
+        columns:{
+            ...state.columns,
+            [action.payload.columnId]:{
+                ...state.columns[action.payload.columnId],
+                style:{
+                    ...state.columns[action.payload.columnId].style,
+                    ...action.payload.style
+                }
+            }
+        }
+    }
+}
+
+const editStyleElement= (state, action) => {
+    return{
+        ...state,
+        elements:{
+            ...state.elements,
+            [action.payload.elementId]:{
+                ...state.elements[action.payload.elementId],
+                style:{
+                    ...state.elements[action.payload.elementId].style,
+                    ...action.payload.style
+                }
+            }
+        }
+    }
+}
 
 export default function contractDom(state = initialState, action) {
     switch (action.type) {
@@ -155,6 +204,9 @@ export default function contractDom(state = initialState, action) {
         case EDIT_ELEMENT_TEXT: return editElementText(state, action)
         case REMOVE_ELEMENT: return removeElement(state, action)
         case EDIT_ELEMENT_VARIABLE: return editElementVariable(state, action)
+        case EDIT_STYLE_ROW: return editStyleRow(state, action)
+        case EDIT_STYLE_COLUMN: return editStyleColumn(state, action)
+        case EDIT_STYLE_ELEMENT: return editStyleElement(state, action)
         default:
             return state
     }

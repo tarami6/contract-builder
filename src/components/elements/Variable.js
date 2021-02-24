@@ -12,6 +12,7 @@ const Variable = ({ elementId }) => {
     const { currentId } = useSelector(state => state.editable)
     const [editMode, setEditMode] = useState(false)
     const [selectValues, setSelectValues] = useState([])
+    const [hover, setHover] = useState(false)
     const [inputsValues, setValue] = useState({
         title: _variable.title,
         key: _variable.key,
@@ -69,12 +70,24 @@ const Variable = ({ elementId }) => {
             dispatch(setCurrentEditable(_variable))
     }
 
+    const onLeave = (e) => {
+        e.stopPropagation()
+        setHover(false)
+    }
+
+    const onEnter = (e) => {
+        e.stopPropagation()
+        setHover(true)
+    }
+
     return (
         <Card
             onClick={editElement}
             onDoubleClick={_handleDoubleClick}
             style={{ padding: '3px', width: 'fit-content', margin: '2px' }}
-            elevation={elementId === currentId ? 3 : 0}
+            elevation={(elementId === currentId || hover) ? 3 : 0}
+            onMouseEnter={onEnter}
+            onMouseLeave={onLeave}
         >
             {
                 editMode ?

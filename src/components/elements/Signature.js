@@ -1,11 +1,15 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { removeElement } from '../../redux/actions/actionsContractDom'
 import { useSelector, useDispatch } from 'react-redux'
-import {  XCircle, Trash2 } from 'react-bootstrap-icons'
+import { XCircle, Trash2 } from 'react-bootstrap-icons'
+import { Card } from '@material-ui/core'
+import { setCurrentEditable } from '../../redux/actions/actionsEditable'
 
 const Signature = ({ elementId }) => {
     const _signature = useSelector(state => state.contractDom.elements[elementId])
+    const { currentId } = useSelector(state => state.editable)
     const dispatch = useDispatch()
+    const [hover, setHover] = useState(false)
     const [editMode, setEditMode] = useState(false)
 
 
@@ -25,8 +29,24 @@ const Signature = ({ elementId }) => {
         dispatch(removeElement(_signature.id, _signature.columnId))
     }
 
+    const editElement = (e) => {
+        e.stopPropagation()
+        dispatch(setCurrentEditable(_signature))
+    }
+
+    const onHover = () => {
+        setHover(!hover)
+    }
+
     return (
-        <div onDoubleClick={_handleDoubleClick}   >
+        <Card
+            onClick={editElement}
+            onDoubleClick={_handleDoubleClick}
+            style={{ padding: '3px', width: 'fit-content', margin: '2px' }}
+            elevation={(elementId === currentId || hover) ? 3 : 0}
+            onMouseEnter={onHover}
+            onMouseLeave={onHover}
+        >
             <p>Signature</p>
             <div style={{ ..._signature.style }}  >
                 {editMode ?
@@ -38,7 +58,7 @@ const Signature = ({ elementId }) => {
                 }
             </div>
 
-        </div>
+        </Card>
     );
 };
 
