@@ -1,8 +1,10 @@
 import React from 'react'
 import Column from './Column'
-
+import {
+    ELEMENTTYPE
+} from "../../../redux/config/elementSchema"
 const Row = ({ row }) => {
-    if (row.type === 'row') {
+    if (row.type === ELEMENTTYPE.rows) {
         return <div style={{  ...row.style }}>
             {row.columns.map((column, index) => {
                 if (column) {

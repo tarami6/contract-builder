@@ -1,10 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
 import AddRow from '../../common/AddRow'
 import ButtonToPrint from '../../print/ButtonToPrint'
 import Button from '@material-ui/core/Button';
 import Editor from '../../edit/editElements/Editor'
+import TitleBox from '../../common/TitleBox'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
   },
   row: {
-    padding: 10,
+    padding: '5px 10px',
     border: '1px solid #525661',
     display: 'flex',
     alignItems: 'center',
@@ -99,11 +99,7 @@ const NavBar = () => {
   const classes = useStyles();
   return (
     <div className={classes.root} >
-      <div className={classes.title}>
-        <Typography variant='h6' className={classes.title}>
-          Editor
-        </Typography>
-      </div>
+      <TitleBox title='Editor' />
       <Editor />
       <div className={classes.item}>
           <AddRow row />
@@ -121,77 +117,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-
-
-{/* <div className={classes.row}>
-          <div>
-            <TextFormatIcon className={classes.icon} />
-            <Typography variant='h6' className={classes.text}>
-              Text line
-            </Typography>
-          </div>
-          <AddIcon className={classes.icon} />
-        </div>
-        <div className={classes.row}>
-          <div>
-            <MoneyIcon className={classes.icon} />
-            <Typography variant='h6' className={classes.text}>
-              Number
-            </Typography>
-          </div>
-          <AddIcon className={classes.icon} />
-        </div>
-        <div className={classes.row}>
-          <div>
-            <LineStyleIcon className={classes.icon} />
-            <Typography variant='h6' className={classes.text}>
-              Paragraph
-            </Typography>
-          </div>
-          <AddIcon className={classes.icon} />
-        </div>
-        <div className={classes.row}>
-          <div>
-            <DoneIcon className={classes.icon} />
-            <Typography variant='h6' className={classes.text}>
-              Checkboxes
-            </Typography>
-          </div>
-          <AddIcon className={classes.icon} />
-        </div>
-        <div className={classes.row}>
-          <div>
-            <RadioButtonCheckedIcon className={classes.icon} />
-            <Typography variant='h6' className={classes.text}>
-              Multiple choice
-            </Typography>
-          </div>
-          <AddIcon className={classes.icon} />
-        </div>
-        <div className={classes.row}>
-          <div>
-            <ArrowDropDownIcon className={classes.icon} />
-            <Typography variant='h6' className={classes.text}>
-              Dropdown
-            </Typography>
-          </div>
-          <AddIcon className={classes.icon} />
-        </div>
-        <div className={classes.row}>
-          <div>
-            <RemoveIcon className={classes.icon} />
-            <Typography variant='h6' className={classes.text}>
-              Section break
-            </Typography>
-          </div>
-          <AddIcon className={classes.icon} />
-        </div>
-          <div>
-            <InsertDriveFileIcon className={classes.icon} />
-            <Typography variant='h6' className={classes.text}>
-              Page break
-            </Typography>
-          </div>
-          <AddIcon className={classes.icon} />
-        </div>
-        <div className={classes.row}> */}

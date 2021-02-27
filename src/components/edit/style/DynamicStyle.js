@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
+import React from 'react';
+import { useSelector } from 'react-redux'
 import { ELEMENTTYPE } from '../../../redux/config/elementSchema'
 import { makeStyles } from '@material-ui/core/styles';
-import { editStyleRow } from '../../../redux/actions/actionsEditable'
 import StyleRow from './StyleRow'
 import StyleColumn from './StyleColumn'
 import StyleText from './StyleText'
@@ -43,9 +42,9 @@ const DynamicStyle = () => {
 
     const StyleByType = () => {
         switch (currentType) {
-            case ELEMENTTYPE.row:
+            case ELEMENTTYPE.rows:
                 return <StyleRow />
-            case ELEMENTTYPE.column:
+            case ELEMENTTYPE.columns:
                 return <StyleColumn />
             case ELEMENTTYPE.text:
                 return <StyleText />
@@ -64,25 +63,3 @@ const DynamicStyle = () => {
 };
 
 export default DynamicStyle;
-
-
-{/* <div className={classes.iconContainer}>
-                    <input
-                        className={classes.input}
-                        type='number'
-                        name='marginLeft'
-                        onChange={changeStyle}
-                        value={getStyleValue('marginLeft')}
-                    />
-                    <ArrowBack className={classes.icon} />
-                </div>
-                <div className={classes.iconContainer}>
-                    <input
-                        className={classes.input}
-                        type='number'
-                        name='marginRight'
-                        onChange={changeStyle}
-                        value={getStyleValue('marginRight')}
-                    />
-                    <ArrowForward className={classes.icon} />
-                </div> */}

@@ -86,12 +86,12 @@ const Variable = ({ elementId }) => {
             onDoubleClick={_handleDoubleClick}
             style={{ padding: '3px', width: 'fit-content', margin: '2px' }}
             elevation={(elementId === currentId || hover) ? 3 : 0}
-            onMouseEnter={onEnter}
-            onMouseLeave={onLeave}
+            onMouseOver={onEnter}
+            onMouseOut={onLeave}
         >
             {
                 editMode ?
-                    <div >
+                    <div>
                         <input name={_variable.id} onChange={_handelChangeTitle} placeholder={inputsValues.title} value={inputsValues.title} />
                         <div style={{ display: 'flex' }}>
                             <select onChange={_handelChangeKey} value={inputsValues.key} >

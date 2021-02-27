@@ -1,5 +1,4 @@
-import { fromPairs } from 'lodash';
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useSelector } from 'react-redux'
 import {cloneDeep} from 'lodash'
 
@@ -9,14 +8,7 @@ const useContractVirtualDom = () => {
     const columns = useSelector(state => state.contractDom.columns)
     const elements = useSelector(state => state.contractDom.elements)
     const [cVDom, setCVDom ] = useState(body)
-
-
-    useEffect(() => {
-        setCVDom(buildDom())
-    }, [body, rows, columns, elements])
-
-
-    const buildDom = () => {
+    const buildDom = useCallback(() => {
         let vdom = cloneDeep(body)
         let _rows = cloneDeep(rows)
         let _columns = cloneDeep(columns)
@@ -48,8 +40,12 @@ const useContractVirtualDom = () => {
             });
         })
         return vdom
-    }
-    
+    }, [body, rows, columns, elements])
+
+    useEffect(() => {
+        setCVDom(buildDom())
+    }, [body, rows, columns, elements, setCVDom, buildDom])
+
     return cVDom
 };
 

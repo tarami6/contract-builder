@@ -9,11 +9,11 @@ import ChooseColumnLayout from './ChooseColumnLayout'
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        padding: 10,
+        padding: '5px 10px',
         border: '1px solid #525661',
         display: 'flex',
         alignItems: 'center',
-        paddingLeft: 33,
+        paddingLeft: 30,
         justifyContent: 'space-between',
         cursor: 'pointer',
         '&:hover': {

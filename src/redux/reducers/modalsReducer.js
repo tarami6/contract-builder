@@ -3,7 +3,7 @@ const initialState = {
     addRow: false
 }
 
-export default function (state = initialState, action) {
+export default function modals(state = initialState, action) {
     switch (action.type) {
         case TOGGLE_ADD_ROW:
             return {

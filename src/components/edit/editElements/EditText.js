@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles, Typography } from '@material-ui/core'
 import { setCurrentEditable } from '../../../redux/actions/actionsEditable'
@@ -7,11 +7,11 @@ import { DeleteOutline, ExitToApp, SettingsApplications } from '@material-ui/ico
 
 const useStyles = makeStyles((theme) => ({
     row: {
-        padding: 10,
+        padding: '5px 10px',
         border: '1px solid #525661',
         display: 'flex',
         alignItems: 'center',
-        paddingLeft: 33,
+        paddingLeft: 30,
         justifyContent: 'space-between',
         cursor: 'pointer',
         '&:hover': {
@@ -39,13 +39,13 @@ const useStyles = makeStyles((theme) => ({
 const EditText = ({ id }) => {
     const dispatch = useDispatch()
     const classes = useStyles();
-    const { currentType, currentId, elementId, columnId } = useSelector(state => state.editable)
+    const { currentId, elementId, columnId } = useSelector(state => state.editable)
     const _currentElementId = id || currentId
     const _currentEditable = currentId === elementId
     const _element = useSelector(state => state.contractDom.elements[_currentElementId])
     const _column = useSelector(state => state.contractDom.columns[_element.columnId])
     const elementIndex = _column.elements.indexOf(_currentElementId) + 1
-    
+
     const onEdit = () => {
         dispatch(setCurrentEditable(_element))
     }
@@ -58,7 +58,7 @@ const EditText = ({ id }) => {
         dispatch(removeElement(_currentElementId, columnId))
         dispatch(setCurrentEditable(_column))
     }
-   
+
     return (
         <div>
             <div className={classes.row} onClick={onEdit}>

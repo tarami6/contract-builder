@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { setCurrentEditable } from '../../redux/actions/actionsEditable'
 import ModalAddElementToColumn from '../common/ModalAddElementToColumn'
 import { useDispatch, useSelector } from 'react-redux'
@@ -17,7 +17,7 @@ const useStyle = makeStyles((theme) => ({
         color: '#505b75',
         opacity: '0.1'
     },
-    emptyContainer:{
+    emptyContainer: {
         width: "100%",
         minHeight: "50px",
         margin: "1px",

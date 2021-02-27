@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { addRow } from '../../redux/actions/actionsContractDom'
 import { toggleAddRow } from '../../redux/actions/actionsModals'
@@ -9,13 +9,6 @@ import { Typography } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 
 const useStyles = makeStyles(() => ({
-    title: {
-        border: "1pxsolid#525661",
-        cursor: "pointer",
-        display: "flex",
-        padding: "10px",
-        alignItems: "center",
-    },
     text: {
         fontSize: '14px',
         margin: '0 15px',
@@ -23,11 +16,11 @@ const useStyles = makeStyles(() => ({
         color: '#b9b9b9',
     },
     row: {
-        padding: 10,
+        padding: '5px 10px',
         border: '1px solid #525661',
         display: 'flex',
         alignItems: 'center',
-        paddingLeft: 33,
+        paddingLeft: 30,
         justifyContent: 'space-between',
         cursor: 'pointer',
         '&:hover': {
@@ -53,34 +46,41 @@ const useStyles = makeStyles(() => ({
     }
 }))
 
+const useMounted = () => {
+    const [mounted, setMounted] = useState(false)
+    useEffect(() => {
+        if (!mounted)
+            setMounted(true)
+    }, [mounted])
+    return mounted
+}
+
 const ChooseColumnLayout = () => {
     const classes = useStyles();
-    const _rows = useSelector(state => state.contractDom?.body?.rows)
-    const [mounted, setMounted] = useState(false)
-    const _editableRowId = useSelector(state => state.editable?.rowId)
-    const lastRow = _rows[_rows.length-1] 
-    const _row = useSelector(state => state.contractDom.rows[lastRow])
     const dispatch = useDispatch()
-
-    const _handleClose = () => dispatch(toggleAddRow());
+    const _rows = useSelector(state => state.contractDom?.body?.rows)
+    const _editableRowId = useSelector(state => state.editable?.rowId)
+    const lastRow = _rows[_rows.length - 1]
+    const _row = useSelector(state => state.contractDom.rows[lastRow])
+    const _handleClose = useCallback(() => dispatch(toggleAddRow()), [dispatch]);
+    const _setCurrentEditable = useCallback(() => dispatch(setCurrentEditable(_row)), [_row, dispatch]);
 
     const _addRow = async (numOfColumns) => {
         dispatch(addRow(numOfColumns))
     }
+    
+    const mounted = useMounted()
 
-    const setEditable = () => {
+    const _setEditable = useCallback(() => {
         if (!_row || _row?.id === _editableRowId || !mounted)
-            return 
+            return
         else {
-            dispatch(setCurrentEditable(_row))
+            _setCurrentEditable()
             _handleClose()
         }
-    }
+    }, [_row, _editableRowId, mounted, _handleClose, _setCurrentEditable]);
 
-    useEffect(() => {
-        setEditable()
-        setMounted(!mounted)
-    }, [lastRow])
+    useEffect(_setEditable, [lastRow, _setEditable])
 
     return (
         <div>

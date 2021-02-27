@@ -6,7 +6,7 @@ import { Card } from '@material-ui/core'
 
 const Row = ({ rowId }) => {
     const dispatch = useDispatch()
-    const { currentType, currentId } = useSelector(state => state.editable)
+    const { currentId } = useSelector(state => state.editable)
     const _row = useSelector(state => state.contractDom.rows[rowId])
     const [hover, setHover] = useState(false)
 

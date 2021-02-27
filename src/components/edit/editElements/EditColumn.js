@@ -14,11 +14,11 @@ import EditSignature from './EditSignature'
 
 const useStyles = makeStyles((theme) => ({
     row: {
-        padding: 10,
+        padding: '5px 10px',
         border: '1px solid #525661',
         display: 'flex',
         alignItems: 'center',
-        paddingLeft: 33,
+        paddingLeft: 30,
         justifyContent: 'space-between',
         cursor: 'pointer',
         '&:hover': {
@@ -55,15 +55,14 @@ const useStyles = makeStyles((theme) => ({
 
 const EditColumn = ({ title, columnIdToSet }) => {
     const dispatch = useDispatch()
-    const { currentType, currentId, columnId, rowId } = useSelector(state => state.editable)
+    const { currentId, columnId, rowId } = useSelector(state => state.editable)
     const _currentColumnId = columnId || columnIdToSet
     const _currentColumn = useSelector(state => state.contractDom.columns[_currentColumnId])
     const _currentrow = useSelector(state => state.contractDom.rows[rowId])
     const classes = useStyles();
     const [editMode, setEditMode] = useState(false)
-    const _currentEditElement = currentId == _currentColumnId
+    const _currentEditElement = currentId === _currentColumnId
     const [addElementMode, setAddElementMode] = useState(false)
-    const manyColumns = _currentrow?.columns.length > 1
 
     useEffect(() => {
         setEditMode(_currentEditElement)

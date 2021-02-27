@@ -52,7 +52,7 @@ const removeRow = (state, action) => {
     Object.keys(newState.columns).map(idColumn => {
         if (newState.columns[idColumn].rowId === action.payload.rowId)
             delete newState.columns[idColumn]
-        return
+        return idColumn
     })
     return {
         ...state,

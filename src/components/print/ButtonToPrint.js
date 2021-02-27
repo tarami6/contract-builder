@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     btn: {
-        margin: '20px',
+        margin: '20px 0px',
         padding: '5px 55px',
         backgroundColor: '#192233',
         textTransform: 'capitalize',
