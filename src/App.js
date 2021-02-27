@@ -1,14 +1,7 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import './App.css';
 import DropZoneScreenScreen from './components/dropZoneScreen/DropZoneScreen'
 
-function App() {
-
-  return (
-    <>
-      <DropZoneScreenScreen />
-    </>
-  );
-}
+const App =  () => <DropZoneScreenScreen />
 
 export default App;

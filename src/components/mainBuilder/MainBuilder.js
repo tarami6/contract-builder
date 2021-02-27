@@ -1,11 +1,7 @@
 import React from 'react';
 import ContractBody from '../elements/ContractBody'
 import { makeStyles } from '@material-ui/core/styles';
-import ModalAddRow from '../common/ModalAddRow'
 import ModalAddElementToColumn from '../common/ModalAddElementToColumn'
-import ButtonToPrint from '../print/ButtonToPrint'
-import DynamicStyle from '../edit/style/DynamicStyle'
-import { Button, Container, Row, Col } from 'react-bootstrap'
 
 const useStyle = makeStyles((theme) => ({
   root: {

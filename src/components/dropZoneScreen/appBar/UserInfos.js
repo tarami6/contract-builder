@@ -4,7 +4,7 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Typography from '@material-ui/core/Typography';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { Avatar, Badge } from '@material-ui/core';
-import Image from '../../../assets/img.jpg';
+import Image from '../../../assets/ramiAvatar.jpg';
 import ToolTip from './ToolTip';
 
 const useStyles = makeStyles((theme) => ({
@@ -57,7 +57,7 @@ const UserInfos = () => {
             className={classes.text}
             onClick={handleTooltipOpen}
           >
-            Lorem ipsum
+            Rami Talisveiber 
           </Typography>
           <ArrowDropDownIcon style={{ color: '#666' }} />
           {open && <ToolTip />}

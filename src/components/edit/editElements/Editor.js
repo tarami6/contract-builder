@@ -20,9 +20,9 @@ const Editor = () => {
             return _rows.map(bodyRowId => <EditRow key={bodyRowId} bodyRowId={bodyRowId} />)
     }
     switch (currentType) {
-        case ELEMENTTYPE.row:
+        case ELEMENTTYPE.rows:
             return <EditRow />
-        case ELEMENTTYPE.column:
+        case ELEMENTTYPE.columns:
             return <EditColumn />
         case ELEMENTTYPE.text:
             return <EditText />

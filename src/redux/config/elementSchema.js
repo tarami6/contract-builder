@@ -14,20 +14,19 @@ export const VARIABLETYPES = {
 }
 
 export const ELEMENTTYPE = {
-    row: 'row',
+    rows: 'rows',
     text: 'text',
     variable: 'variable',
     img: 'img',
     signature: 'signature',
-    row: 'row',
-    column: 'column'
+    columns: 'columns'
 }
 
 export const columnConstructor = rowId => (
     {
         id: uid(),
         rowId,
-        type: 'column',
+        type: 'columns',
         style: {
             minHeight: "50px",
             width: "100%",
@@ -47,7 +46,7 @@ export const columnConstructor = rowId => (
 
 export const rowContsructor = (id, numOfColumns, columnsIds) => ({
     id,
-    type: 'row',
+    type: 'rows',
     style: {
         width: "100%",
         minHeight: "50px",

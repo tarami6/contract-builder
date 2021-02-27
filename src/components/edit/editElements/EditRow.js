@@ -8,11 +8,11 @@ import EditColumn from './EditColumn'
 
 const useStyles = makeStyles((theme) => ({
     row: {
-        padding: 10,
+        padding: '5px 10px',
         border: '1px solid #525661',
         display: 'flex',
         alignItems: 'center',
-        paddingLeft: 33,
+        paddingLeft: 30,
         justifyContent: 'space-between',
         cursor: 'pointer',
         '&:hover': {
@@ -57,10 +57,9 @@ const EditRow = ({ bodyRowId }) => {
     const [editMode, setEditMode] = useState(false)
     const _currentEditElement = currentId && currentId === currentRowId
     const manyColumns = _row?.columns.length > 1
-
     useEffect(() => {
-        _currentEditElement && setEditMode(!editMode)
-    }, [_currentEditElement])
+        _currentEditElement && setEditMode(false)
+    }, [_currentEditElement, setEditMode])
 
 
     const deleteRow = () => {

@@ -1,6 +1,5 @@
 import {
     CURRENT_STYBLE,
-    ADD_ROW
 } from "../actions/actionTypes"
 
 const initialState = {

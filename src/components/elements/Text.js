@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { editElementText, removeElement } from '../../redux/actions/actionsContractDom'
+import { editElementText } from '../../redux/actions/actionsContractDom'
 import { useSelector, useDispatch } from 'react-redux'
 import { CheckCircle, XCircle } from 'react-bootstrap-icons'
 import { Card } from '@material-ui/core'

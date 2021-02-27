@@ -16,8 +16,8 @@ export const setCurrentEditable = (element) => {
         type
     } = element
     const isElement = type === ELEMENTTYPE.text || type === ELEMENTTYPE.img || type === ELEMENTTYPE.signature || type === ELEMENTTYPE.variable
-    const isColumn = type === ELEMENTTYPE.column
-    const isRow = type === ELEMENTTYPE.row
+    const isColumn = type === ELEMENTTYPE.columns
+    const isRow = type === ELEMENTTYPE.rows
     
     return {
         type: CURRENT_STYBLE,
