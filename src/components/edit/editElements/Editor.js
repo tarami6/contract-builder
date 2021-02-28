@@ -9,6 +9,7 @@ import EditText from './EditText'
 import EditImg from './EditImg'
 import EditVariable from './EditVariable'
 import EditSignature from './EditSignature'
+import EditWys from './EditWys'
 
 const Editor = () => {
     const { currentType } = useSelector(state => state.editable)
@@ -17,7 +18,7 @@ const Editor = () => {
         if (!_rows.length)
             return <></>
         else
-            return _rows.map(bodyRowId => <EditRow key={bodyRowId} bodyRowId={bodyRowId} />)
+            return _rows.map((bodyRowId, index) => <EditRow key={bodyRowId} bodyRowId={bodyRowId} index={index} />)
     }
     switch (currentType) {
         case ELEMENTTYPE.rows:
@@ -26,6 +27,8 @@ const Editor = () => {
             return <EditColumn />
         case ELEMENTTYPE.text:
             return <EditText />
+        case ELEMENTTYPE.wys:
+            return <EditWys />
         case ELEMENTTYPE.img:
             return <EditImg />
         case ELEMENTTYPE.variable:

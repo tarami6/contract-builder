@@ -67,8 +67,9 @@ const ChooseColumnLayout = () => {
 
     const _addRow = async (numOfColumns) => {
         dispatch(addRow(numOfColumns))
+        console.log('_rows', _rows)
     }
-    
+
     const mounted = useMounted()
 
     const _setEditable = useCallback(() => {
@@ -80,7 +81,8 @@ const ChooseColumnLayout = () => {
         }
     }, [_row, _editableRowId, mounted, _handleClose, _setCurrentEditable]);
 
-    useEffect(_setEditable, [lastRow, _setEditable])
+    //eslint-disable-next-line
+    useEffect( _setEditable, [lastRow])
 
     return (
         <div>

@@ -15,7 +15,7 @@ import {
     textContstractor,
     imgConstractor,
     signatureConstractor,
-    variableConstractor
+    variableConstractor, wysContstractor
 } from '../config/elementSchema'
 
 export const addRow = numOfColumns => {
@@ -59,7 +59,7 @@ export const removeColumn = (rowId, columnId) => {
     }
 }
 
-export const addElement = (type, columnId, rowId) => {
+export const addElement = (type, columnId, rowId, imgSrc) => {
     let element;
     let id = uid()
 
@@ -67,8 +67,11 @@ export const addElement = (type, columnId, rowId) => {
         case ELEMENTTYPE.text:
             element = textContstractor(id, columnId, rowId)
             break;
+        case ELEMENTTYPE.wys:
+            element = wysContstractor(id, columnId, rowId)
+            break;
         case ELEMENTTYPE.img:
-            element = imgConstractor(id, columnId, rowId)
+            element = imgConstractor(id, columnId, rowId, imgSrc)
             break;
         case ELEMENTTYPE.variable:
             element = variableConstractor(id, columnId, rowId)

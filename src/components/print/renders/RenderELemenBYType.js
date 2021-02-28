@@ -2,17 +2,20 @@ import Text from '../components/Text'
 import Variable from '../components/Variable'
 import Image from '../components/Image'
 import Signature from '../components/Signature'
-
+import WysText from '../components/WysText'
+import { ELEMENTTYPE } from '../../../redux/config/elementSchema'
 
 const RenderELemenBYType = ({ element }) => {
     switch (element.type) {
-        case 'text':
+        case ELEMENTTYPE.text:
             return <Text element={element} />
-        case 'variable':
+        case ELEMENTTYPE.wys:
+            return <WysText element={element} />
+        case ELEMENTTYPE.variable:
             return <Variable element={element} />
-        case 'img':
+        case ELEMENTTYPE.img:
             return <Image element={element} />
-        case 'signature':
+        case ELEMENTTYPE.signature:
             return <Signature element={element} />
         default:
             return <div />

@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-const EditRow = ({ bodyRowId }) => {
+const EditRow = ({ bodyRowId, index }) => {
     const dispatch = useDispatch()
     const classes = useStyles();
     const { currentId, rowId } = useSelector(state => state.editable)
@@ -58,7 +58,7 @@ const EditRow = ({ bodyRowId }) => {
     const _currentEditElement = currentId && currentId === currentRowId
     const manyColumns = _row?.columns.length > 1
     useEffect(() => {
-        _currentEditElement && setEditMode(false)
+        _currentEditElement && setEditMode(true)
     }, [_currentEditElement, setEditMode])
 
 
@@ -121,6 +121,13 @@ const EditRow = ({ bodyRowId }) => {
 
     }
 
+    const numTheRow = () => {
+        if (index || index === 0)
+            return index + 1
+        else
+            return ''
+    }
+
     const Label = () => (
         <div
             className={classes.row}
@@ -129,7 +136,7 @@ const EditRow = ({ bodyRowId }) => {
         >
             <div>
                 <SettingsApplications width='20' height='20' className={_currentEditElement ? classes.iconEditMode : classes.icon} />
-                <Typography variant='h6' className={_currentEditElement ? classes.textEditMode : classes.text} >Row</Typography>
+    <Typography variant='h6' className={_currentEditElement ? classes.textEditMode : classes.text} >Row {numTheRow()}</Typography>
             </div>
         </div>
     )

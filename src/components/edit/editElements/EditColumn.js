@@ -3,14 +3,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles, Typography } from '@material-ui/core'
 import { setCurrentEditable } from '../../../redux/actions/actionsEditable'
 import { removeColumn, addElement } from '../../../redux/actions/actionsContractDom'
+import { toggleChooseImg } from '../../../redux/actions/actionsModals'
 import { PlusCircle, XCircle } from 'react-bootstrap-icons'
-import { DeleteOutline, ExitToApp, SettingsApplications } from '@material-ui/icons'
+import { DeleteOutline, ExitToApp, SettingsApplications, ListAlt } from '@material-ui/icons'
 import { FileFont, FileImage, FileEarmarkMedical, PencilSquare } from 'react-bootstrap-icons'
 import { ELEMENTTYPE } from '../../../redux/config/elementSchema'
 import EditText from './EditText'
 import EditImg from './EditImg'
 import EditVariable from './EditVariable'
 import EditSignature from './EditSignature'
+import EditWys from './EditWys'
 
 const useStyles = makeStyles((theme) => ({
     row: {
@@ -87,6 +89,10 @@ const EditColumn = ({ title, columnIdToSet }) => {
         dispatch(addElement(type, columnId, rowId))
     }
 
+    const _chooseImg = () => {
+        dispatch(toggleChooseImg())
+    }
+
     const label = title ? `${title} Column` : 'Column'
 
     const EditMode = () => {
@@ -132,7 +138,13 @@ const EditColumn = ({ title, columnIdToSet }) => {
                         <Typography variant='h6' className={classes.text}>Add Text</Typography>
                     </div>
                 </div>
-                <div className={classes.row} onClick={() => _addElement(ELEMENTTYPE.img)} >
+                <div className={classes.row} onClick={() => _addElement(ELEMENTTYPE.wys)} >
+                    <div>
+                        <ListAlt width='20' height='20' className={classes.icon} />
+                        <Typography variant='h6' className={classes.text}>Add Content</Typography>
+                    </div>
+                </div>
+                <div className={classes.row} onClick={_chooseImg} >
                     <div>
                         <FileImage width='20' height='20' className={classes.icon} />
                         <Typography variant='h6' className={classes.text}>Add Image</Typography>
@@ -161,6 +173,8 @@ const EditColumn = ({ title, columnIdToSet }) => {
             switch (_currentElement?.type) {
                 case ELEMENTTYPE.text:
                     return <EditText id={_currentElement.id} />
+                case ELEMENTTYPE.wys:
+                    return <EditWys id={_currentElement.id} />
                 case ELEMENTTYPE.img:
                     return <EditImg id={_currentElement.id} />
                 case ELEMENTTYPE.variable:

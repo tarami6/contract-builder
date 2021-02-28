@@ -16,6 +16,7 @@ export const VARIABLETYPES = {
 export const ELEMENTTYPE = {
     rows: 'rows',
     text: 'text',
+    wys: 'wys',
     variable: 'variable',
     img: 'img',
     signature: 'signature',
@@ -91,12 +92,16 @@ export const textContstractor = (id, columnId, rowId) => ({
     content: 'Double click for edit'
 })
 
-export const imgConstractor = (id, columnId, rowId) => ({
+export const imgConstractor = (id, columnId, rowId, imgSrc) => ({
     id,
     rowId,
     columnId,
     type: 'img',
-    style: {},
+    src: imgSrc,
+    style: {
+        width: '100px',
+        height: '60px'
+    },
 })
 
 export const signatureConstractor = (id, columnId, rowId) => ({
@@ -150,4 +155,14 @@ export const variableConstractor = (id, columnId, rowId) => ({
     },
     title: 'Title',
     key: 'empty'
+})
+
+export const wysContstractor = (id, columnId, rowId) => ({
+    id,
+    rowId,
+    columnId,
+    type: 'wys',
+    style: {
+    },
+    content: 'Editor'
 })
