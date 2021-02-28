@@ -13,6 +13,7 @@ const definePath = (state, currentType) => {
             return state.contractDom[currentType]
 
         case ELEMENTTYPE.text:
+        case ELEMENTTYPE.wys:
         case ELEMENTTYPE.img:
         case ELEMENTTYPE.signature:
         case ELEMENTTYPE.variable:
@@ -39,32 +40,33 @@ const useGetInputValue = () => {
         const valuBy = typeIndicator ? `${value}${typeIndicator}` : `${value}`
         const name = e.target.name
         switch (currentType) {
-            case ELEMENTTYPE.rows:{
-                setCurrentStyle({..._currentStyle, [name]: valuBy})
+            case ELEMENTTYPE.rows: {
+                setCurrentStyle({ ..._currentStyle, [name]: valuBy })
                 return dispatch(editStyleRow(currentId, { [name]: valuBy }))
             }
-               
-            case ELEMENTTYPE.columns:{
-                setCurrentStyle({..._currentStyle, [name]: valuBy})
+
+            case ELEMENTTYPE.columns: {
+                setCurrentStyle({ ..._currentStyle, [name]: valuBy })
                 return dispatch(editStyleColumn(currentId, { [name]: valuBy }))
             }
-               
+
             case ELEMENTTYPE.text:
+            case ELEMENTTYPE.wys:
             case ELEMENTTYPE.img:
             case ELEMENTTYPE.signature:
-            case ELEMENTTYPE.variable:{
-                setCurrentStyle({..._currentStyle, [name]: valuBy})
+            case ELEMENTTYPE.variable: {
+                setCurrentStyle({ ..._currentStyle, [name]: valuBy })
                 return dispatch(editStyleElement(currentId, { [name]: valuBy }))
             }
-               
+
             default:
                 break
         }
     }
 
-     const getStyleValue = (keyPath) => {
+    const getStyleValue = (keyPath) => {
         const cssUnit = getCssUnit(keyPath)
-    
+
         if (_currentStyle) {
             if (_currentStyle?.hasOwnProperty(keyPath)) {
                 if (cssUnit) {

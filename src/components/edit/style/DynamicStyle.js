@@ -6,6 +6,9 @@ import StyleRow from './StyleRow'
 import StyleColumn from './StyleColumn'
 import StyleText from './StyleText'
 import StyleVariable from './StyleVariable'
+import StyleWys from './StyleWys'
+import StyleImg from './StyleImg'
+import StyleSignature from './StyleSignature'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -48,10 +51,19 @@ const DynamicStyle = () => {
                 return <StyleColumn />
             case ELEMENTTYPE.text:
                 return <StyleText />
+            case ELEMENTTYPE.wys:
+                return <StyleWys />
             case ELEMENTTYPE.variable:
                 return <StyleVariable />
-            default:
-                return <p>No style type</p>
+            case ELEMENTTYPE.img:
+                return <StyleImg />
+            case ELEMENTTYPE.signature:
+                return <StyleSignature />
+            default:{
+                console.warn('No style type')
+                return <></>
+            }
+              
         }
     }
 

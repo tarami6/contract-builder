@@ -1,10 +1,8 @@
 import { useState } from 'react'
 import { setCurrentEditable } from '../../redux/actions/actionsEditable'
-import ModalAddElementToColumn from '../common/ModalAddElementToColumn'
 import { useDispatch, useSelector } from 'react-redux'
 import { Card, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
-
 import RenderElement from '../common/RenderElement'
 
 const useStyle = makeStyles((theme) => ({
@@ -33,9 +31,7 @@ const Column = ({ columnId }) => {
     const dispatch = useDispatch()
     const _column = useSelector(state => state.contractDom.columns[columnId])
     const _elementsIds = _column?.elements
-    const _row = useSelector(state => state.contractDom.rows[_column?.rowId])
     const { currentId } = useSelector(state => state.editable)
-    const [modalOpen, setModalOpen] = useState(false)
     const [hover, setHover] = useState(false)
 
     const editColumn = (e) => {
@@ -69,7 +65,6 @@ const Column = ({ columnId }) => {
                 )
             }
             {_elementsIds?.map((elementId, index) => <RenderElement key={elementId} elementId={elementId} />)}
-            <ModalAddElementToColumn open={modalOpen} rowId={_row.id} columnId={columnId} onClick={() => setModalOpen(!modalOpen)} />
         </Card>
     )
 }

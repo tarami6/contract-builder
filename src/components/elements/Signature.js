@@ -42,13 +42,28 @@ const Signature = ({ elementId }) => {
         <Card
             onClick={editElement}
             onDoubleClick={_handleDoubleClick}
-            style={{ padding: '3px', width: 'fit-content', margin: '2px' }}
+            style={{
+                padding: '3px',
+                width: 'fit-content',
+                marginTop: _signature.style.marginTop,
+                marginBottom: _signature.style.marginBottom,
+                marginLeft: _signature.style.marginLeft,
+                marginRight: _signature.style.marginRight,
+                paddingTop: _signature.style.paddingTop,
+                paddingBottom: _signature.style.paddingBottom,
+                paddingLeft: _signature.style.paddingLeft,
+                paddingRight: _signature.style.paddingRight,
+            }}
             elevation={(elementId === currentId || hover) ? 3 : 0}
             onMouseEnter={onHover}
             onMouseLeave={onHover}
         >
             <p>Signature</p>
-            <div style={{ ..._signature.style }}  >
+            <div style={{
+                width: '160px',
+                height: '80px',
+                border: '2px solid'
+            }}  >
                 {editMode ?
                     <div style={{ display: 'flex' }}>
                         <div onClick={_close} style={{ margin: '0 5px' }}><XCircle width='20' height='20' /></div>

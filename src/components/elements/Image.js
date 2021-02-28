@@ -27,12 +27,14 @@ const Image = ({ elementId }) => {
     return (
         <Card
             onClick={editElement}
-            style={{ padding: '3px', width: 'fit-content', margin: '2px' }}
+            style={{ width: 'fit-content', ..._element.style }}
             elevation={(elementId === currentId || hover) ? 3 : 0}
             onMouseOver={onEnter}
             onMouseOut={onLeave}
         >
-            <img src={'https://www.amdocs.com/sites/default/files/inline-images/optima-logo-sm-whiteBG.jpg'}
+            <img src={_element.src}
+                width={_element.style.width}
+                height={_element.style.height}
                 alt="Logo" />
         </Card>
     )

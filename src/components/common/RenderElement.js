@@ -6,12 +6,15 @@ import Text from '../elements/Text'
 import Variable from '../elements/Variable'
 import Image from '../elements/Image'
 import Signature from '../elements/Signature'
+import WysEditor from '../elements/WysEditor'
 
 const RenderElement = ({ elementId }) => {
     const _type = useSelector(state => state.contractDom.elements[elementId].type)
     switch (_type) {
         case ELEMENTTYPE.text:
             return <Text elementId={elementId} />
+        case ELEMENTTYPE.wys:
+            return <WysEditor elementId={elementId} />
         case ELEMENTTYPE.img:
             return <Image elementId={elementId} />
         case ELEMENTTYPE.variable:

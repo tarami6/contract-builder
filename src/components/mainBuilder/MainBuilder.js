@@ -1,7 +1,7 @@
 import React from 'react';
 import ContractBody from '../elements/ContractBody'
 import { makeStyles } from '@material-ui/core/styles';
-import ModalAddElementToColumn from '../common/ModalAddElementToColumn'
+import ModalChooseImg from '../common/ModalChooseImg'
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -29,8 +29,7 @@ const MainBuilder = () => {
         <form onSubmit={_handleSubmit}>
           <ContractBody />
         </form>
-        <ModalAddElementToColumn />
-
+        <ModalChooseImg />
         {/* <Test /> */}
       </div>
     </div>

@@ -15,3 +15,4 @@ export const EDIT_STYLE_COLUMN = "EDIT_STYLE_COLUMN";
 export const EDIT_STYLE_ELEMENT = "EDIT_STYLE_ELEMENT";
 // modals
 export const TOGGLE_ADD_ROW = "TOGGLE_ADD_ROW";
+export const TOGGLE_CHOOSE_IMG = "TOGGLE_CHOOSE_IMG";

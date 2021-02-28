@@ -48,9 +48,6 @@ const DropZoneScreen = () => {
         <MainBuilder />
         <DynamicStyle />
       </div>
-      {/* <div className={classes.footer}>
-        <Footer />
-      </div> */}
     </div>
   );
 };
