@@ -1,11 +1,12 @@
 import React, { useState} from 'react';
 import BoxSize from './inputs/BoxSize'
+import SaveStyle from './inputs/SaveStyle'
 import TitleRow from './TitleRow'
 import TitleBox from '../../common/TitleBox'
 import useGetInputValue from '../customHooks/useGetInputValue'
 
 const StyleSignature = () => {
-    const [getStyleValue, changeStyle] = useGetInputValue()
+    const {getStyleValue, changeStyle} = useGetInputValue()
     const [openedSections, setOpenedSections] = useState({
         margin: true,
         padding: false,
@@ -47,6 +48,7 @@ const StyleSignature = () => {
                 sides
                 type={'padding'}
             />
+            <SaveStyle />
         </div>
     );
 };
