@@ -2,7 +2,8 @@ import {
     CURRENT_STYBLE,
     EDIT_STYLE_ROW,
     EDIT_STYLE_COLUMN,
-    EDIT_STYLE_ELEMENT
+    EDIT_STYLE_ELEMENT,
+    SET_TEMP_STYLE
 } from "./actionTypes"
 import {
     ELEMENTTYPE
@@ -18,7 +19,7 @@ export const setCurrentEditable = (element) => {
     const isElement = type === ELEMENTTYPE.text || type === ELEMENTTYPE.img || type === ELEMENTTYPE.signature || type === ELEMENTTYPE.variable || type === ELEMENTTYPE.wys
     const isColumn = type === ELEMENTTYPE.columns
     const isRow = type === ELEMENTTYPE.rows
-    
+
     return {
         type: CURRENT_STYBLE,
         payload: {
@@ -61,3 +62,12 @@ export const editStyleElement = (elementId, style) => {
     }
 }
 
+export const setTempStyle = (type, style) => {
+    return {
+        type: SET_TEMP_STYLE,
+        payload: {
+            type,
+            style
+        }
+    }
+}

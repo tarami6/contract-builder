@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import BoxSize from './inputs/BoxSize'
 import TitleRow from './TitleRow'
+import SaveStyle from './inputs/SaveStyle'
 import useGetInputValue from '../customHooks/useGetInputValue'
 import TitleBox from '../../common/TitleBox'
 
 const StyleRow = () => {
-    const [getStyleValue, changeStyle] = useGetInputValue()
+    const { getStyleValue, changeStyle } = useGetInputValue()
     const [openedSections, setOpenedSections] = useState({
         margin: true,
         padding: false,
@@ -17,7 +18,7 @@ const StyleRow = () => {
 
     return (
         <div>
-            <TitleBox title={'Row Style'}/>
+            <TitleBox title={'Row Style'} />
             <TitleRow
                 title={'Margin'}
                 onClick={() => openSections('margin')}
@@ -44,6 +45,7 @@ const StyleRow = () => {
                 sides
                 type={'padding'}
             />
+            <SaveStyle />
         </div>
     );
 };

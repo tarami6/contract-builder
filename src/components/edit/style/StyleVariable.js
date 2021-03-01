@@ -5,6 +5,7 @@ import { editStyleElement } from '../../../redux/actions/actionsEditable'
 import { Typography } from '@material-ui/core';
 import BoxSize from './inputs/BoxSize'
 import Fonts from './inputs/Fonts'
+import SaveStyle from './inputs/SaveStyle'
 import TitleRow from './TitleRow'
 
 const useStyles = makeStyles((theme) => ({
@@ -211,6 +212,7 @@ const StyleVariable = () => {
              colorValue={getStyleValue('color', 'key')}
              show={openedSections.keyFont}
             />
+            <SaveStyle />
         </div>
     );
 };

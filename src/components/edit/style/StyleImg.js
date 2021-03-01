@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import BoxSize from './inputs/BoxSize'
 import ImgSize from './inputs/ImgSize'
+import SaveStyle from './inputs/SaveStyle'
 import TitleRow from './TitleRow'
 import TitleBox from '../../common/TitleBox'
 import useGetInputValue from '../customHooks/useGetInputValue'
 
 const StyleImg = () => {
-    const [getStyleValue, changeStyle] = useGetInputValue()
+    const {getStyleValue, changeStyle} = useGetInputValue()
     const [openedSections, setOpenedSections] = useState({
         margin: true,
         padding: false,
@@ -54,6 +55,7 @@ const StyleImg = () => {
                 sides
                 type={'padding'}
             />
+            <SaveStyle />
         </div>
     );
 };

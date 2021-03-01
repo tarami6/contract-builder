@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { editStyleRow, editStyleColumn, editStyleElement } from '../../../redux/actions/actionsEditable'
+import { editStyleRow, editStyleColumn, editStyleElement, setTempStyle } from '../../../redux/actions/actionsEditable'
 import {
     ELEMENTTYPE
 } from "../../../redux/config/elementSchema"
@@ -26,28 +26,37 @@ const definePath = (state, currentType) => {
 
 const useGetInputValue = () => {
     const dispatch = useDispatch()
-    const { currentId, currentType } = useSelector(state => state.editable)
+    const { currentId, currentType, tempStyle } = useSelector(state => state.editable)
     const _elements = useSelector(state => definePath(state, currentType))
     const [_currentStyle, setCurrentStyle] = useState({})
+    const [hasStyle, setHasStyle] = useState(tempStyle.type === currentType) 
 
     useEffect(() => {
         _elements && setCurrentStyle({ ..._elements[currentId].style })
     }, [currentType, _elements, currentId])
+
+    useEffect(()=>{
+        setHasStyle(tempStyle.type === currentType)
+    }, [tempStyle.type, currentType])
+
 
     const changeStyle = (e) => {
         const typeIndicator = getCssUnit(e.target.name)
         const value = e.target.value
         const valuBy = typeIndicator ? `${value}${typeIndicator}` : `${value}`
         const name = e.target.name
+        setCurrentStyle({ ..._currentStyle, [name]: valuBy })
+        dispatchStyle({ [name]: valuBy })
+    }
+
+    const dispatchStyle = (style) => {
         switch (currentType) {
             case ELEMENTTYPE.rows: {
-                setCurrentStyle({ ..._currentStyle, [name]: valuBy })
-                return dispatch(editStyleRow(currentId, { [name]: valuBy }))
+                return dispatch(editStyleRow(currentId, style))
             }
 
             case ELEMENTTYPE.columns: {
-                setCurrentStyle({ ..._currentStyle, [name]: valuBy })
-                return dispatch(editStyleColumn(currentId, { [name]: valuBy }))
+                return dispatch(editStyleColumn(currentId, style))
             }
 
             case ELEMENTTYPE.text:
@@ -55,8 +64,7 @@ const useGetInputValue = () => {
             case ELEMENTTYPE.img:
             case ELEMENTTYPE.signature:
             case ELEMENTTYPE.variable: {
-                setCurrentStyle({ ..._currentStyle, [name]: valuBy })
-                return dispatch(editStyleElement(currentId, { [name]: valuBy }))
+                return dispatch(editStyleElement(currentId, style))
             }
 
             default:
@@ -81,7 +89,19 @@ const useGetInputValue = () => {
         return undefined
     }
 
-    return [getStyleValue, changeStyle]
+    const saveStyle = () => {
+        const style = { ..._currentStyle }
+        dispatch(setTempStyle(currentType, style))
+    }
+
+    const getStyle = () => {
+        if (hasStyle) {
+            setCurrentStyle({ ...tempStyle.style })
+            dispatchStyle({ ...tempStyle.style })
+        }
+    }
+
+    return {getStyleValue, changeStyle, saveStyle, getStyle, hasStyle}
 }
 
 export default useGetInputValue;
