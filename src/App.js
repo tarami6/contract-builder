@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css';
-import DropZoneScreenScreen from './components/dropZoneScreen/DropZoneScreen'
+import DropZoneScreen from './components/dropZoneScreen/DropZoneScreen'
 
-const App =  () => <DropZoneScreenScreen />
+const App =  () => <DropZoneScreen />
 
 export default App;

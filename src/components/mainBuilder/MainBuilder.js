@@ -9,6 +9,12 @@ const useStyle = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     marginLeft: '20%'
+  },
+  container: {
+    width: "75%",
+    minHeight: "100vh",
+    backgroundColor: '#fff',
+    padding: '15px 15px 0px 15px',
   }
 }))
 
@@ -20,12 +26,7 @@ const MainBuilder = () => {
   }
   return (
     <div className={classes.root} >
-      <div style={{
-        width: "75%",
-        minHeight: "100vh",
-        backgroundColor: '#fff',
-        padding: '15px 15px 0px 15px',
-      }}>
+      <div className={classes.container}>
         <form onSubmit={_handleSubmit}>
           <ContractBody />
         </form>

@@ -7,7 +7,7 @@ import { Avatar, Badge } from '@material-ui/core';
 import Image from '../../../assets/ramiAvatar.jpg';
 import ToolTip from './ToolTip';
 
-const useStyles = makeStyles((theme) => ({
+const useStyle = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     color: '#666',
   },
+  arrow: { color: '#666' },
 }));
 
 const UserInfos = () => {
@@ -47,7 +48,7 @@ const UserInfos = () => {
     setOpen(!open);
   };
 
-  const classes = useStyles();
+  const classes = useStyle();
   return (
     <div className={classes.root}>
       <ClickAwayListener onClickAway={handleTooltipClose}>
@@ -57,9 +58,9 @@ const UserInfos = () => {
             className={classes.text}
             onClick={handleTooltipOpen}
           >
-            Rami Talisveiber 
+            Rami Talisveiber
           </Typography>
-          <ArrowDropDownIcon style={{ color: '#666' }} />
+          <ArrowDropDownIcon className={classes.arrow} />
           {open && <ToolTip />}
           <div className={classes.avatar}>
             <Badge color='secondary' overlap='circle' badgeContent={1}>

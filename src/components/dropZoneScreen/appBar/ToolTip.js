@@ -6,9 +6,8 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Typography from '@material-ui/core/Typography';
 import InfoIcon from '@material-ui/icons/Info';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-  },
+const useStyle = makeStyles((theme) => ({
+  root: {},
   item: {
     display: 'flex',
     flexDirection: 'column',
@@ -16,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     width: 166,
     right: '-20px',
     background: '#333b4e',
-    bottom: '-165px',
+    bottom: '-134px',
     borderRadius: 4,
     zIndex: 99,
     overflow: 'hidden',
@@ -30,8 +29,8 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     '&:hover': {
       background: '#2a3040',
-      border: 'none'
-    }
+      border: 'none',
+    },
   },
   arrow: {
     position: 'absolute',
@@ -53,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ToolTip = () => {
-  const classes = useStyles();
+  const classes = useStyle();
   return (
     <div className={classes.root}>
       <div className={classes.arrow} />
@@ -66,13 +65,13 @@ const ToolTip = () => {
           <InfoIcon className={classes.icon} />
         </div>
         <div className={classes.row}>
-          <AddCircleIcon  className={classes.icon} />
+          <AddCircleIcon className={classes.icon} />
           <Typography variant='h6' className={classes.text}>
             Support
           </Typography>
         </div>
         <div className={classes.row}>
-          <ExitToAppIcon  className={classes.icon} />
+          <ExitToAppIcon className={classes.icon} />
           <Typography variant='h6' className={classes.text}>
             Logout
           </Typography>

@@ -3,12 +3,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentEditable } from '../../redux/actions/actionsEditable'
 import Column from '../elements/Column'
 import { Card } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyle = makeStyles((theme) => ({
+    card: props => (props)
+}))
 
 const Row = ({ rowId }) => {
     const dispatch = useDispatch()
     const { currentId } = useSelector(state => state.editable)
     const _row = useSelector(state => state.contractDom.rows[rowId])
     const [hover, setHover] = useState(false)
+    const props = { ..._row.style }
+    const classes = useStyle(props)
 
     const onLeave = (e) => {
         e.stopPropagation()
@@ -26,7 +33,7 @@ const Row = ({ rowId }) => {
     }
     return (
         <Card
-            style={{ ..._row.style }}
+            className={classes.card}
             elevation={(rowId === currentId || hover) ? 3 : 0}
             onClick={editRow}
             onMouseOver={onEnter}

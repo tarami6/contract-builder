@@ -1,16 +1,23 @@
-import React from 'react'
-import useContractVirtualDom from './customeHooks/useContractVirtualDom'
+import React from 'react';
+import useContractVirtualDom from './customeHooks/useContractVirtualDom';
 
-import Row from './components/Row'
+import Row from './components/Row';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyle = makeStyles((theme) => ({
+  root: { padding: '15px' },
+}));
 
 const ComponentToPrint = React.forwardRef((_, ref) => {
-    const { rows } = useContractVirtualDom()
-    return (
-        <div ref={ref} style={{padding: '15px'}}>
-            {rows.map(row => <Row key={row.id} row={row} />)}
-        </div>
-    )
+  const classes = useStyle();
+  const { rows } = useContractVirtualDom();
+  return (
+    <div ref={ref} className={classes.root}>
+      {rows.map((row) => (
+        <Row key={row.id} row={row} />
+      ))}
+    </div>
+  );
 });
 
-
-export default ComponentToPrint
+export default ComponentToPrint;

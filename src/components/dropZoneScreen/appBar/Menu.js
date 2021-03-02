@@ -5,8 +5,9 @@ import PermDeviceInformationIcon from '@material-ui/icons/PermDeviceInformation'
 import Typography from '@material-ui/core/Typography';
 import PeopleIcon from '@material-ui/icons/People';
 import SettingsIcon from '@material-ui/icons/Settings';
+import clsx from 'clsx';
 
-const useStyles = makeStyles((theme) => ({
+const useStyle = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
@@ -17,7 +18,10 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     padding: '0 20px',
     alignItems: 'center',
-    borderLeft: '2px solid white',
+    borderLeft: '2px solid #ebf3ff',
+    '&:first-child': {
+      borderLeft: 'none',
+    },
   },
   item: {
     display: 'flex',
@@ -32,25 +36,24 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '16px',
     margin: '0 5px',
     color: '#97a1b1',
-    fontWeight: 400
+    fontWeight: 400,
   },
+  forms: { color: '#2a2a2a' },
 }));
 
 const Menu = () => {
-  const classes = useStyles();
+  const classes = useStyle();
   return (
     <div className={classes.root}>
       <div className={classes.listItems}>
-        <div className={classes.itemContainer} style={{ borderLeft: 'none' }}>
+        <div className={classes.itemContainer}>
           <div className={classes.item}>
             <PermDeviceInformationIcon
-              className={classes.icon}
-              style={{ color: '#2a2a2a' }}
+              className={clsx(classes.icon, classes.forms)}
             />
             <Typography
               variant='h6'
-              className={classes.text}
-              style={{ color: '#2a2a2a' }}
+              className={clsx(classes.text, classes.forms)}
             >
               Forms
             </Typography>

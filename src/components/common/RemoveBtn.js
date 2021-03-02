@@ -1,44 +1,55 @@
-import React, { useEffect, useState } from 'react'
-import { removeRow, removeColumn } from '../../redux/actions/actionsContractDom'
-import { useDispatch } from 'react-redux'
-import { Trash, XSquare } from 'react-bootstrap-icons'
+import React, { useEffect, useState } from 'react';
+import {
+  removeRow,
+  removeColumn,
+} from '../../redux/actions/actionsContractDom';
+import { useDispatch } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
+import { Trash, XSquare } from 'react-bootstrap-icons';
+
+const useStyle = makeStyles(() => ({
+  root: { cursor: 'pointer' },
+  icon: { width: 20, height: 20 },
+}));
 
 const RemoveElementBtn = ({ row, column, rowId, columnId }) => {
-    const dispatch = useDispatch()
-    const [deleteMode, setDeleteMode] = useState('Row')
+  const classes = useStyle();
+  const dispatch = useDispatch();
+  const [deleteMode, setDeleteMode] = useState('Row');
 
-    useEffect(() => {
-        if (column) {
-            setDeleteMode('Column')
-        } else {
-            setDeleteMode('Row')
-        }
-    }, [column, row])
-
-    const removeByRow = () => {
-        return dispatch(removeRow(rowId))
+  useEffect(() => {
+    if (column) {
+      setDeleteMode('Column');
+    } else {
+      setDeleteMode('Row');
     }
+  }, [column, row]);
 
-    const removeByColumn = () => {
-        return dispatch(removeColumn(rowId, columnId))
+  const removeByRow = () => {
+    return dispatch(removeRow(rowId));
+  };
+
+  const removeByColumn = () => {
+    return dispatch(removeColumn(rowId, columnId));
+  };
+
+  const removeByMode = () => {
+    if (deleteMode === 'Row') {
+      removeByRow();
+    } else if (deleteMode === 'Column') {
+      removeByColumn();
     }
+  };
 
-    const removeByMode = () => {
-        if (deleteMode === 'Row') {
-            removeByRow()
-        } else if (deleteMode === 'Column') {
-            removeByColumn()
-        }
-    }
+  return (
+    <div onClick={removeByMode} className={classes.root}>
+      {deleteMode === 'Row' ? (
+        <Trash className={classes.icon} />
+      ) : (
+        <XSquare className={classes.icon} />
+      )}
+    </div>
+  );
+};
 
-    return (
-        <div onClick={removeByMode}  style={{
-            cursor: 'pointer'
-        }}>
-            {deleteMode === 'Row' ? <Trash width='20' height='20' />  : <XSquare width='20' height='20' />}
-            
-        </div>
-    )
-}
-
-export default RemoveElementBtn
+export default RemoveElementBtn;

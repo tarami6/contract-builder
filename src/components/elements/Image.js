@@ -2,12 +2,19 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentEditable } from '../../redux/actions/actionsEditable'
 import { Card } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyle = makeStyles((theme) => ({
+    card: props => ({width: 'fit-content', ...props})
+}))
 
 const Image = ({ elementId }) => {
     const dispatch = useDispatch()
     const _element = useSelector(state => state.contractDom.elements[elementId])
     const { currentId } = useSelector(state => state.editable)
     const [hover, setHover] = useState(false)
+    const props = { ..._element.style }
+    const classes = useStyle(props)
 
     const editElement = (e) => {
         e.stopPropagation()
@@ -27,7 +34,7 @@ const Image = ({ elementId }) => {
     return (
         <Card
             onClick={editElement}
-            style={{ width: 'fit-content', ..._element.style }}
+            className={classes.card}
             elevation={(elementId === currentId || hover) ? 3 : 0}
             onMouseOver={onEnter}
             onMouseOut={onLeave}

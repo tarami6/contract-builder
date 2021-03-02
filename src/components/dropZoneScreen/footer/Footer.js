@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import FacebookIcon from '@material-ui/icons/Facebook';
 
-const useStyles = makeStyles((theme) => ({
+const useStyle = makeStyles((theme) => ({
   root: {
     display: 'flex',
     height: '100%',
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Footer = () => {
-  const classes = useStyles();
+  const classes = useStyle();
   return (
     <div className={classes.root}>
       <div className={classes.items}>

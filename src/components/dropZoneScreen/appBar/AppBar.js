@@ -5,7 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Menu from './Menu';
 import UserInfos from './UserInfos';
 
-const useStyles = makeStyles((theme) => ({
+const useStyle = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     width: '80%',
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AppBar = () => {
-  const classes = useStyles();
+  const classes = useStyle();
   return (
     <div className={classes.root}>
       <AppBarMat position='static' className={classes.appBar}>

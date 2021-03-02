@@ -6,7 +6,7 @@ import PostAddOutlinedIcon from '@material-ui/icons/PostAddOutlined';
 import Button from '@material-ui/core/Button';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 
-const useStyles = makeStyles((theme) => ({
+const useStyle = makeStyles((theme) => ({
   root: {
     display: 'flex',
     width: '80%',
@@ -45,6 +45,12 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: '322px',
     backgroundImage: `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='gray' stroke-width='4' stroke-dasharray='17' stroke-dashoffset='28' stroke-linecap='square'/%3e%3c/svg%3e")`,
+    icon: {
+      fontSize: '80px',
+    },
+    text: {
+      fontSize: '16px',
+    },
   },
   button: {
     display: 'flex',
@@ -57,13 +63,13 @@ const useStyles = makeStyles((theme) => ({
     textTransform: 'capitalize',
     '&:last-child': {
       background: 'linear-gradient(90deg,#f66c43, #f24c58)',
-      color: '#fff'
-    }
-  }
+      color: '#fff',
+    },
+  },
 }));
 
 const Content = () => {
-  const classes = useStyles();
+  const classes = useStyle();
   return (
     <div className={classes.root}>
       <div className={classes.title}>
@@ -75,15 +81,8 @@ const Content = () => {
       <div className={classes.content}>
         <div className={classes.dropZone}>
           <div className={classes.iconTextContainer}>
-            <PostAddOutlinedIcon
-              className={classes.icon}
-              style={{ fontSize: '80px' }}
-            />
-            <Typography
-              variant='h6'
-              className={classes.text}
-              style={{ fontSize: '16px' }}
-            >
+            <PostAddOutlinedIcon className={classes.icon} />
+            <Typography variant='h6' className={classes.text}>
               ADD FIELDS
             </Typography>
             <Typography variant='h6' className={classes.text}>
@@ -93,14 +92,14 @@ const Content = () => {
         </div>
       </div>
       <div className={classes.button}>
-        <Button className={classes.btn} variant='outlined' startIcon={<VisibilityIcon />} >
-          Preview mode
-        </Button>
         <Button
           className={classes.btn}
+          variant='outlined'
+          startIcon={<VisibilityIcon />}
         >
-          Save this form
+          Preview mode
         </Button>
+        <Button className={classes.btn}>Save this form</Button>
       </div>
     </div>
   );

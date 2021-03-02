@@ -1,18 +1,18 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import AddRow from '../../common/AddRow'
-import ButtonToPrint from '../../print/ButtonToPrint'
+import AddRow from '../../common/AddRow';
+import ButtonToPrint from '../../print/ButtonToPrint';
 import Button from '@material-ui/core/Button';
-import Editor from '../../edit/editElements/Editor'
-import TitleBox from '../../common/TitleBox'
+import Editor from '../../edit/editElements/Editor';
+import TitleBox from '../../common/TitleBox';
 
-const useStyles = makeStyles((theme) => ({
+const useStyle = makeStyles((theme) => ({
   root: {
     width: '20%',
     background: '#333b4e',
     boxShadow: '0 0 3px 0 #212121',
     position: 'fixed',
-    height: '100%'
+    height: '100%',
   },
   item: {
     display: 'flex',
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     '&:hover': {
       background: '#2a3040',
-      border: 'none'
+      border: 'none',
     },
     '& > div': {
       display: 'flex',
@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     width: '100%',
     position: 'absolute',
-    bottom: '100px'
+    bottom: '100px',
   },
   btn: {
     margin: '0 10px',
@@ -90,27 +90,23 @@ const useStyles = makeStyles((theme) => ({
     textTransform: 'capitalize',
     '&:last-child': {
       background: 'linear-gradient(90deg,#f66c43, #f24c58)',
-      color: '#fff'
-    }
-  }
+      color: '#fff',
+    },
+  },
 }));
 
 const NavBar = () => {
-  const classes = useStyles();
+  const classes = useStyle();
   return (
-    <div className={classes.root} >
+    <div className={classes.root}>
       <TitleBox title='Editor' />
       <Editor />
       <div className={classes.item}>
-          <AddRow row />
+        <AddRow row />
       </div>
       <div className={classes.button}>
         <ButtonToPrint />
-        <Button
-          className={classes.btn}
-        >
-          Save this form
-        </Button>
+        <Button className={classes.btn}>Save this form</Button>
       </div>
     </div>
   );

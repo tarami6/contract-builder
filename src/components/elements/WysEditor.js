@@ -11,6 +11,8 @@ import { Save } from '@material-ui/icons'
 import { isEqual } from 'lodash'
 import { Card } from '@material-ui/core'
 
+import { makeStyles } from '@material-ui/core/styles';
+
 class EditorConvertToJSON extends Component {
   constructor(props) {
     super(props);
@@ -68,6 +70,7 @@ class EditorConvertToJSON extends Component {
   render() {
     const { elementId, editorState, editMode, currentElement } = this.state;
     const {editable } = this.props
+
     return (
       <Card
         style={{ ...currentElement?.style, minHeight: editMode ? '300px' : 'inherit', display: 'flex' }}

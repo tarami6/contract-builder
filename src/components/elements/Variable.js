@@ -5,6 +5,32 @@ import { removeElement, editElementVariable } from '../../redux/actions/actionsC
 import { CheckCircle, XCircle, Trash2 } from 'react-bootstrap-icons'
 import { Card } from '@material-ui/core'
 import { setCurrentEditable } from '../../redux/actions/actionsEditable'
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyle = makeStyles((theme) => ({
+  card: { padding: '3px', width: 'fit-content', margin: '2px' },
+  iconContainer: { display: 'flex' },
+  content: {
+    width: '160px',
+    height: '80px',
+    border: '2px solid',
+  },
+  inputValue: {
+    margin: '0',
+    fontSize: (props) => props.fontSize,
+    color: (props) => props.style.color,
+  },
+  iconContent: { margin: '0 5px' },
+  icon: {
+    width: 20,
+    height: 20,
+    '&:last-child': {
+      width: 22,
+      height: 22,
+    },
+  },
+}));
+
 
 const Variable = ({ elementId }) => {
     const dispatch = useDispatch()
@@ -18,6 +44,7 @@ const Variable = ({ elementId }) => {
         key: _variable.key,
         value: _variable.value
     })
+    const classes = useStyle()
 
     useEffect(() => {
         const selectValuesToArr = Object.keys(VARIABLETYPES)
@@ -84,7 +111,7 @@ const Variable = ({ elementId }) => {
         <Card
             onClick={editElement}
             onDoubleClick={_handleDoubleClick}
-            style={{ padding: '3px', width: 'fit-content', margin: '2px' }}
+            className={classes.card}
             elevation={(elementId === currentId || hover) ? 3 : 0}
             onMouseOver={onEnter}
             onMouseOut={onLeave}
@@ -93,17 +120,17 @@ const Variable = ({ elementId }) => {
                 editMode ?
                     <div>
                         <input name={_variable.id} onChange={_handelChangeTitle} placeholder={inputsValues.title} value={inputsValues.title} />
-                        <div style={{ display: 'flex' }}>
+                        <div className={classes.content}>
                             <select onChange={_handelChangeKey} value={inputsValues.key} >
                                 {selectValues.map(option => <option key={Math.random() * 1000} >{option}</option>)}
                             </select>
-                            <div onClick={_handleSave} style={{ margin: '0 5px' }}><CheckCircle width='20' height='20' /></div>
-                            <div onClick={_close} style={{ margin: '0 5px' }}><XCircle width='20' height='20' /></div>
-                            <div onClick={_delete} style={{ margin: '0 5px' }}><Trash2 width='22' height='22' /></div>
+                            <div onClick={_handleSave} className={classes.iconContainer}><CheckCircle className={classes.icon} /></div>
+                            <div onClick={_close} className={classes.iconContainer}><XCircle className={classes.icon} /></div>
+                            <div onClick={_delete} className={classes.iconContainer}><Trash2 className={classes.icon} /></div>
                         </div>
                     </div>
                     : (
-                        <div style={{ display: "flex" }}>
+                        <div className={classes.content}>
                             <p style={{ ..._variable.style.title }} >{_variable.title}</p>
                             <p style={{ ..._variable.style.key }}>{_variable.key}</p>
                         </div>

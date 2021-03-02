@@ -23,13 +23,15 @@ const useStyle = makeStyles((theme) => ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-    }
+    },
+    card: props => (props)
 }))
 
 const Column = ({ columnId }) => {
-    const classes = useStyle()
     const dispatch = useDispatch()
     const _column = useSelector(state => state.contractDom.columns[columnId])
+    const props = { ..._column.style }
+    const classes = useStyle(props)
     const _elementsIds = _column?.elements
     const { currentId } = useSelector(state => state.editable)
     const [hover, setHover] = useState(false)
@@ -51,7 +53,7 @@ const Column = ({ columnId }) => {
 
     return (
         <Card
-            style={{ ..._column.style }}
+            className={classes.card}
             onClick={editColumn}
             elevation={(columnId === currentId || hover) ? 3 : 0}
             onMouseOver={onEnter}

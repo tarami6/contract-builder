@@ -3,10 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from './appBar/AppBar';
 import Logo from './appBar/Logo';
 import NavBar from './navBar/NavBar';
-import MainBuilder from '../mainBuilder/MainBuilder'
-import DynamicStyle from '../edit/style/DynamicStyle'
+import MainBuilder from '../mainBuilder/MainBuilder';
+import DynamicStyle from '../edit/style/DynamicStyle';
 
-const useStyles = makeStyles((theme) => ({
+const useStyle = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     height: '100vh',
@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     display: 'flex',
-    paddingTop: '76px'
+    paddingTop: '76px',
   },
   topBar: {
     display: 'flex',
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 2,
   },
   footer: {
-    height: '10%'
+    height: '10%',
   },
   appBar: {
     padding: '0 15',
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const DropZoneScreen = () => {
-  const classes = useStyles();
+  const classes = useStyle();
   return (
     <div className={classes.root}>
       <div className={classes.topBar}>
