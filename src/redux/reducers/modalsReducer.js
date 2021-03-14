@@ -1,7 +1,8 @@
-import { TOGGLE_ADD_ROW, TOGGLE_CHOOSE_IMG } from '../actions/actionTypes'
+import { TOGGLE_ADD_ROW, TOGGLE_CHOOSE_IMG, TOGGLE_COPY_HTML } from '../actions/actionTypes'
 const initialState = {
     addRow: false,
-    chooseImg: false
+    chooseImg: false,
+    copyHtml: false
 }
 
 export default function modals(state = initialState, action) {
@@ -15,6 +16,11 @@ export default function modals(state = initialState, action) {
             return {
                 ...state,
                 chooseImg: !state.chooseImg
+            }
+        case TOGGLE_COPY_HTML:
+            return {
+                ...state,
+                copyHtml: !state.copyHtml
             }
         default:
             return state

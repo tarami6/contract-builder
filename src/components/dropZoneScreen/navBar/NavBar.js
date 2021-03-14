@@ -1,5 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { useDispatch } from 'react-redux'
+import { toggleCopyHtml } from '../../../redux/actions/actionsModals'
 import AddRow from '../../common/AddRow'
 import ButtonToPrint from '../../print/ButtonToPrint'
 import Button from '@material-ui/core/Button';
@@ -92,20 +94,39 @@ const useStyles = makeStyles((theme) => ({
       background: 'linear-gradient(90deg,#f66c43, #f24c58)',
       color: '#fff'
     }
-  }
+  },
+  btn2: {
+    margin: '0 10px',
+    padding: '5px 75px',
+    textTransform: 'capitalize',
+    background: 'linear-gradient(90deg,#EB068C, #f24c58)',
+    color: '#fff',
+    margin: "20px 0",
+  },
 }));
 
 const NavBar = () => {
   const classes = useStyles();
+  const dispatch = useDispatch()
+
   return (
     <div className={classes.root} >
       <TitleBox title='Editor' />
-      <Editor />
+      <div style={{maxHeight: '55vh', overflow: 'auto'}}>
+        <Editor />
+      </div>
+
       <div className={classes.item}>
-          <AddRow row />
+        <AddRow row />
       </div>
       <div className={classes.button}>
         <ButtonToPrint />
+        <Button
+          onClick={() => dispatch(toggleCopyHtml())}
+          className={classes.btn2}
+        >
+          Show Html
+        </Button>
         <Button
           className={classes.btn}
         >

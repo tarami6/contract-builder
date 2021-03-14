@@ -1,4 +1,4 @@
-import { TOGGLE_ADD_ROW, TOGGLE_CHOOSE_IMG } from './actionTypes'
+import { TOGGLE_ADD_ROW, TOGGLE_CHOOSE_IMG, TOGGLE_COPY_HTML } from './actionTypes'
 
 export const toggleAddRow = () => {
     return {
@@ -9,5 +9,11 @@ export const toggleAddRow = () => {
 export const toggleChooseImg = () => {
     return {
         type: TOGGLE_CHOOSE_IMG
+    }
+}
+
+export const toggleCopyHtml = () => {
+    return {
+        type: TOGGLE_COPY_HTML
     }
 }

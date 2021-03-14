@@ -40,6 +40,12 @@ export const columnConstructor = rowId => (
             paddingBottom: '2px',
             paddingLeft: '2px',
             paddingRight: '2px',
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+            borderStyle: "solid",
+            borderWidth: "0px"
         },
         elements: []
     }

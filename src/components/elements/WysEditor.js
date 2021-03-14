@@ -91,8 +91,8 @@ class EditorConvertToJSON extends Component {
             </div>
           </>
           :
-          <div onDoubleClick={this.setEditMode} onClick={this.setEditable}>
-            <div className="content" dangerouslySetInnerHTML={{ __html: currentElement?.content }}></div>
+          <div onDoubleClick={this.setEditMode} onClick={this.setEditable} style={{width: '100%'}}>
+            <div className="content" style={{width: '100%'}} dangerouslySetInnerHTML={{ __html: currentElement?.content }}></div>
 
           </div>
         }

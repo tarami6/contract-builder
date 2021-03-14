@@ -17,3 +17,4 @@ export const SET_TEMP_STYLE = "SET_TEMP_STYLE";
 // modals
 export const TOGGLE_ADD_ROW = "TOGGLE_ADD_ROW";
 export const TOGGLE_CHOOSE_IMG = "TOGGLE_CHOOSE_IMG";
+export const TOGGLE_COPY_HTML = "TOGGLE_COPY_HTML";
