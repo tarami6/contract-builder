@@ -5,7 +5,7 @@ import { setCurrentEditable } from '../../../redux/actions/actionsEditable'
 import { removeColumn, addElement } from '../../../redux/actions/actionsContractDom'
 import { toggleChooseImg } from '../../../redux/actions/actionsModals'
 import { PlusCircle, XCircle } from 'react-bootstrap-icons'
-import { DeleteOutline, ExitToApp, SettingsApplications, ListAlt } from '@material-ui/icons'
+import { DeleteOutline, ExitToApp, SettingsApplications, ListAlt, CalendarViewDay } from '@material-ui/icons'
 import { FileFont, FileImage, FileEarmarkMedical, PencilSquare } from 'react-bootstrap-icons'
 import { ELEMENTTYPE } from '../../../redux/config/elementSchema'
 import EditText from './EditText'
@@ -13,6 +13,7 @@ import EditImg from './EditImg'
 import EditVariable from './EditVariable'
 import EditSignature from './EditSignature'
 import EditWys from './EditWys'
+import EditDevider from './EditDevider'
 
 const useStyles = makeStyles((theme) => ({
     row: {
@@ -162,6 +163,12 @@ const EditColumn = ({ title, columnIdToSet }) => {
                         <Typography variant='h6' className={classes.text}>Add Signature</Typography>
                     </div>
                 </div>
+                <div className={classes.row} onClick={() => _addElement(ELEMENTTYPE.devider)} >
+                    <div>
+                        <CalendarViewDay width='20' height='20' className={classes.icon} />
+                        <Typography variant='h6' className={classes.text}>Add Devider</Typography>
+                    </div>
+                </div>
             </div>
         )
     }
@@ -181,6 +188,8 @@ const EditColumn = ({ title, columnIdToSet }) => {
                     return <EditVariable id={_currentElement.id} />
                 case ELEMENTTYPE.signature:
                     return <EditSignature id={_currentElement.id} />
+                case ELEMENTTYPE.devider:
+                    return <EditDevider id={_currentElement.id} />
                 default:
                     return <p>No Type Element</p>
             }

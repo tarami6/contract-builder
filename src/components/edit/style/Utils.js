@@ -18,7 +18,7 @@ export const getStyleValue = (keyPath, elementStyle) => {
 export const getCssUnit = (unit) => {
     if (unit === 'fontSize')
         return '%'
-    else if (unit === 'color' || unit === 'alignItems')
+    else if (unit === 'color' || unit === 'alignItems' || unit === 'backgroundColor')
         return false
     return 'px'
 }

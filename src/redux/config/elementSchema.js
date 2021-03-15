@@ -20,7 +20,8 @@ export const ELEMENTTYPE = {
     variable: 'variable',
     img: 'img',
     signature: 'signature',
-    columns: 'columns'
+    columns: 'columns',
+    devider: 'devider'
 }
 
 export const columnConstructor = rowId => (
@@ -171,4 +172,20 @@ export const wysContstractor = (id, columnId, rowId) => ({
     style: {
     },
     content: 'Editor'
+})
+
+export const deviderContstractor = (id, columnId, rowId) => ({
+    id,
+    rowId,
+    columnId,
+    type: 'devider',
+    style: {
+        width: '100%',
+        height: '3px',
+        backgroundColor: '#000',
+        marginTop: '2px',
+        marginBottom: '2px',
+        marginLeft: '2px',
+        marginRight: '2px',
+    },
 })
