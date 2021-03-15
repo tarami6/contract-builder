@@ -16,7 +16,7 @@ export const setCurrentEditable = (element) => {
         id,
         type
     } = element
-    const isElement = type === ELEMENTTYPE.text || type === ELEMENTTYPE.img || type === ELEMENTTYPE.signature || type === ELEMENTTYPE.variable || type === ELEMENTTYPE.wys
+    const isElement = type === ELEMENTTYPE.text || type === ELEMENTTYPE.img || type === ELEMENTTYPE.signature || type === ELEMENTTYPE.variable || type === ELEMENTTYPE.wys || type === ELEMENTTYPE.devider
     const isColumn = type === ELEMENTTYPE.columns
     const isRow = type === ELEMENTTYPE.rows
 

@@ -17,6 +17,7 @@ const definePath = (state, currentType) => {
         case ELEMENTTYPE.img:
         case ELEMENTTYPE.signature:
         case ELEMENTTYPE.variable:
+        case ELEMENTTYPE.devider:
             return state.contractDom.elements
 
         default:
@@ -29,13 +30,13 @@ const useGetInputValue = () => {
     const { currentId, currentType, tempStyle } = useSelector(state => state.editable)
     const _elements = useSelector(state => definePath(state, currentType))
     const [_currentStyle, setCurrentStyle] = useState({})
-    const [hasStyle, setHasStyle] = useState(tempStyle.type === currentType) 
+    const [hasStyle, setHasStyle] = useState(tempStyle.type === currentType)
 
     useEffect(() => {
         _elements && setCurrentStyle({ ..._elements[currentId].style })
     }, [currentType, _elements, currentId])
 
-    useEffect(()=>{
+    useEffect(() => {
         setHasStyle(tempStyle.type === currentType)
     }, [tempStyle.type, currentType])
 
@@ -63,7 +64,8 @@ const useGetInputValue = () => {
             case ELEMENTTYPE.wys:
             case ELEMENTTYPE.img:
             case ELEMENTTYPE.signature:
-            case ELEMENTTYPE.variable: {
+            case ELEMENTTYPE.variable:
+            case ELEMENTTYPE.devider: {
                 return dispatch(editStyleElement(currentId, style))
             }
 
@@ -101,7 +103,7 @@ const useGetInputValue = () => {
         }
     }
 
-    return {getStyleValue, changeStyle, saveStyle, getStyle, hasStyle}
+    return { getStyleValue, changeStyle, saveStyle, getStyle, hasStyle }
 }
 
 export default useGetInputValue;

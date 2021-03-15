@@ -15,7 +15,7 @@ import {
     textContstractor,
     imgConstractor,
     signatureConstractor,
-    variableConstractor, wysContstractor
+    variableConstractor, wysContstractor, deviderContstractor
 } from '../config/elementSchema'
 
 export const addRow = numOfColumns => {
@@ -78,6 +78,9 @@ export const addElement = (type, columnId, rowId, imgSrc) => {
             break;
         case ELEMENTTYPE.signature:
             element = signatureConstractor(id, columnId, rowId)
+            break;
+        case ELEMENTTYPE.devider:
+            element = deviderContstractor(id, columnId, rowId)
             break;
         default:
             break;
