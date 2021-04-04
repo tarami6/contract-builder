@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 const EditDevider = ({ id }) => {
     const dispatch = useDispatch()
     const classes = useStyles();
-    const { currentId, elementId, columnId } = useSelector(state => state.editable)
+    const { currentId, elementId } = useSelector(state => state.editable)
     const _currentElementId = id || currentId
     const _currentEditable = currentId === elementId
     const _element = useSelector(state => state.contractDom.elements[_currentElementId])

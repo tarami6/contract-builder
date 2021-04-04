@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import BoxSize from './inputs/BoxSize'
 import SaveStyle from './inputs/SaveStyle'
 import TitleRow from './TitleRow'
 import TitleBox from '../../common/TitleBox'
 import Aligment from './inputs/Aligment'
 import Border from './inputs/Border'
+import WidthHeight from './inputs/WidthHeight'
 import useGetInputValue from '../customHooks/useGetInputValue'
 
 const StyleColumn = () => {
@@ -13,7 +14,8 @@ const StyleColumn = () => {
         margin: true,
         padding: false,
         aligment: false,
-        border: false
+        border: false,
+        size: false
     })
 
     const openSections = (key) => {
@@ -61,6 +63,7 @@ const StyleColumn = () => {
                 onChange={changeStyle}
                 value={getStyleValue('alignItems')}
                 show={openedSections.aligment}
+                selector={'alignItems'}
             />
             <TitleRow
                 title={'Border'}
@@ -71,6 +74,17 @@ const StyleColumn = () => {
                 onChange={changeStyle}
                 value={getStyleValue('borderWidth')}
                 show={openedSections.border}
+            />
+            <TitleRow
+                title={'Size'}
+                onClick={() => openSections('size')}
+                opened={openedSections.border}
+            />
+            <WidthHeight 
+             onChange={changeStyle}
+             valueWidth={getStyleValue('minHeight')}
+             valueHeight={getStyleValue('width')}
+             show={openedSections.size}
             />
             <SaveStyle />
         </div>

@@ -6,7 +6,7 @@ import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { editElementText } from '../../redux/actions/actionsContractDom'
-import { setCurrentEditable } from '../../redux/actions/actionsEditable'
+import { setCurrentEditable, editStyleColumn } from '../../redux/actions/actionsEditable'
 import { Save } from '@material-ui/icons'
 import { isEqual } from 'lodash'
 import { Card } from '@material-ui/core'
@@ -18,7 +18,8 @@ class EditorConvertToJSON extends Component {
       editorState: EditorState.createEmpty(),
       elementId: undefined,
       editMode: false,
-      currentElement: undefined
+      currentElement: undefined,
+      hover: false
     };
   }
 
@@ -49,12 +50,27 @@ class EditorConvertToJSON extends Component {
   };
 
   setEditMode = () => {
-    this.setState({ editMode: !this.state.editMode })
+    const { editMode, currentElement } = this.state;
+    const { columns } = this.props
+    this.setState({ editMode: !editMode })
+
+    let newWidth = {
+      ...columns[currentElement.columnId].style,
+    }
+
+    if (!editMode) {
+      newWidth.minWidth = '95%'
+      this.props.dispatchStyle(currentElement.columnId, newWidth)
+    } else {
+      newWidth.minWidth = '0%'
+      this.props.dispatchStyle(currentElement.columnId, newWidth)
+    }
   }
 
   save = () => {
     const { editorState, currentElement } = this.state;
     const content = draftToHtml(convertToRaw(editorState.getCurrentContent()))
+    console.log('content', content)
     this.props.editElementText(currentElement.id, content)
     this.setEditMode()
   }
@@ -65,13 +81,25 @@ class EditorConvertToJSON extends Component {
     this.props.setEditable(currentElement)
   }
 
+  onLeave = (e) => {
+    e.stopPropagation()
+    this.setState({hover: false})
+  }
+
+  onEnter = (e) => {
+    e.stopPropagation()
+    this.setState({hover: true})
+  }
+
   render() {
-    const { elementId, editorState, editMode, currentElement } = this.state;
-    const {editable } = this.props
+    const { elementId, editorState, editMode, currentElement, hover } = this.state;
+    const { editable } = this.props
     return (
       <Card
+        onMouseOver={this.onEnter}
+        onMouseOut={this.onLeave}
         style={{ ...currentElement?.style, minHeight: editMode ? '300px' : 'inherit', display: 'flex' }}
-        elevation={(elementId === editable.currentId) ? 3 : 0}
+        elevation={(elementId === editable.currentId || hover) ? 3 : 0}
       >
         { editMode ?
           <>
@@ -91,12 +119,10 @@ class EditorConvertToJSON extends Component {
             </div>
           </>
           :
-          <div onDoubleClick={this.setEditMode} onClick={this.setEditable} style={{width: '100%'}}>
-            <div className="content" style={{width: '100%'}} dangerouslySetInnerHTML={{ __html: currentElement?.content }}></div>
-
+          <div onDoubleClick={this.setEditMode} onClick={this.setEditable} style={{ width: '100%' }}>
+            <div className="content" style={{ width: '100%' }} dangerouslySetInnerHTML={{ __html: currentElement?.content }}></div>
           </div>
         }
-
       </Card>
     );
   }
@@ -105,14 +131,16 @@ class EditorConvertToJSON extends Component {
 const mapStateToProps = (state) => {
   return {
     editable: state.editable,
-    elements: state.contractDom.elements
+    elements: state.contractDom.elements,
+    columns: state.contractDom.columns
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     editElementText: (id, value) => dispatch(editElementText(id, value)),
-    setEditable: (element) => dispatch(setCurrentEditable(element))
+    setEditable: (element) => dispatch(setCurrentEditable(element)),
+    dispatchStyle: (id, style) => dispatch(editStyleColumn(id, style))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(EditorConvertToJSON);

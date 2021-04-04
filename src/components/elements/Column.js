@@ -17,7 +17,6 @@ const useStyle = makeStyles((theme) => ({
     },
     emptyContainer: {
         width: "100%",
-        minHeight: "50px",
         margin: "1px",
         padding: "1px",
         display: "flex",

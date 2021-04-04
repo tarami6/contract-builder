@@ -4,7 +4,6 @@ import ComponentToPrint from './ComponentToPrint'
 import { Button } from '@material-ui/core';
 import { Visibility as VisibilityIcon } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
-import ReactDOMServer from 'react-dom/server';
 
 const useStyles = makeStyles((theme) => ({
     btn: {

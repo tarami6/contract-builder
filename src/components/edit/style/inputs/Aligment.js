@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const Aligment = ({ onChange, value, show }) => {
+const Aligment = ({ onChange, value, show, selector }) => {
     const classes = useStyles();
 
     const setAligment = (position) => {
@@ -24,7 +24,7 @@ const Aligment = ({ onChange, value, show }) => {
         } else {
             const element = {
                 target: {
-                    name: 'alignItems',
+                    name: selector,
                     value: position
                 }
             }
@@ -37,13 +37,13 @@ const Aligment = ({ onChange, value, show }) => {
     }
     return (
         <div className={classes.root} >
-            <div onClick={() => setAligment('flex-start')} style={{backgroundColor: value === 'flex-start' ? '#445165' : 'inherit'}}>
+            <div onClick={() => setAligment('flex-start')} style={{ backgroundColor: value === 'flex-start' ? '#445165' : 'inherit' }}>
                 <FormatAlignLeft className={classes.icon} />
             </div>
-            <div onClick={() => setAligment('center')} style={{backgroundColor: value === 'center' ? '#445165' : 'inherit'}}>
+            <div onClick={() => setAligment('center')} style={{ backgroundColor: value === 'center' ? '#445165' : 'inherit' }}>
                 <FormatAlignJustify className={classes.icon} />
             </div>
-            <div onClick={() => setAligment('flex-end')} style={{backgroundColor: value === 'flex-end' ? '#445165' : 'inherit'}}>
+            <div onClick={() => setAligment('flex-end')} style={{ backgroundColor: value === 'flex-end' ? '#445165' : 'inherit' }}>
                 <FormatAlignRight className={classes.icon} />
             </div>
         </div>

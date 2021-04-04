@@ -42,7 +42,7 @@ const useGetInputValue = () => {
 
 
     const changeStyle = (e) => {
-        const typeIndicator = getCssUnit(e.target.name)
+        const typeIndicator = getCssUnit(e.target.name, currentType)
         const value = e.target.value
         const valuBy = typeIndicator ? `${value}${typeIndicator}` : `${value}`
         const name = e.target.name
@@ -75,7 +75,7 @@ const useGetInputValue = () => {
     }
 
     const getStyleValue = (keyPath) => {
-        const cssUnit = getCssUnit(keyPath)
+        const cssUnit = getCssUnit(keyPath, currentType)
 
         if (_currentStyle) {
             if (_currentStyle?.hasOwnProperty(keyPath)) {

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { removeElement } from '../../redux/actions/actionsContractDom'
 import { useSelector, useDispatch } from 'react-redux'
-import { XCircle, Trash2 } from 'react-bootstrap-icons'
 import { Card } from '@material-ui/core'
 import { setCurrentEditable } from '../../redux/actions/actionsEditable'
 

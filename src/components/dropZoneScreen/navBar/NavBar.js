@@ -96,7 +96,6 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   btn2: {
-    margin: '0 10px',
     padding: '5px 75px',
     textTransform: 'capitalize',
     background: 'linear-gradient(90deg,#EB068C, #f24c58)',

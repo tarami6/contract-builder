@@ -15,10 +15,23 @@ export const getStyleValue = (keyPath, elementStyle) => {
     return undefined
 }
 
-export const getCssUnit = (unit) => {
-    if (unit === 'fontSize')
-        return '%'
-    else if (unit === 'color' || unit === 'alignItems' || unit === 'backgroundColor')
-        return false
-    return 'px'
+export const getCssUnit = (unit, currentType) => {
+    if(currentType === 'img'){
+        if(unit === 'width' || unit === 'height' ){
+            return 'px'
+        }
+    }
+    switch (unit) {
+        case 'fontSize':
+        case 'width':
+        case 'height':
+            return '%'
+        case 'color':
+        case 'alignItems':
+        case 'justifyContent':
+        case 'backgroundColor':
+            return false
+        default:
+            return 'px'
+    }
 }

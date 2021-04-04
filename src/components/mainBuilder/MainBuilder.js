@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ContractBody from '../elements/ContractBody'
 import { makeStyles } from '@material-ui/core/styles';
 import ModalChooseImg from '../common/ModalChooseImg';
@@ -15,7 +15,6 @@ const useStyle = makeStyles((theme) => ({
 
 const MainBuilder = () => {
   const classes = useStyle()
-  const [toHtml, setToHtml] = useState(false)
   const _handleSubmit = (e) => {
     e.preventDefault()
     console.log('submit html structure to server')

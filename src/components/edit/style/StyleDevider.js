@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import SaveStyle from './inputs/SaveStyle'
 import BoxSize from './inputs/BoxSize'
 import Dimensions from './inputs/Dimensions'
 import TitleRow from './TitleRow'

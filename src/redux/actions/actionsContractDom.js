@@ -26,11 +26,19 @@ export const addRow = numOfColumns => {
     columnsIds.push(column.id)
     columns[column.id] = { ...column }
 
-    if (numOfColumns === 2) {
-        const column2 = columnConstructor(rowId)
-        columnsIds.push(column2.id)
-        columns[column2.id] = { ...column2 }
+    if (numOfColumns > 0) {
+        let pushToColumns = (numOfColumns) => {
+            if (numOfColumns === 0) {
+                return
+            } 
+            const newColumn = columnConstructor(rowId)
+            columnsIds.push(newColumn.id)
+            columns[newColumn.id] = { ...newColumn }
+            pushToColumns(numOfColumns - 1)
+        }
+        pushToColumns(numOfColumns)
     }
+
     return {
         type: ADD_ROW,
         payload: {

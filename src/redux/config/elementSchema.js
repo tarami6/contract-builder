@@ -32,7 +32,6 @@ export const columnConstructor = rowId => (
         style: {
             minHeight: "50px",
             width: "100%",
-            height: "100%",
             marginTop: '2px',
             marginBottom: '2px',
             marginLeft: '2px',
@@ -56,11 +55,8 @@ export const rowContsructor = (id, numOfColumns, columnsIds) => ({
     id,
     type: 'rows',
     style: {
+        minHeight: "55px",
         width: "100%",
-        minHeight: "50px",
-        display: "flex",
-        alignItems: "flexStart",
-        justifyContent: "space-around",
         marginTop: '2px',
         marginBottom: '2px',
         marginLeft: '2px',
@@ -69,6 +65,12 @@ export const rowContsructor = (id, numOfColumns, columnsIds) => ({
         paddingBottom: '2px',
         paddingLeft: '2px',
         paddingRight: '2px',
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "flex-start",
+        alignItems: "flex-start",
+        borderStyle: "solid",
+        borderWidth: "0px"
     },
     numOfColumns,
     columns: [...columnsIds]

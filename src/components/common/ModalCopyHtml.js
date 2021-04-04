@@ -16,7 +16,7 @@ ReactDOM.render(
   myDiv
 );
 
-const ModalCopyHtml = ({}) => {
+const ModalCopyHtml = () => {
     const dispatch = useDispatch()
     const _handleClose = () => dispatch(toggleCopyHtml())
     const open = useSelector(state => state.modals.copyHtml)

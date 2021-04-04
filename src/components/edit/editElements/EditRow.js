@@ -56,7 +56,6 @@ const EditRow = ({ bodyRowId, index }) => {
     const _row = useSelector(state => state.contractDom.rows[currentRowId])
     const [editMode, setEditMode] = useState(false)
     const _currentEditElement = currentId && currentId === currentRowId
-    const manyColumns = _row?.columns.length > 1
     useEffect(() => {
         _currentEditElement && setEditMode(true)
     }, [_currentEditElement, setEditMode])
@@ -110,10 +109,9 @@ const EditRow = ({ bodyRowId, index }) => {
         else
             return (
                 _row?.columns?.map((columnId, index) => {
-                    const title = manyColumns ? index === 0 ? 'Left' : 'Right' : 'Full Width'
                     return (
                         <div key={columnId}>
-                            <EditColumn title={title} columnIdToSet={columnId} />
+                            <EditColumn title={index + 1} columnIdToSet={columnId} />
                         </div>
                     )
                 })
@@ -136,7 +134,7 @@ const EditRow = ({ bodyRowId, index }) => {
         >
             <div>
                 <SettingsApplications width='20' height='20' className={_currentEditElement ? classes.iconEditMode : classes.icon} />
-    <Typography variant='h6' className={_currentEditElement ? classes.textEditMode : classes.text} >Row {numTheRow()}</Typography>
+                <Typography variant='h6' className={_currentEditElement ? classes.textEditMode : classes.text} >Row {numTheRow()}</Typography>
             </div>
         </div>
     )

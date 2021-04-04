@@ -4,9 +4,9 @@ import { addRow } from '../../redux/actions/actionsContractDom'
 import { toggleAddRow } from '../../redux/actions/actionsModals'
 import { setCurrentEditable } from '../../redux/actions/actionsEditable'
 import { makeStyles } from '@material-ui/core/styles';
-import { LayoutSplit, Square } from 'react-bootstrap-icons'
+import { LayoutSplit } from 'react-bootstrap-icons'
 import { Typography } from '@material-ui/core';
-import { Close } from '@material-ui/icons';
+import { Close, Filter1, Filter2, Filter3, Filter4 } from '@material-ui/icons';
 
 const useStyles = makeStyles(() => ({
     text: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles(() => ({
         },
     },
     icon: {
-        fontSize: '15px',
+        fontSize: '50px',
         color: '#b9b9b9',
     },
     columnCOntainer: {
@@ -67,14 +67,13 @@ const ChooseColumnLayout = () => {
 
     const _addRow = async (numOfColumns) => {
         dispatch(addRow(numOfColumns))
-        console.log('_rows', _rows)
     }
 
     const mounted = useMounted()
 
     const _setEditable = useCallback(() => {
         if (!_row || _row?.id === _editableRowId || !mounted)
-            return
+            return undefined
         else {
             _setCurrentEditable()
             _handleClose()
@@ -82,7 +81,7 @@ const ChooseColumnLayout = () => {
     }, [_row, _editableRowId, mounted, _handleClose, _setCurrentEditable]);
 
     //eslint-disable-next-line
-    useEffect( _setEditable, [lastRow])
+    useEffect(_setEditable, [lastRow])
 
     return (
         <div>
@@ -97,29 +96,22 @@ const ChooseColumnLayout = () => {
             </div>
 
             <div className={classes.columnCOntainer}>
-                <div onClick={() => _addRow(1)} style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                }}>
-                    <Square width='40' height='40' className={classes.icon} />
-                    <Typography className={classes.text}>
-                        Column
-                    </Typography>
-                </div>
-                <div onClick={() => _addRow(2)}
-                    style={{
+                {[Filter1, Filter2, Filter3, Filter4].map((icon, index) => {
+                    let Icon = icon
+                    return <div key={index} onClick={() => _addRow(index)} style={{
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
                         justifyContent: "center",
                     }}>
-                    <LayoutSplit width='45' height='45' className={classes.icon} />
-                    <Typography className={classes.text}>
-                        Columns
-                    </Typography>
-                </div>
+                        <Icon width='50' height='50' className={classes.icon} />
+                        <Typography className={classes.text}>
+                            {Math.floor(100 / (index + 1))} %
+                        </Typography>
+                    </div>
+                }
+                )}
+
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {  TextFormat, SwapVert } from '@material-ui/icons'
+import { TextFormat, SwapVert } from '@material-ui/icons'
 
 const useStyles = makeStyles((theme) => ({
     input: {
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const Dimensions = ({ onChange, show, valueWidth, valueColor }) => {
+const WidthHeight = ({ onChange, show, valueWidth, valueHeight }) => {
     const classes = useStyles();
 
     if (!show) {
@@ -37,7 +37,7 @@ const Dimensions = ({ onChange, show, valueWidth, valueColor }) => {
                 <input
                     className={classes.input}
                     type='number'
-                    name='height'
+                    name='minHeight'
                     onChange={onChange}
                     value={valueWidth}
                 />
@@ -46,10 +46,10 @@ const Dimensions = ({ onChange, show, valueWidth, valueColor }) => {
             <div className={classes.iconContainer}>
                 <input
                     className={classes.input}
-                    type='color'
-                    name='backgroundColor'
+                    type='number'
+                    name='width'
                     onChange={onChange}
-                    value={valueColor}
+                    value={valueHeight}
                 />
                 <TextFormat className={classes.icon} />
             </div>
@@ -57,4 +57,4 @@ const Dimensions = ({ onChange, show, valueWidth, valueColor }) => {
     );
 };
 
-export default Dimensions;
+export default WidthHeight;
