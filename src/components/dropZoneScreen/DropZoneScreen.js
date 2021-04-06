@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from './appBar/AppBar';
 import Logo from './appBar/Logo';
@@ -36,6 +36,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const DropZoneScreen = () => {
+  // const [ data, setData ] = useState()
+
+  // return (
+  //   <>
+  //   <textarea onChange={(e) => {
+  //     setData(e.target.value)
+  //   }}/>
+  //   <div dangerouslySetInnerHTML={{__html: data}}>
+      
+  //     </div>
+  //   </>
+  // )
   const classes = useStyles();
   return (
     <div className={classes.root}>

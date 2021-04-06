@@ -45,6 +45,7 @@ const StyleText = () => {
                 valueRight={getStyleValue('paddingRight')}
                 sides
                 show={openedSections.padding}
+                type={'padding'}
             />
             <TitleRow
                 title={'Font'}

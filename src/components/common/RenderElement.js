@@ -8,9 +8,11 @@ import Image from '../elements/Image'
 import Signature from '../elements/Signature'
 import WysEditor from '../elements/WysEditor'
 import Devider from '../elements/Devider'
+import Code from '../elements/Code'
 
 const RenderElement = ({ elementId }) => {
     const _type = useSelector(state => state.contractDom.elements[elementId].type)
+    
     switch (_type) {
         case ELEMENTTYPE.text:
             return <Text elementId={elementId} />
@@ -24,7 +26,8 @@ const RenderElement = ({ elementId }) => {
             return <Signature elementId={elementId} />
         case ELEMENTTYPE.devider:
             return <Devider elementId={elementId} />
-
+        case ELEMENTTYPE.code:
+            return <Code elementId={elementId} />
         default:
             return <p>Element type not found</p>
     }

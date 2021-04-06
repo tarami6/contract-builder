@@ -6,8 +6,10 @@ import {
     ADD_ELEMENT,
     EDIT_ELEMENT_TEXT,
     REMOVE_ELEMENT,
-    EDIT_ELEMENT_VARIABLE
+    EDIT_ELEMENT_VARIABLE,
+    EDIT_ELEMENT_CODE
 } from './actionTypes'
+
 import {
     ELEMENTTYPE,
     columnConstructor,
@@ -15,7 +17,10 @@ import {
     textContstractor,
     imgConstractor,
     signatureConstractor,
-    variableConstractor, wysContstractor, deviderContstractor
+    variableConstractor,
+    wysContstractor,
+    deviderContstractor,
+    codeContstractor
 } from '../config/elementSchema'
 
 export const addRow = numOfColumns => {
@@ -30,7 +35,7 @@ export const addRow = numOfColumns => {
         let pushToColumns = (numOfColumns) => {
             if (numOfColumns === 0) {
                 return
-            } 
+            }
             const newColumn = columnConstructor(rowId)
             columnsIds.push(newColumn.id)
             columns[newColumn.id] = { ...newColumn }
@@ -90,6 +95,9 @@ export const addElement = (type, columnId, rowId, imgSrc) => {
         case ELEMENTTYPE.devider:
             element = deviderContstractor(id, columnId, rowId)
             break;
+        case ELEMENTTYPE.code:
+            element = codeContstractor(id, columnId, rowId)
+            break;
         default:
             break;
     }
@@ -106,6 +114,16 @@ export const addElement = (type, columnId, rowId, imgSrc) => {
 export const editElementText = (id, value) => {
     return {
         type: EDIT_ELEMENT_TEXT,
+        payload: {
+            id,
+            value
+        }
+    }
+}
+
+export const editElementCode = (id, value) => {
+    return {
+        type: EDIT_ELEMENT_CODE,
         payload: {
             id,
             value
@@ -132,3 +150,4 @@ export const removeElement = (id, columnId) => {
         }
     }
 }
+

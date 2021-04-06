@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { TextFormat, SwapVert } from '@material-ui/icons'
+import { SwapHoriz, SwapVert } from '@material-ui/icons'
 
 const useStyles = makeStyles((theme) => ({
     input: {
@@ -51,7 +51,7 @@ const WidthHeight = ({ onChange, show, valueWidth, valueHeight }) => {
                     onChange={onChange}
                     value={valueHeight}
                 />
-                <TextFormat className={classes.icon} />
+                <SwapHoriz className={classes.icon} />
             </div>
         </div>
     );

@@ -36,16 +36,16 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 
-const EditVariable = ({ id }) => {
+const EditCode = ({ id }) => {
     const dispatch = useDispatch()
     const classes = useStyles();
     const { currentId, elementId, columnId } = useSelector(state => state.editable)
     const _currentElementId = id || currentId
     const _currentEditable = currentId === elementId
     const _element = useSelector(state => state.contractDom.elements[_currentElementId])
-    const _column = useSelector(state => state.contractDom.columns[_element?.columnId])
-    const elementIndex = _column?.elements.indexOf(_currentElementId) + 1
-    
+    const _column = useSelector(state => state.contractDom.columns[_element.columnId])
+    const elementIndex = _column.elements.indexOf(_currentElementId) + 1
+
     const onEdit = () => {
         dispatch(setCurrentEditable(_element))
     }
@@ -58,13 +58,14 @@ const EditVariable = ({ id }) => {
         dispatch(removeElement(_currentElementId, columnId))
         dispatch(setCurrentEditable(_column))
     }
-    console.log('_currentEditable', _currentEditable)
+
+    
     return (
         <div>
             <div className={classes.row} onClick={onEdit}>
                 <div>
                     <SettingsApplications width='20' height='20' className={classes.icon} />
-                    <Typography variant='h6' className={classes.text}>{_element?.title} {elementIndex}</Typography>
+                    <Typography variant='h6' className={classes.text}>Code {elementIndex}</Typography>
                 </div>
             </div>
             <div>
@@ -76,7 +77,7 @@ const EditVariable = ({ id }) => {
                             </div>
                             <div onClick={backToColumn}>
                                 <Typography variant='h6' className={classes.text}>
-                                    Column
+                                    Code
                             </Typography>
                                 <ExitToApp className={classes.icon} />
                             </div>
@@ -85,8 +86,7 @@ const EditVariable = ({ id }) => {
                 )}
             </div>
         </div>
-
     );
 };
 
-export default EditVariable;
+export default EditCode;

@@ -37,6 +37,10 @@ const useStyles = makeStyles(() => ({
         fontSize: '50px',
         color: '#b9b9b9',
     },
+    iconSmall: {
+        fontSize: '20px',
+        color: '#b9b9b9',
+    },
     columnCOntainer: {
         display: "flex",
         width: "100%",
@@ -91,7 +95,7 @@ const ChooseColumnLayout = () => {
                     <Typography variant='h6' className={classes.text}>Row Layout</Typography>
                 </div>
                 <div>
-                    <Close className={classes.icon} />
+                    <Close className={classes.iconSmall} />
                 </div>
             </div>
 

@@ -10,6 +10,7 @@ import StyleWys from './StyleWys'
 import StyleImg from './StyleImg'
 import StyleSignature from './StyleSignature'
 import StyleDevider from './StyleDevider'
+import StyleCode from './StyleCode'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -62,6 +63,8 @@ const DynamicStyle = () => {
                 return <StyleSignature />
             case ELEMENTTYPE.devider:
                 return <StyleDevider />
+            case ELEMENTTYPE.code:
+                return <StyleCode />
             default: {
                 console.warn('No style type')
                 return <></>

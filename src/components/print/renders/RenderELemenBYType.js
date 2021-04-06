@@ -4,6 +4,7 @@ import Image from '../components/Image'
 import Signature from '../components/Signature'
 import WysText from '../components/WysText'
 import Devider from '../components/Devider'
+import Code from '../components/Code'
 import { ELEMENTTYPE } from '../../../redux/config/elementSchema'
 
 const RenderELemenBYType = ({ element }) => {
@@ -20,6 +21,8 @@ const RenderELemenBYType = ({ element }) => {
             return <Signature element={element} />
         case ELEMENTTYPE.devider:
             return <Devider element={element} />
+        case ELEMENTTYPE.code:
+            return <Code element={element} />
         default:
             return <div />
     }

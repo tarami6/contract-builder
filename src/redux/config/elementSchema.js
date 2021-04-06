@@ -21,7 +21,8 @@ export const ELEMENTTYPE = {
     img: 'img',
     signature: 'signature',
     columns: 'columns',
-    devider: 'devider'
+    devider: 'devider',
+    code: 'code'
 }
 
 export const columnConstructor = rowId => (
@@ -190,4 +191,13 @@ export const deviderContstractor = (id, columnId, rowId) => ({
         marginLeft: '2px',
         marginRight: '2px',
     },
+})
+
+
+export const codeContstractor = (id, columnId, rowId) => ({
+    id,
+    rowId,
+    columnId,
+    type: 'code',
+    html: '<p>Html</p>'
 })

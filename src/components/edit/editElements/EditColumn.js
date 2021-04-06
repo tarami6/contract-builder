@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles, Typography } from '@material-ui/core'
 import { setCurrentEditable } from '../../../redux/actions/actionsEditable'
-import { removeColumn, addElement } from '../../../redux/actions/actionsContractDom'
-import { toggleChooseImg } from '../../../redux/actions/actionsModals'
+import { removeColumn } from '../../../redux/actions/actionsContractDom'
 import { PlusCircle, XCircle } from 'react-bootstrap-icons'
-import { DeleteOutline, ExitToApp, SettingsApplications, ListAlt, CalendarViewDay } from '@material-ui/icons'
-import { FileFont, FileImage, FileEarmarkMedical, PencilSquare } from 'react-bootstrap-icons'
+import { DeleteOutline, ExitToApp, SettingsApplications } from '@material-ui/icons'
 import { ELEMENTTYPE } from '../../../redux/config/elementSchema'
 import EditText from './EditText'
 import EditImg from './EditImg'
@@ -14,6 +12,8 @@ import EditVariable from './EditVariable'
 import EditSignature from './EditSignature'
 import EditWys from './EditWys'
 import EditDevider from './EditDevider'
+import EditCode from './EditCode'
+import AddElement from './helperComponents/AddElement'
 
 const useStyles = makeStyles((theme) => ({
     row: {
@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
 
 const EditColumn = ({ title, columnIdToSet }) => {
     const dispatch = useDispatch()
-    const { currentId, columnId, rowId } = useSelector(state => state.editable)
+    const { currentId, columnId, rowId, currentType } = useSelector(state => state.editable)
     const _currentColumnId = columnId || columnIdToSet
     const _currentColumn = useSelector(state => state.contractDom.columns[_currentColumnId])
     const _currentrow = useSelector(state => state.contractDom.rows[rowId])
@@ -70,6 +70,12 @@ const EditColumn = ({ title, columnIdToSet }) => {
     useEffect(() => {
         setEditMode(_currentEditElement)
     }, [_currentEditElement])
+
+    useEffect(() => {
+        currentType === ELEMENTTYPE.columns &&
+            !_currentColumn?.elements?.length &&
+            setAddElementMode(true)
+    }, [currentType, _currentColumn])
 
     const onEdit = () => {
         setEditMode(!editMode)
@@ -84,14 +90,6 @@ const EditColumn = ({ title, columnIdToSet }) => {
     const deleteColumn = () => {
         dispatch(removeColumn(rowId, columnId))
         dispatch(setCurrentEditable(_currentrow))
-    }
-
-    const _addElement = (type) => {
-        dispatch(addElement(type, columnId, rowId))
-    }
-
-    const _chooseImg = () => {
-        dispatch(toggleChooseImg())
     }
 
     const label = title ? `${title} Column` : 'Column'
@@ -128,50 +126,6 @@ const EditColumn = ({ title, columnIdToSet }) => {
         )
     }
 
-    const AddElememt = () => {
-        if (!addElementMode)
-            return <></>
-        return (
-            <div style={{ display: "flex", flexDirection: 'column' }}>
-                <div className={classes.row} onClick={() => _addElement(ELEMENTTYPE.text)} >
-                    <div>
-                        <FileFont width='20' height='20' className={classes.icon} />
-                        <Typography variant='h6' className={classes.text}>Add Text</Typography>
-                    </div>
-                </div>
-                <div className={classes.row} onClick={() => _addElement(ELEMENTTYPE.wys)} >
-                    <div>
-                        <ListAlt width='20' height='20' className={classes.icon} />
-                        <Typography variant='h6' className={classes.text}>Add Content</Typography>
-                    </div>
-                </div>
-                <div className={classes.row} onClick={_chooseImg} >
-                    <div>
-                        <FileImage width='20' height='20' className={classes.icon} />
-                        <Typography variant='h6' className={classes.text}>Add Image</Typography>
-                    </div>
-                </div>
-                <div className={classes.row} onClick={() => _addElement(ELEMENTTYPE.variable)} >
-                    <div>
-                        <FileEarmarkMedical width='20' height='20' className={classes.icon} />
-                        <Typography variant='h6' className={classes.text}>Add Varibale</Typography>
-                    </div>
-                </div>
-                <div className={classes.row} onClick={() => _addElement(ELEMENTTYPE.signature)} >
-                    <div>
-                        <PencilSquare width='20' height='20' className={classes.icon} />
-                        <Typography variant='h6' className={classes.text}>Add Signature</Typography>
-                    </div>
-                </div>
-                <div className={classes.row} onClick={() => _addElement(ELEMENTTYPE.devider)} >
-                    <div>
-                        <CalendarViewDay width='20' height='20' className={classes.icon} />
-                        <Typography variant='h6' className={classes.text}>Add Devider</Typography>
-                    </div>
-                </div>
-            </div>
-        )
-    }
 
     const EditElements = () => {
 
@@ -190,6 +144,8 @@ const EditColumn = ({ title, columnIdToSet }) => {
                     return <EditSignature id={_currentElement.id} />
                 case ELEMENTTYPE.devider:
                     return <EditDevider id={_currentElement.id} />
+                case ELEMENTTYPE.code:
+                    return <EditCode id={_currentElement.id} />
                 default:
                     return <p>No Type Element</p>
             }
@@ -221,7 +177,7 @@ const EditColumn = ({ title, columnIdToSet }) => {
         <div>
             <Label />
             <EditMode />
-            <AddElememt />
+            <AddElement addElementMode={addElementMode} />
             <EditElements />
         </div>
     )

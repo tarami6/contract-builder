@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { TextFields, TextFormat} from '@material-ui/icons'
+import { TextFields, SwapHoriz, SwapVert } from '@material-ui/icons'
 
 const useStyles = makeStyles((theme) => ({
     input: {
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const ImgSize = ({onChange, show, width='', height=''}) => {
+const ImgSize = ({ onChange, show, width = '', height = '' }) => {
     const classes = useStyles();
 
     if (!show)
@@ -36,21 +36,21 @@ const ImgSize = ({onChange, show, width='', height=''}) => {
                 <input
                     className={classes.input}
                     type='number'
-                    name='width'
+                    name='height'
                     onChange={onChange}
-                    value={width}
+                    value={height}
                 />
-                <TextFields className={classes.icon} />
+                <SwapVert className={classes.icon} />
             </div>
             <div className={classes.iconContainer}>
                 <input
                     className={classes.input}
                     type='number'
-                    name='height'
+                    name='width'
                     onChange={onChange}
-                    value={height}
+                    value={width}
                 />
-                <TextFormat className={classes.icon} />
+                <SwapHoriz className={classes.icon} />
             </div>
         </div>
     );

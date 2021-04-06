@@ -99,7 +99,7 @@ const Variable = ({ elementId }) => {
                             </select>
                             <div onClick={_handleSave} style={{ margin: '0 5px' }}><CheckCircle width='20' height='20' /></div>
                             <div onClick={_close} style={{ margin: '0 5px' }}><XCircle width='20' height='20' /></div>
-                            <div onClick={_delete} style={{ margin: '0 5px' }}><Trash2 width='22' height='22' /></div>
+                            {/* <div onClick={_delete} style={{ margin: '0 5px' }}><Trash2 width='22' height='22' /></div> */}
                         </div>
                     </div>
                     : (

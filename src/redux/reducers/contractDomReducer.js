@@ -8,7 +8,8 @@ import {
     EDIT_ELEMENT_VARIABLE,
     EDIT_STYLE_ROW,
     EDIT_STYLE_COLUMN,
-    EDIT_STYLE_ELEMENT
+    EDIT_STYLE_ELEMENT,
+    EDIT_ELEMENT_CODE
 } from "../actions/actionTypes"
 
 const initialState = {
@@ -117,6 +118,19 @@ const editElementText = (state, action) => {
     }
 }
 
+const editElementCode = (state, action) => {
+    return {
+        ...state,
+        elements: {
+            ...state.elements,
+            [action.payload.id]: {
+                ...state.elements[action.payload.id],
+                html: action.payload.value
+            }
+        }
+    }
+}
+
 const removeElement = (state, action) => {
     const newState = Object.assign({}, state);
     delete newState.elements[action.payload.id]
@@ -206,7 +220,8 @@ export default function contractDom(state = initialState, action) {
         case EDIT_ELEMENT_VARIABLE: return editElementVariable(state, action)
         case EDIT_STYLE_ROW: return editStyleRow(state, action)
         case EDIT_STYLE_COLUMN: return editStyleColumn(state, action)
-        case EDIT_STYLE_ELEMENT: return editStyleElement(state, action)
+        case EDIT_STYLE_ELEMENT: return editStyleElement(state, action) 
+        case EDIT_ELEMENT_CODE: return editElementCode(state, action)
         default:
             return state
     }

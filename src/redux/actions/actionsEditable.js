@@ -16,7 +16,22 @@ export const setCurrentEditable = (element) => {
         id,
         type
     } = element
-    const isElement = type === ELEMENTTYPE.text || type === ELEMENTTYPE.img || type === ELEMENTTYPE.signature || type === ELEMENTTYPE.variable || type === ELEMENTTYPE.wys || type === ELEMENTTYPE.devider
+
+    const currentType = (type) => {
+        switch (type) {
+            case ELEMENTTYPE.text:
+            case ELEMENTTYPE.img:
+            case ELEMENTTYPE.signature:
+            case ELEMENTTYPE.devider:
+            case ELEMENTTYPE.variable:
+            case ELEMENTTYPE.code:
+                return true
+            default:
+                return false
+        }
+    }
+
+    const isElement = currentType(type)
     const isColumn = type === ELEMENTTYPE.columns
     const isRow = type === ELEMENTTYPE.rows
 

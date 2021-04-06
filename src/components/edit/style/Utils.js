@@ -1,3 +1,7 @@
+import {
+    ELEMENTTYPE
+} from "../../../redux/config/elementSchema"
+
 export const getStyleValue = (keyPath, elementStyle) => {
     const cssUnit = getCssUnit(keyPath)
 
@@ -16,8 +20,13 @@ export const getStyleValue = (keyPath, elementStyle) => {
 }
 
 export const getCssUnit = (unit, currentType) => {
-    if(currentType === 'img'){
+    if(currentType === ELEMENTTYPE.img){
         if(unit === 'width' || unit === 'height' ){
+            return 'px'
+        }
+    }
+    if(currentType === ELEMENTTYPE.devider){
+        if(unit === 'height' ){
             return 'px'
         }
     }
