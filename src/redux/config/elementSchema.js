@@ -55,6 +55,7 @@ export const columnConstructor = rowId => (
 export const rowContsructor = (id, numOfColumns, columnsIds) => ({
     id,
     type: 'rows',
+    loop: undefined,
     style: {
         minHeight: "55px",
         width: "100%",

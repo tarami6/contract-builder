@@ -20,6 +20,7 @@ const ModalCopyHtml = () => {
     const dispatch = useDispatch()
     const _handleClose = () => dispatch(toggleCopyHtml())
     const open = useSelector(state => state.modals.copyHtml)
+    
     return (
         <Modal show={open} animation={false} onHide={_handleClose}>
             <Modal.Header closeButton>

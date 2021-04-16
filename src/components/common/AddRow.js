@@ -54,7 +54,7 @@ const AddRow = () => {
                 <LineStyleIcon className={classes.icon} id={'123'} />
                 <Typography variant='h6' className={classes.text}>
                     Add Row
-            </Typography>
+                </Typography>
             </div>
             <AddIcon className={classes.icon} />
         </div>

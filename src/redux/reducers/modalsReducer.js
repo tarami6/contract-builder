@@ -1,8 +1,22 @@
-import { TOGGLE_ADD_ROW, TOGGLE_CHOOSE_IMG, TOGGLE_COPY_HTML } from '../actions/actionTypes'
+import {
+    TOGGLE_ADD_ROW,
+    TOGGLE_CHOOSE_IMG,
+    TOGGLE_COPY_HTML,
+    TOGGLE_ADD_LOOP,
+    LOGOUT
+} from '../actions/actionTypes'
+
 const initialState = {
     addRow: false,
     chooseImg: false,
-    copyHtml: false
+    copyHtml: false,
+    addLoop: false
+}
+
+const logOut = () => {
+    return {
+        ...initialState
+    }
 }
 
 export default function modals(state = initialState, action) {
@@ -22,6 +36,12 @@ export default function modals(state = initialState, action) {
                 ...state,
                 copyHtml: !state.copyHtml
             }
+        case TOGGLE_ADD_LOOP:
+            return {
+                ...state,
+                addLoop: !state.addLoop
+            }
+        case LOGOUT: return logOut()
         default:
             return state
     }

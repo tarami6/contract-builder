@@ -1,6 +1,7 @@
 import {
     CURRENT_STYBLE,
-    SET_TEMP_STYLE
+    SET_TEMP_STYLE,
+    LOGOUT
 } from "../actions/actionTypes"
 
 const initialState = {
@@ -36,10 +37,17 @@ const setTempStyle = (state, action) => {
     }
 }
 
+const logOut = () => {
+    return {
+        ...initialState
+    }
+}
+
 export default function editable(state = initialState, action) {
     switch (action.type) {
         case CURRENT_STYBLE: return setCurrentEditable(state, action)
         case SET_TEMP_STYLE: return setTempStyle(state, action)
+        case LOGOUT: return logOut()
         default:
             return state
     }

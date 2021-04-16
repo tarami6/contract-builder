@@ -3,7 +3,8 @@ import {
     EDIT_STYLE_ROW,
     EDIT_STYLE_COLUMN,
     EDIT_STYLE_ELEMENT,
-    SET_TEMP_STYLE
+    SET_TEMP_STYLE,
+    SET_LOOP
 } from "./actionTypes"
 import {
     ELEMENTTYPE
@@ -17,7 +18,7 @@ export const setCurrentEditable = (element) => {
         type
     } = element
 
-    const currentType = (type) => {
+    const isElement = (type) => {
         switch (type) {
             case ELEMENTTYPE.text:
             case ELEMENTTYPE.img:
@@ -31,7 +32,6 @@ export const setCurrentEditable = (element) => {
         }
     }
 
-    const isElement = currentType(type)
     const isColumn = type === ELEMENTTYPE.columns
     const isRow = type === ELEMENTTYPE.rows
 
@@ -40,7 +40,7 @@ export const setCurrentEditable = (element) => {
         payload: {
             rowId: isRow ? id : rowId,
             columnId: isColumn ? id : columnId,
-            elementId: isElement ? id : undefined,
+            elementId: isElement() ? id : undefined,
             currentId: id,
             currentType: type
         }
@@ -83,6 +83,16 @@ export const setTempStyle = (type, style) => {
         payload: {
             type,
             style
+        }
+    }
+}
+
+export const setLoop = (rowId, value) => {
+    return {
+        type: SET_LOOP,
+        payload: {
+            rowId,
+            value
         }
     }
 }

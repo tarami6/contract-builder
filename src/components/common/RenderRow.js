@@ -1,5 +1,5 @@
 import React from "react";
-import Row from '../elements/Row'
+import Row from '../displayElements/DisplayRow'
 import { useSelector } from 'react-redux'
 import { Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';

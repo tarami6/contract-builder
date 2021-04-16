@@ -1,10 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import PersonIcon from '@material-ui/icons/Person';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Typography from '@material-ui/core/Typography';
-import InfoIcon from '@material-ui/icons/Info';
+import { useDispatch } from 'react-redux'
+import { logOut } from '../../../redux/actions/actionAuth'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,9 +13,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     position: 'absolute',
     width: 166,
-    right: '-20px',
+    right: 60,
     background: '#333b4e',
-    bottom: '-165px',
+    bottom: -35,
     borderRadius: 4,
     zIndex: 99,
     overflow: 'hidden',
@@ -54,25 +53,16 @@ const useStyles = makeStyles((theme) => ({
 
 const ToolTip = () => {
   const classes = useStyles();
+  const dispatch = useDispatch()
+  const _logOut = () => {
+    console.log('logOut')
+    dispatch(logOut())
+  }
   return (
     <div className={classes.root}>
-      <div className={classes.arrow} />
       <div className={classes.item}>
-        <div className={classes.row}>
-          <PersonIcon className={classes.icon} />
-          <Typography variant='h6' className={classes.text}>
-            Account
-          </Typography>
-          <InfoIcon className={classes.icon} />
-        </div>
-        <div className={classes.row}>
-          <AddCircleIcon  className={classes.icon} />
-          <Typography variant='h6' className={classes.text}>
-            Support
-          </Typography>
-        </div>
-        <div className={classes.row}>
-          <ExitToAppIcon  className={classes.icon} />
+        <div className={classes.row} onClick={_logOut}>
+          <ExitToAppIcon className={classes.icon} />
           <Typography variant='h6' className={classes.text}>
             Logout
           </Typography>

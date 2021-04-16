@@ -5,7 +5,7 @@ import { toggleCopyHtml } from '../../../redux/actions/actionsModals'
 import AddRow from '../../common/AddRow'
 import ButtonToPrint from '../../print/ButtonToPrint'
 import Button from '@material-ui/core/Button';
-import Editor from '../../edit/editElements/Editor'
+import Editor from '../../editAndStyle/editElements/Editor'
 import TitleBox from '../../common/TitleBox'
 
 const useStyles = makeStyles((theme) => ({

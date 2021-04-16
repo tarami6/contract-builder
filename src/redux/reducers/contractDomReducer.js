@@ -9,7 +9,9 @@ import {
     EDIT_STYLE_ROW,
     EDIT_STYLE_COLUMN,
     EDIT_STYLE_ELEMENT,
-    EDIT_ELEMENT_CODE
+    EDIT_ELEMENT_CODE,
+    SET_LOOP,
+    LOGOUT
 } from "../actions/actionTypes"
 
 const initialState = {
@@ -209,6 +211,25 @@ const editStyleElement= (state, action) => {
     }
 }
 
+const setLoop = (state, action) => {
+    return{
+        ...state,
+        rows:{
+            ...state.rows,
+            [action.payload.rowId]:{
+                ...state.rows[action.payload.rowId],
+                loop: action.payload.value
+            }
+        }
+    }
+}
+
+const logOut = () => {
+    return {
+        ...initialState
+    }
+}
+
 export default function contractDom(state = initialState, action) {
     switch (action.type) {
         case ADD_ROW: return addRow(state, action)
@@ -222,6 +243,8 @@ export default function contractDom(state = initialState, action) {
         case EDIT_STYLE_COLUMN: return editStyleColumn(state, action)
         case EDIT_STYLE_ELEMENT: return editStyleElement(state, action) 
         case EDIT_ELEMENT_CODE: return editElementCode(state, action)
+        case SET_LOOP: return setLoop(state, action)
+        case LOGOUT: return logOut()
         default:
             return state
     }

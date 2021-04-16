@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css';
-import DropZoneScreenScreen from './components/dropZoneScreen/DropZoneScreen'
+import RoouRouter from './components/rootRouter/RoouRouter'
 
-const App =  () => <DropZoneScreenScreen />
+const App =  () => <RoouRouter />
 
 export default App;

@@ -2,13 +2,13 @@ import React from 'react';
 import { useSelector } from 'react-redux'
 
 import { ELEMENTTYPE } from '../../redux/config/elementSchema'
-import Text from '../elements/Text'
-import Variable from '../elements/Variable'
-import Image from '../elements/Image'
-import Signature from '../elements/Signature'
-import WysEditor from '../elements/WysEditor'
-import Devider from '../elements/Devider'
-import Code from '../elements/Code'
+import Text from '../displayElements/DisplayText'
+import Variable from '../displayElements/DisplayVariable'
+import Image from '../displayElements/DisplayImage'
+import Signature from '../displayElements/DisplaySignature'
+import WysEditor from '../displayElements/DisplayWysEditor'
+import Devider from '../displayElements/DisplayDevider'
+import Code from '../displayElements/DisplayCode'
 
 const RenderElement = ({ elementId }) => {
     const _type = useSelector(state => state.contractDom.elements[elementId].type)

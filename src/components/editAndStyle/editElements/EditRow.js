@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles, Typography } from '@material-ui/core'
 import { setCurrentEditable } from '../../../redux/actions/actionsEditable'
+import { toggleAddLoop } from '../../../redux/actions/actionsModals'
 import { removeRow } from '../../../redux/actions/actionsContractDom'
-import { SettingsApplications, ExitToApp, DeleteOutline } from '@material-ui/icons'
+import { SettingsApplications, ExitToApp, DeleteOutline, BlurCircular } from '@material-ui/icons'
 import EditColumn from './EditColumn'
 
 const useStyles = makeStyles((theme) => ({
@@ -139,10 +140,35 @@ const EditRow = ({ bodyRowId, index }) => {
         </div>
     )
 
+    const AddLoop = () => {
+        const _toggleAddLoop = () => {
+            dispatch(toggleAddLoop())
+        }
+
+        if (!_currentEditElement) {
+            return <div />
+        } else {
+            return (
+                <div
+                    className={classes.row}
+                    onClick={_toggleAddLoop}
+                >
+                    <div>
+                        <BlurCircular width='20' height='20' className={classes.icon} />
+                        <Typography variant='h6' className={classes.text} >Add Loop</Typography>
+                    </div>
+                </div>
+            )
+        }
+    }
+
+
+
     return (
         <>
             <Label />
             <EditMode />
+            <AddLoop />
             <EditColumns />
         </>
     );

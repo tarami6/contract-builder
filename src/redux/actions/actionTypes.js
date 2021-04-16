@@ -15,7 +15,12 @@ export const EDIT_STYLE_ROW = "EDIT_STYLE_ROW";
 export const EDIT_STYLE_COLUMN = "EDIT_STYLE_COLUMN";
 export const EDIT_STYLE_ELEMENT = "EDIT_STYLE_ELEMENT";
 export const SET_TEMP_STYLE = "SET_TEMP_STYLE";
+export const SET_LOOP = "SET_LOOP"
 // modals
 export const TOGGLE_ADD_ROW = "TOGGLE_ADD_ROW";
 export const TOGGLE_CHOOSE_IMG = "TOGGLE_CHOOSE_IMG";
 export const TOGGLE_COPY_HTML = "TOGGLE_COPY_HTML";
+export const TOGGLE_ADD_LOOP = "TOGGLE_ADD_LOOP";
+//auth
+export const LOGIN = "LOGIN"
+export const LOGOUT = "LOGOUT"

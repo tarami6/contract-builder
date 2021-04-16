@@ -1,8 +1,9 @@
 import React from 'react';
-import ContractBody from '../elements/ContractBody'
+import ContractBody from '../displayElements/DisplayContractBody'
 import { makeStyles } from '@material-ui/core/styles';
-import ModalChooseImg from '../common/ModalChooseImg';
-import ModalCopyHtml from '../common/ModalCopyHtml';
+import ModalChooseImg from '../modals/ModalChooseImg';
+import ModalCopyHtml from '../modals/ModalCopyHtml';
+import ModalAddLoop from '../modals/ModalAddLoop';
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -32,6 +33,7 @@ const MainBuilder = () => {
         </form>
         <ModalChooseImg />
         <ModalCopyHtml />
+        <ModalAddLoop />
         {/* <Test /> */}
       </div>
     </div>

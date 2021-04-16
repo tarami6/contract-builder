@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from './appBar/AppBar';
 import Logo from './appBar/Logo';
 import NavBar from './navBar/NavBar';
 import MainBuilder from '../mainBuilder/MainBuilder'
-import DynamicStyle from '../edit/style/DynamicStyle'
+import DynamicStyle from '../editAndStyle/style/DynamicStyle'
+import axios from 'axios'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const DropZoneScreen = () => {
+const MainScreen = () => {
   // const [ data, setData ] = useState()
 
   // return (
@@ -49,6 +51,14 @@ const DropZoneScreen = () => {
   //   </>
   // )
   const classes = useStyles();
+  // useEffect(() => {
+  //   axios.get(`https://shm-back-end.herokuapp.com/api/html/`, {
+  //     headers: {"auth-token" : `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNzU3ZDBmMzIzYzY0ODgyZmNmODRiYiIsImlhdCI6MTYxODMyMDM3N30.2TAY9zctbEyj-1xwKe5QdM3iziiG4NFJzCT1g1xJlTo`}
+  //   })
+  //   .then(res => {
+  //     console.log('persons', res.data)
+  //   }).catch(err => console.log('err', err))
+  // }, [])
   return (
     <div className={classes.root}>
       <div className={classes.topBar}>
@@ -64,4 +74,4 @@ const DropZoneScreen = () => {
   );
 };
 
-export default DropZoneScreen;
+export default MainScreen;
