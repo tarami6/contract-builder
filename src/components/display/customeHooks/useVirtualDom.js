@@ -14,13 +14,16 @@ const useContractVirtualDom = (state) => {
         let _rows = cloneDeep(rows)
         let _columns = cloneDeep(columns)
         let _elements = cloneDeep(elements)
+        
+        if(!vdom) return undefined
+
         vdom.rows = vdom.rows.map(rowOrId =>{
             if(typeof rowOrId === 'string'){
                 return _rows[rowOrId]
             }
             else return _rows[rowOrId.id]
         } )
-        vdom.rows.forEach(row => {
+        vdom?.rows.forEach(row => {
             row.columns = row.columns.map(columnId => {
                 if(typeof columnId === 'string'){
                     return _columns[columnId]
@@ -28,7 +31,7 @@ const useContractVirtualDom = (state) => {
                 else return  _columns[columnId.id]
             })
         });
-        vdom.rows.forEach(row => {
+        vdom?.rows.forEach(row => {
             row.columns?.forEach(column => {
                 if(column?.elements){
                     column.elements = column.elements.map(elementOrId =>{

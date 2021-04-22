@@ -24,11 +24,11 @@ const DisplayMain = () => {
     const files = useSelector(state => state.files.data)
     const file = files?.filter(file => file._id === fileId)[0]
     const dom = file?.dom
-    const { rows } = useVirtualDom(dom)
+    const virtualDom = useVirtualDom(dom)
     
     return (
         <Paper className={classes.root} elevation={1}>
-            {rows.map((row, index) => <Row key={index} row={row} />)}
+            {virtualDom?.rows.map((row, index) => <Row key={index} row={row} />)}
         </Paper>
     );
 };
