@@ -8,8 +8,9 @@ const useContractVirtualDom = (state) => {
     const columns = state?.columns
     const elements = state?.elements
     const [cVDom, setCVDom ] = useState(body)
-    if(!body) return undefined
     
+    if(!body) return undefined
+
     const buildDom = useCallback(() => {
         let vdom = cloneDeep(body)
         let _rows = cloneDeep(rows)
