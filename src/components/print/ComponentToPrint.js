@@ -5,9 +5,10 @@ import Row from './components/Row'
 
 const ComponentToPrint = React.forwardRef((_, ref) => {
     const { rows } = useContractVirtualDom()
+    console.log('rows', rows)
     return (
         <div ref={ref} style={{padding: '15px'}}>
-            {rows.map(row => <Row key={row.id} row={row} />)}
+            {rows.map((row, index) => <Row key={index} row={row} />)}
         </div>
     )
 });
