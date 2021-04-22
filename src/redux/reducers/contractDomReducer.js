@@ -11,10 +11,14 @@ import {
     EDIT_STYLE_ELEMENT,
     EDIT_ELEMENT_CODE,
     SET_LOOP,
-    LOGOUT
+    LOGOUT,
+    RENAME_FILE,
+    RESET_FILE,
+    SET_DOM
 } from "../actions/actionTypes"
 
 const initialState = {
+    name: '',
     body: {
         type: "body",
         style: {},
@@ -164,13 +168,13 @@ const editElementVariable = (state, action) => {
 }
 
 const editStyleRow = (state, action) => {
-    return{
+    return {
         ...state,
-        rows:{
+        rows: {
             ...state.rows,
-            [action.payload.rowId]:{
+            [action.payload.rowId]: {
                 ...state.rows[action.payload.rowId],
-                style:{
+                style: {
                     ...state.rows[action.payload.rowId].style,
                     ...action.payload.style
                 }
@@ -179,14 +183,14 @@ const editStyleRow = (state, action) => {
     }
 }
 
-const editStyleColumn= (state, action) => {
-    return{
+const editStyleColumn = (state, action) => {
+    return {
         ...state,
-        columns:{
+        columns: {
             ...state.columns,
-            [action.payload.columnId]:{
+            [action.payload.columnId]: {
                 ...state.columns[action.payload.columnId],
-                style:{
+                style: {
                     ...state.columns[action.payload.columnId].style,
                     ...action.payload.style
                 }
@@ -195,14 +199,14 @@ const editStyleColumn= (state, action) => {
     }
 }
 
-const editStyleElement= (state, action) => {
-    return{
+const editStyleElement = (state, action) => {
+    return {
         ...state,
-        elements:{
+        elements: {
             ...state.elements,
-            [action.payload.elementId]:{
+            [action.payload.elementId]: {
                 ...state.elements[action.payload.elementId],
-                style:{
+                style: {
                     ...state.elements[action.payload.elementId].style,
                     ...action.payload.style
                 }
@@ -212,11 +216,11 @@ const editStyleElement= (state, action) => {
 }
 
 const setLoop = (state, action) => {
-    return{
+    return {
         ...state,
-        rows:{
+        rows: {
             ...state.rows,
-            [action.payload.rowId]:{
+            [action.payload.rowId]: {
                 ...state.rows[action.payload.rowId],
                 loop: action.payload.value
             }
@@ -224,9 +228,28 @@ const setLoop = (state, action) => {
     }
 }
 
-const logOut = () => {
+const resetFile = () => {
     return {
         ...initialState
+    }
+}
+
+const renameFile = (state, action) => {
+    return {
+        ...state,
+        name: action.payload.name
+    }
+}
+
+const setDom = (state, action) => {
+    console.log('action', action)
+    return {
+        ...state,
+        name: action.payload.file.name,
+        body: action.payload.file.dom.body,
+        rows: action.payload.file.dom.rows,
+        columns: action.payload.file.dom.columns,
+        elements: action.payload.file.dom.elements,
     }
 }
 
@@ -241,10 +264,13 @@ export default function contractDom(state = initialState, action) {
         case EDIT_ELEMENT_VARIABLE: return editElementVariable(state, action)
         case EDIT_STYLE_ROW: return editStyleRow(state, action)
         case EDIT_STYLE_COLUMN: return editStyleColumn(state, action)
-        case EDIT_STYLE_ELEMENT: return editStyleElement(state, action) 
+        case EDIT_STYLE_ELEMENT: return editStyleElement(state, action)
         case EDIT_ELEMENT_CODE: return editElementCode(state, action)
         case SET_LOOP: return setLoop(state, action)
-        case LOGOUT: return logOut()
+        case LOGOUT: return resetFile()
+        case RENAME_FILE: return renameFile(state, action)
+        case RESET_FILE: return resetFile()
+        case SET_DOM: return setDom(state, action)
         default:
             return state
     }

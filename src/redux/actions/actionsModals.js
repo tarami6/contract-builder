@@ -2,7 +2,8 @@ import {
     TOGGLE_ADD_ROW,
     TOGGLE_CHOOSE_IMG,
     TOGGLE_COPY_HTML,
-    TOGGLE_ADD_LOOP
+    TOGGLE_ADD_LOOP,
+    TOGGLE_FILE_NAME
 } from './actionTypes'
 
 export const toggleAddRow = () => {
@@ -28,3 +29,10 @@ export const toggleAddLoop = () => {
         type: TOGGLE_ADD_LOOP
     }
 }
+
+export const toggleFileName = () => {
+    return {
+        type: TOGGLE_FILE_NAME
+    }
+}
+

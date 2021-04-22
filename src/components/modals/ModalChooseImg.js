@@ -2,9 +2,10 @@ import React from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { addElement } from '../../redux/actions/actionsContractDom'
 import { toggleChooseImg } from '../../redux/actions/actionsModals'
-import { Modal, Button, Row, Container } from 'react-bootstrap'
+import { Row, Container } from 'react-bootstrap'
 import { SmartLogo, OptimaLogo, SunLogo, PldtLogo, QrCode } from '../../assets';
 import { ELEMENTTYPE } from '../../redux/config/elementSchema'
+import MainModal from './ModalMain'
 
 const ModalChooseImg = () => {
     const { columnId, rowId } = useSelector(state => state.editable)
@@ -31,33 +32,28 @@ const ModalChooseImg = () => {
         }
     }
 
-    return (
-        <Modal show={open} animation={false} onHide={_handleClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>Choose from library</Modal.Title>
-            </Modal.Header>
-            <Modal.Body style={{ display: "flex" }}>
-                <Container style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                }}>
-                    {
-                        [SmartLogo, OptimaLogo, SunLogo, PldtLogo, QrCode].map((icon, index) => (
-                            <Row key={index} onClick={() => _addImg(icon)}>
-                                <img src={icon} alt={`${icon}Img`} width='100px' height={getHeigt(index)} />
-                            </Row>
-                        )
-                        )
-                    }
-                </Container>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={_handleClose}>
-                    Close
-          </Button>
-            </Modal.Footer>
-        </Modal>
+    return(
+        <MainModal
+        open={open}
+        handleClose={_handleClose}
+        title={'Choose from library'}
+        body={
+            <Container style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+            }}>
+                {
+                    [SmartLogo, OptimaLogo, SunLogo, PldtLogo, QrCode].map((icon, index) => (
+                        <Row key={index} onClick={() => _addImg(icon)}>
+                            <img src={icon} alt={`${icon}Img`} width='100px' height={getHeigt(index)} />
+                        </Row>
+                    )
+                    )
+                }
+            </Container>
+        }
+    />
     )
 }
 

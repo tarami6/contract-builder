@@ -7,7 +7,10 @@ import {
     EDIT_ELEMENT_TEXT,
     REMOVE_ELEMENT,
     EDIT_ELEMENT_VARIABLE,
-    EDIT_ELEMENT_CODE
+    EDIT_ELEMENT_CODE,
+    RENAME_FILE,
+    RESET_FILE,
+    SET_DOM
 } from './actionTypes'
 
 import {
@@ -147,6 +150,32 @@ export const removeElement = (id, columnId) => {
         payload: {
             id,
             columnId
+        }
+    }
+}
+
+
+
+export const renameFile = (name) => {
+    return {
+        type: RENAME_FILE,
+        payload: {
+            name
+        }
+    }
+}
+
+export const resetFile = () => {
+    return {
+        type: RESET_FILE,
+    }
+}
+
+export const setDom = (file) => {
+    return {
+        type: SET_DOM,
+        payload: {
+            file
         }
     }
 }
