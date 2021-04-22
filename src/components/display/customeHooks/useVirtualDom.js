@@ -3,11 +3,12 @@ import { useSelector } from 'react-redux'
 import {cloneDeep} from 'lodash'
 
 const useContractVirtualDom = (state) => {
-    const body = state.body
-    const rows = state.rows
-    const columns = state.columns
-    const elements = state.elements
+    const body = state?.body
+    const rows = state?.rows
+    const columns = state?.columns
+    const elements = state?.elements
     const [cVDom, setCVDom ] = useState(body)
+    if(!body) return undefined
     
     const buildDom = useCallback(() => {
         let vdom = cloneDeep(body)
