@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import LeftSiteEditor from '../leftSideEditor/LeftSiteEditor'
+import LeftSiteEditor from './leftSideEditor/LeftSiteEditor'
 import {useLocation} from 'react-router-dom'
 import MainFilesList from 'components/files/MainFilesList';
 

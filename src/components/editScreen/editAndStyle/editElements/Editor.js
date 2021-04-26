@@ -12,6 +12,7 @@ import EditSignature from './EditSignature'
 import EditWys from './EditWys'
 import EditDevider from './EditDevider'
 import EditCode from './EditCode'
+import EditTable from './EditTable'
 
 const Editor = () => {
     const { currentType } = useSelector(state => state.editable)
@@ -41,6 +42,8 @@ const Editor = () => {
             return <EditDevider />
         case ELEMENTTYPE.code:
             return <EditCode />
+        case ELEMENTTYPE.table:
+            return <EditTable />
         default:
             return <TopLevelEditore />
     }

@@ -9,10 +9,11 @@ import Signature from '../displayElements/DisplaySignature'
 import WysEditor from '../displayElements/DisplayWysEditor'
 import Devider from '../displayElements/DisplayDevider'
 import Code from '../displayElements/DisplayCode'
+import Table from '../displayElements/DisplayTable'
 
 const RenderElement = ({ elementId }) => {
     const _type = useSelector(state => state.contractDom.elements[elementId].type)
-    
+
     switch (_type) {
         case ELEMENTTYPE.text:
             return <Text elementId={elementId} />
@@ -28,6 +29,8 @@ const RenderElement = ({ elementId }) => {
             return <Devider elementId={elementId} />
         case ELEMENTTYPE.code:
             return <Code elementId={elementId} />
+        case ELEMENTTYPE.table:
+            return <Table elementId={elementId} />
         default:
             return <p>Element type not found</p>
     }

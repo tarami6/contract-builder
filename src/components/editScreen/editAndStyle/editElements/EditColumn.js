@@ -12,6 +12,7 @@ import EditSignature from './EditSignature'
 import EditWys from './EditWys'
 import EditDevider from './EditDevider'
 import EditCode from './EditCode'
+import EditTable from './EditTable'
 import AddElement from './helperComponents/AddElement'
 
 const useStyles = makeStyles((theme) => ({
@@ -145,6 +146,8 @@ const EditColumn = ({ title, columnIdToSet }) => {
                     return <EditDevider id={_currentElement.id} />
                 case ELEMENTTYPE.code:
                     return <EditCode id={_currentElement.id} />
+                case ELEMENTTYPE.table:
+                    return <EditTable id={_currentElement.id} />
                 default:
                     return <p>No Type Element</p>
             }

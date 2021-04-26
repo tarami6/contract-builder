@@ -67,9 +67,8 @@ const Text = ({ elementId }) => {
                     <div onClick={_handleSave} style={{ margin: '0 5px' }}><CheckCircle width='20' height='20' /></div>
                     <div onClick={_close} style={{ margin: '0 5px' }}><XCircle width='20' height='20' /></div>
                 </div>
-                : <p style={{margin: '0', fontSize: _element.style.fontSize, color: _element.style.color}}>{inputValue}</p>}
+                : <p style={{margin: '0', fontSize: _element.style.fontSize, color: _element.style.color}}>{_element.content}</p>}
         </Card>
-
     )
 }
 

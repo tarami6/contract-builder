@@ -1,11 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux'
-import AddRow from '../../common/AddRow'
-import ButtonToPrint from '../../print/ButtonToPrint'
+import AddRow from '../../../common/AddRow'
+import ButtonToPrint from '../../../print/ButtonToPrint'
 import Button from '@material-ui/core/Button';
 import Editor from 'components/editScreen/editAndStyle/editElements/Editor'
-import TitleBox from '../../common/TitleBox'
+import TitleBox from '../../../common/TitleBox'
 import { saveFile, toggleCopyHtml, updateFile } from 'redux/actions'
 import { useLocation } from 'react-router-dom'
 

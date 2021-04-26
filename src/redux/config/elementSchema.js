@@ -22,7 +22,8 @@ export const ELEMENTTYPE = {
     signature: 'signature',
     columns: 'columns',
     devider: 'devider',
-    code: 'code'
+    code: 'code',
+    table: 'table'
 }
 
 export const columnConstructor = rowId => (
@@ -202,3 +203,51 @@ export const codeContstractor = (id, columnId, rowId) => ({
     type: 'code',
     html: '<p>Html</p>'
 })
+
+export const tableContstractor = (id, columnId, rowId) => {
+    let bodyRowArr = []
+    let bodyColumnArr = []
+    let headerColArr = []
+    let cellsContent = {}
+    let headerContent = ['title','title','title']
+    let bodyContent = []
+
+    for (let i = 0; i < 3; i++) {
+        headerColArr.push(i)
+    }
+
+
+    for (let i = 0; i < 3; i++) {
+        bodyRowArr.push(i)
+    }
+
+
+    for (let i = 0; i < 3; i++) {
+        bodyRowArr.push(i)
+    }
+
+    for (let i = 0; i < 3; i++) {
+        cellsContent[i] = i
+    }
+
+    for (let i = 0; i < 3; i++) {
+        bodyContent.push({...cellsContent})
+    }
+
+    return {
+        id,
+        rowId,
+        columnId,
+        type: 'table',
+        loop: 'sellsInfo',
+        table: {
+            headerCol: 3,
+            bodyRow: 3,
+            bodyColumn: 3,
+            headerContent,
+            headerColspan: 0,
+            bodyContent,
+        },
+        style: {}
+    }
+}

@@ -2,15 +2,17 @@ import React from 'react';
 import { useSelector } from 'react-redux'
 import { ELEMENTTYPE } from 'redux/config/elementSchema'
 import { makeStyles } from '@material-ui/core/styles';
-import StyleRow from './StyleRow'
-import StyleColumn from './StyleColumn'
-import StyleText from './StyleText'
-import StyleVariable from './StyleVariable'
-import StyleWys from './StyleWys'
-import StyleImg from './StyleImg'
-import StyleSignature from './StyleSignature'
-import StyleDevider from './StyleDevider'
-import StyleCode from './StyleCode'
+import {
+    StyleRow,
+    StyleColumn,
+    StyleText,
+    StyleVariable,
+    StyleWys,
+    StyleImg,
+    StyleSignature,
+    StyleDevider,
+    StyleCode
+} from './style'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -41,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const DynamicStyle = () => {
+const RightSideBar = () => {
     const classes = useStyles();
     const { currentType } = useSelector(state => state.editable)
 
@@ -80,4 +82,4 @@ const DynamicStyle = () => {
     );
 };
 
-export default DynamicStyle;
+export default RightSideBar;

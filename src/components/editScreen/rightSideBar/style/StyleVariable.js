@@ -1,39 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux'
 import { editStyleElement } from 'redux/actions'
-import { Typography } from '@material-ui/core';
-import BoxSize from './inputs/BoxSize'
-import Fonts from './inputs/Fonts'
-import SaveStyle from './inputs/SaveStyle'
-import TitleRow from './TitleRow'
+import { Typography, makeStyles } from '@material-ui/core';
+import TitleRow from 'components/common/TitleRow'
+import { BoxSize, Fonts, SaveStyle } from './inputs'
 
 const useStyles = makeStyles((theme) => ({
-    input: {
-        width: '50px'
-    },
-    inputsContainer: {
-        display: 'flex',
-        justifyContent: 'space-evenly',
-        marginTop: '15px'
-    },
-    iconContainer: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'column'
-    },
-    icon: {
-        color: "#b9b9b9",
-        margin: "015px",
-        fontSize: "14px",
-        fontWeight: "600",
-    },
-    iconArrow: {
-        color: "#b9b9b9",
-        fontSize: "14px",
-        fontWeight: "600",
-    },
     title: {
         fontSize: '22px',
         display: 'flex',
@@ -43,30 +15,6 @@ const useStyles = makeStyles((theme) => ({
         background: '#505b75',
         position: 'relative',
         color: '#fff',
-    },
-    row: {
-        padding: '5px 10px',
-        border: '1px solid #525661',
-        display: 'flex',
-        alignItems: 'center',
-        paddingLeft: 30,
-        justifyContent: 'space-between',
-        cursor: 'pointer',
-        '&:hover': {
-            background: '#2a3040',
-            border: 'none'
-        },
-        '& > div': {
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-        },
-    },
-    text: {
-        fontSize: '14px',
-        margin: '0 15px',
-        fontWeight: 600,
-        color: '#b9b9b9',
     },
 }))
 
@@ -168,11 +116,11 @@ const StyleVariable = () => {
                 onClick={() => openSections('titleFont')}
                 opened={openedSections.titleFont}
             />
-            <Fonts 
-             onChange={(e) => changeStyle(e, 'title')}
-             sizeValue={getStyleValue('fontSize', 'title')}
-             colorValue={getStyleValue('color', 'title')}
-             show={openedSections.titleFont}
+            <Fonts
+                onChange={(e) => changeStyle(e, 'title')}
+                sizeValue={getStyleValue('fontSize', 'title')}
+                colorValue={getStyleValue('color', 'title')}
+                show={openedSections.titleFont}
             />
             {/* KEY */}
             <TitleRow
@@ -191,7 +139,7 @@ const StyleVariable = () => {
                 onClick={() => openSections('keyPadding')}
                 opened={openedSections.keyPadding}
             />
-             <BoxSize
+            <BoxSize
                 onChange={(e) => changeStyle(e, 'key')}
                 valueTop={getStyleValue('paddingTop', 'key')}
                 valueBottom={getStyleValue('paddingBottom', 'key')}
@@ -206,11 +154,11 @@ const StyleVariable = () => {
                 onClick={() => openSections('keyFont')}
                 opened={openedSections.keyFont}
             />
-            <Fonts 
-             onChange={(e) => changeStyle(e, 'key')}
-             sizeValue={getStyleValue('fontSize', 'key')}
-             colorValue={getStyleValue('color', 'key')}
-             show={openedSections.keyFont}
+            <Fonts
+                onChange={(e) => changeStyle(e, 'key')}
+                sizeValue={getStyleValue('fontSize', 'key')}
+                colorValue={getStyleValue('color', 'key')}
+                show={openedSections.keyFont}
             />
             <SaveStyle />
         </div>

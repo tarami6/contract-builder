@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles, Typography } from '@material-ui/core'
-import { ListAlt, CalendarViewDay, Code } from '@material-ui/icons'
+import { ListAlt, CalendarViewDay, Code, TableChart } from '@material-ui/icons'
 import { removeColumn, addElement, toggleChooseImg } from 'redux/actions'
 import { FileFont, FileImage, FileEarmarkMedical, PencilSquare } from 'react-bootstrap-icons'
 import { ELEMENTTYPE } from 'redux/config/elementSchema'
@@ -64,6 +64,8 @@ const getTitle = (type) => {
             return `${mainWord} Devider`
         case ELEMENTTYPE.code:
             return `${mainWord} Code`
+        case ELEMENTTYPE.table:
+            return `${mainWord} Table`
         default:
             return ''
     }
@@ -89,6 +91,8 @@ const Icon = ({ type }) => {
             return <CalendarViewDay width={size} height={size} className={icon} />
         case ELEMENTTYPE.code:
             return <Code width={size} height={size} className={icon} />
+        case ELEMENTTYPE.table:
+            return <TableChart width={size} height={size} className={icon} />
         default:
             return <FileFont width={size} height={size} className={icon} />
     }
@@ -117,7 +121,6 @@ const AddElement = ({ addElementMode }) => {
         <div style={{ display: "flex", flexDirection: 'column' }}>
             {
                 Object.keys(ELEMENTTYPE).map((type, index) => {
-                    console.log('type', type)
                     if (type === 'rows' || type === 'columns') {
                         return <div key={index} />
                     }

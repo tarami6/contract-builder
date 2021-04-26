@@ -26,12 +26,13 @@ export const setCurrentEditable = (element) => {
             case ELEMENTTYPE.devider:
             case ELEMENTTYPE.variable:
             case ELEMENTTYPE.code:
+            case ELEMENTTYPE.table:
                 return true
             default:
                 return false
         }
     }
-
+    console.log('isElement', isElement(type))
     const isColumn = type === ELEMENTTYPE.columns
     const isRow = type === ELEMENTTYPE.rows
 
@@ -40,7 +41,7 @@ export const setCurrentEditable = (element) => {
         payload: {
             rowId: isRow ? id : rowId,
             columnId: isColumn ? id : columnId,
-            elementId: isElement() ? id : undefined,
+            elementId: isElement(type) ? id : undefined,
             currentId: id,
             currentType: type
         }

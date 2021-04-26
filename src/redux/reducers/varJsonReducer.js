@@ -1,8 +1,4 @@
 
-const productInitial = {
-    label: 'Iphone 12 Black 128 Giga',
-    price: 'PHP 1000',
-}
 const initialState = {
     empty: 'empty',
     userName: 'Csr Agent',
@@ -12,7 +8,7 @@ const initialState = {
     paymentNow: 'PHP 1000',
     product: 'Iphone 12 Black 128 Giga',
     storeName: 'Super Phones',
-    agentName: 'Philipe Lopez',
+    agentName: 'Philipe Lopez to',
     phone: '0542291101',
     products: [
         {
@@ -23,7 +19,11 @@ const initialState = {
             label: 'Iphone 12 Gold 256 Giga',
             price: 'PHP 1800',
         }
-    ]
+    ],
+    sellsInfo: {
+        header: [{title: 'Product'}, {title: 'Date'}, {title: 'Price'}],
+        body: [{product: 'Ipone', date: '12/6/2020', price: 'PHP 2000'}]
+    }
 }
 
 

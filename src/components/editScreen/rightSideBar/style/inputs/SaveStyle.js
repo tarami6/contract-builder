@@ -1,6 +1,6 @@
 import React from 'react';
-import useGetInputValue from '../../customHooks/useGetInputValue'
-import {Edit, ColorLens} from '@material-ui/icons'
+import useGetInputValue from 'customHooks/useGetInputValue'
+import { Edit, ColorLens } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -31,22 +31,22 @@ const useStyles = makeStyles((theme) => ({
 
 const SaveStyle = () => {
     const classes = useStyles();
-    const { saveStyle, getStyle, hasStyle} = useGetInputValue()
+    const { saveStyle, getStyle, hasStyle } = useGetInputValue()
 
     return (
         <div
             className={classes.row}
         >
-              {
-                    hasStyle &&  <div onClick={getStyle}>
-                        <ColorLens className={classes.icon}/>
-                    </div>
-                }
-                <div onClick={saveStyle}>
-                <Edit  className={classes.icon}/>
+            {
+                hasStyle && <div onClick={getStyle}>
+                    <ColorLens className={classes.icon} />
                 </div>
-              
+            }
+            <div onClick={saveStyle}>
+                <Edit className={classes.icon} />
             </div>
+
+        </div>
     );
 };
 

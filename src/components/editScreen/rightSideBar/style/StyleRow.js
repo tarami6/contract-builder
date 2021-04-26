@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
-import BoxSize from './inputs/BoxSize'
-import SaveStyle from './inputs/SaveStyle'
-import TitleRow from './TitleRow'
+import TitleRow from 'components/common/TitleRow'
 import TitleBox from 'components/common/TitleBox'
-import Aligment from './inputs/Aligment'
-import Border from './inputs/Border'
-import WidthHeight from './inputs/WidthHeight'
-import useGetInputValue from '../customHooks/useGetInputValue'
+import useGetInputValue from 'customHooks/useGetInputValue'
+import { BoxSize, SaveStyle, Aligment, Border, WidthHeight } from './inputs'
 
-const StyleColumn = () => {
+const StyleRow = () => {
     const { getStyleValue, changeStyle } = useGetInputValue()
     const [openedSections, setOpenedSections] = useState({
         margin: true,
@@ -24,20 +20,17 @@ const StyleColumn = () => {
 
     return (
         <div>
-            <TitleBox title={'Column Style'} />
+            <TitleBox title={'Row Style'} />
             <TitleRow
                 title={'Margin'}
                 onClick={() => openSections('margin')}
                 opened={openedSections.margin}
             />
             <BoxSize
-                onChange={changeStyle}
+                onChange={(e) => changeStyle(e)}
                 valueTop={getStyleValue('marginTop')}
                 valueBottom={getStyleValue('marginBottom')}
-                valueLeft={getStyleValue('marginLeft')}
-                valueRight={getStyleValue('marginRight')}
                 show={openedSections.margin}
-                sides
             />
             <TitleRow
                 title={'Padding'}
@@ -45,10 +38,10 @@ const StyleColumn = () => {
                 opened={openedSections.padding}
             />
             <BoxSize
-                onChange={changeStyle}
+                onChange={(e) => changeStyle(e)}
                 valueTop={getStyleValue('paddingTop')}
                 valueBottom={getStyleValue('paddingBottom')}
-                valueLeft={getStyleValue('paddingLeft')} 
+                valueLeft={getStyleValue('paddingLeft')}
                 valueRight={getStyleValue('paddingRight')}
                 show={openedSections.padding}
                 sides
@@ -61,9 +54,9 @@ const StyleColumn = () => {
             />
             <Aligment
                 onChange={changeStyle}
-                value={getStyleValue('alignItems')}
+                value={getStyleValue('justifyContent')}
                 show={openedSections.aligment}
-                selector={'alignItems'}
+                selector={'justifyContent'}
             />
             <TitleRow
                 title={'Border'}
@@ -80,15 +73,15 @@ const StyleColumn = () => {
                 onClick={() => openSections('size')}
                 opened={openedSections.border}
             />
-            <WidthHeight 
-             onChange={changeStyle}
-             valueWidth={getStyleValue('minHeight')}
-             valueHeight={getStyleValue('width')}
-             show={openedSections.size}
+            <WidthHeight
+                onChange={changeStyle}
+                valueWidth={getStyleValue('minHeight')}
+                valueHeight={getStyleValue('width')}
+                show={openedSections.size}
             />
             <SaveStyle />
         </div>
     );
 };
 
-export default StyleColumn;
+export default StyleRow;

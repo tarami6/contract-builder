@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import BoxSize from './inputs/BoxSize'
 import Dimensions from './inputs/Dimensions'
-import TitleRow from './TitleRow'
+import TitleRow from 'components/common/TitleRow'
 import TitleBox from 'components/common/TitleBox'
-import useGetInputValue from '../customHooks/useGetInputValue'
+import useGetInputValue from 'customHooks/useGetInputValue'
 
 const StyleDevider = () => {
     const { getStyleValue, changeStyle } = useGetInputValue()

@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import BoxSize from './inputs/BoxSize'
-import Fonts from './inputs/Fonts'
-import SaveStyle from './inputs/SaveStyle'
-import TitleRow from './TitleRow'
+import TitleRow from 'components/common/TitleRow'
 import TitleBox from 'components/common/TitleBox'
-import useGetInputValue from '../customHooks/useGetInputValue'
+import useGetInputValue from 'customHooks/useGetInputValue'
+import { BoxSize, Fonts, SaveStyle } from './inputs'
 
 const StyleText = () => {
     const { getStyleValue, changeStyle } = useGetInputValue()

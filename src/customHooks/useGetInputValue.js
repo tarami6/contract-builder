@@ -4,7 +4,7 @@ import { editStyleRow, editStyleColumn, editStyleElement, setTempStyle } from 'r
 import {
     ELEMENTTYPE
 } from "redux/config/elementSchema"
-import { getCssUnit } from '../style/Utils'
+import { getCssUnit } from 'utils/Utils'
 
 const definePath = (state, currentType) => {
     switch (currentType) {

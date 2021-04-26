@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import BoxSize from './inputs/BoxSize'
-import ImgSize from './inputs/ImgSize'
-import SaveStyle from './inputs/SaveStyle'
-import TitleRow from './TitleRow'
+import TitleRow from 'components/common/TitleRow'
 import TitleBox from 'components/common/TitleBox'
-import useGetInputValue from '../customHooks/useGetInputValue'
+import useGetInputValue from 'customHooks/useGetInputValue'
+import { BoxSize, SaveStyle } from './inputs'
 
-const StyleImg = () => {
-    const {getStyleValue, changeStyle} = useGetInputValue()
+const StyleWys = () => {
+    const { getStyleValue, changeStyle } = useGetInputValue()
     const [openedSections, setOpenedSections] = useState({
         margin: true,
         padding: false,
@@ -19,13 +17,7 @@ const StyleImg = () => {
 
     return (
         <div>
-            <TitleBox title={'Image Style'} />
-            <ImgSize
-                show={true}
-                width={getStyleValue('width')}
-                height={getStyleValue('height')}
-                onChange={changeStyle}
-            />
+            <TitleBox title={'Content Style'} />
             <TitleRow
                 title={'Margin'}
                 onClick={() => openSections('margin')}
@@ -60,4 +52,4 @@ const StyleImg = () => {
     );
 };
 
-export default StyleImg;
+export default StyleWys;

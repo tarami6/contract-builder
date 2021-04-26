@@ -20,10 +20,13 @@ const useStyle = makeStyles((theme) => ({
 const RenderRow = () => {
     const classes = useStyle()
     const rows = useSelector(state => state.contractDom?.body?.rows)
+
     if (!rows || !rows?.length)
         return <Typography variant='h6' className={classes.title}>Clean Paper</Typography>
-    else
+    else { 
         return rows?.map((rowId, index) => <Row key={rowId} index={index} rowId={rowId} />)
+
+    }
 }
 
 

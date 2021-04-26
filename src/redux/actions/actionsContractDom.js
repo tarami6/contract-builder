@@ -23,7 +23,8 @@ import {
     variableConstractor,
     wysContstractor,
     deviderContstractor,
-    codeContstractor
+    codeContstractor,
+    tableContstractor
 } from '../config/elementSchema'
 
 export const addRow = numOfColumns => {
@@ -78,7 +79,7 @@ export const removeColumn = (rowId, columnId) => {
 export const addElement = (type, columnId, rowId, imgSrc) => {
     let element;
     let id = uid()
-
+    console.log('addElement', type, columnId, rowId, imgSrc)
     switch (type) {
         case ELEMENTTYPE.text:
             element = textContstractor(id, columnId, rowId)
@@ -100,6 +101,9 @@ export const addElement = (type, columnId, rowId, imgSrc) => {
             break;
         case ELEMENTTYPE.code:
             element = codeContstractor(id, columnId, rowId)
+            break;
+        case ELEMENTTYPE.table:
+            element = tableContstractor(id, columnId, rowId)
             break;
         default:
             break;

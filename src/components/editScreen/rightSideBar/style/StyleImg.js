@@ -1,12 +1,11 @@
-import React, { useState} from 'react';
-import BoxSize from './inputs/BoxSize'
-import SaveStyle from './inputs/SaveStyle'
-import TitleRow from './TitleRow'
+import React, { useState } from 'react';
+import TitleRow from 'components/common/TitleRow'
 import TitleBox from 'components/common/TitleBox'
-import useGetInputValue from '../customHooks/useGetInputValue'
+import useGetInputValue from 'customHooks/useGetInputValue'
+import { BoxSize, ImgSize, SaveStyle } from './inputs'
 
-const StyleSignature = () => {
-    const {getStyleValue, changeStyle} = useGetInputValue()
+const StyleImg = () => {
+    const { getStyleValue, changeStyle } = useGetInputValue()
     const [openedSections, setOpenedSections] = useState({
         margin: true,
         padding: false,
@@ -18,7 +17,13 @@ const StyleSignature = () => {
 
     return (
         <div>
-            <TitleBox title={'Signature Style'}/>
+            <TitleBox title={'Image Style'} />
+            <ImgSize
+                show={true}
+                width={getStyleValue('width')}
+                height={getStyleValue('height')}
+                onChange={changeStyle}
+            />
             <TitleRow
                 title={'Margin'}
                 onClick={() => openSections('margin')}
@@ -53,4 +58,4 @@ const StyleSignature = () => {
     );
 };
 
-export default StyleSignature;
+export default StyleImg;
