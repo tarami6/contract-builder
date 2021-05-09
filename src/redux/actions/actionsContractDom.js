@@ -10,7 +10,8 @@ import {
     EDIT_ELEMENT_CODE,
     RENAME_FILE,
     RESET_FILE,
-    SET_DOM
+    SET_DOM,
+    CURRENT_STYBLE
 } from './actionTypes'
 
 import {
@@ -27,7 +28,7 @@ import {
     tableContstractor
 } from '../config/elementSchema'
 
-export const addRow = numOfColumns => {
+export const addRow = numOfColumns => dispatch => {
     const columnsIds = []
     const columns = {}
     const rowId = uid()
@@ -48,13 +49,23 @@ export const addRow = numOfColumns => {
         pushToColumns(numOfColumns)
     }
 
-    return {
+    dispatch({
         type: ADD_ROW,
         payload: {
             row: rowContsructor(rowId, numOfColumns, columnsIds),
             columns: { ...columns }
         }
-    }
+    })
+    dispatch({
+            type: CURRENT_STYBLE,
+            payload: {
+                rowId: rowId,
+                columnId: column.id,
+                elementId: undefined,
+                currentId: column.id,
+                currentType: ELEMENTTYPE.columns
+            }
+    })
 }
 
 export const removeRow = (rowId) => {
@@ -79,7 +90,6 @@ export const removeColumn = (rowId, columnId) => {
 export const addElement = (type, columnId, rowId, imgSrc) => {
     let element;
     let id = uid()
-    console.log('addElement', type, columnId, rowId, imgSrc)
     switch (type) {
         case ELEMENTTYPE.text:
             element = textContstractor(id, columnId, rowId)

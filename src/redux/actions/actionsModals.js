@@ -3,7 +3,8 @@ import {
     TOGGLE_CHOOSE_IMG,
     TOGGLE_COPY_HTML,
     TOGGLE_ADD_LOOP,
-    TOGGLE_FILE_NAME
+    TOGGLE_FILE_NAME,
+    TOGGLE_VAR_JSON
 } from './actionTypes'
 
 export const toggleAddRow = () => {
@@ -36,3 +37,8 @@ export const toggleFileName = () => {
     }
 }
 
+export const toggleVarJson = () => {
+    return {
+        type: TOGGLE_VAR_JSON
+    }
+}

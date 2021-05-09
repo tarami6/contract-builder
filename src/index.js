@@ -4,14 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux'
-import {store, persistor} from './redux/strore'
-
+import { store, persistor } from './redux/strore'
 import { PersistGate } from 'redux-persist/integration/react'
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from './theme'
 
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor} >
-      <App />
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
     </PersistGate>
   </Provider>,
   document.getElementById('root')

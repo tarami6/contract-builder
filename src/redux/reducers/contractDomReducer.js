@@ -242,7 +242,6 @@ const renameFile = (state, action) => {
 }
 
 const setDom = (state, action) => {
-    console.log('action', action)
     return {
         ...state,
         name: action.payload.file.name,

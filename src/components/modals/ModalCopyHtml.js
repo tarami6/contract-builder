@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleCopyHtml } from '../../redux/actions/actionsModals'
+import { toggleCopyHtml, resetFile } from 'redux/actions'
 import { Modal, Button } from 'react-bootstrap'
 import ReactDOM from 'react-dom';
 import ComponentToHtml from '../print/ComponentToHtml'
 import { Provider } from 'react-redux'
-import { store } from '../../redux/strore'
+import { store } from 'redux/strore'
 import MainModal from './ModalMain'
+import { useLocation } from 'react-router-dom'
 
 var myDiv = document.createElement('div');
 
@@ -19,8 +20,16 @@ ReactDOM.render(
 
 const ModalCopyHtml = () => {
     const dispatch = useDispatch()
-    const _handleClose = () => dispatch(toggleCopyHtml())
+   
     const open = useSelector(state => state.modals.copyHtml)
+    const location = useLocation()
+
+    const _handleClose = () =>  {
+        if(location.pathname === '/') {
+            dispatch(resetFile())
+        }
+        dispatch(toggleCopyHtml())
+    }
 
     return (
         <MainModal

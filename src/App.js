@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css';
-import RoouRouter from './components/rootRouter/RoouRouter'
+import RoouRouter from './rootRouter/RoouRouter'
 
 const App =  () => <RoouRouter />
 

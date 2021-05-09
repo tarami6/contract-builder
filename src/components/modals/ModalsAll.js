@@ -3,6 +3,7 @@ import ModalAddLoop from './ModalAddLoop'
 import ModalChooseImg from './ModalChooseImg'
 import ModalCopyHtml from './ModalCopyHtml'
 import ModalFileName from './ModalFileName'
+import ModalJsonEditor from './ModalJsonEditor'
 
 const ModalsAll = () => {
     return (
@@ -11,6 +12,7 @@ const ModalsAll = () => {
             <ModalChooseImg />
             <ModalCopyHtml />
             <ModalFileName />
+            <ModalJsonEditor />
         </div>
     );
 };
