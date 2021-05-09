@@ -1,3 +1,4 @@
+import { SAVE_VAR_JSON } from "../actions/actionTypes"
 
 const initialState = {
     empty: 'empty',
@@ -21,21 +22,19 @@ const initialState = {
         }
     ],
     sellsInfo: {
-        header: [{title: 'Product'}, {title: 'Date'}, {title: 'Price'}],
-        body: [{product: 'Ipone', date: '12/6/2020', price: 'PHP 2000'}]
+        header: [{ title: 'Product' }, { title: 'Date' }, { title: 'Price' }],
+        body: [{ product: 'Ipone', date: '12/6/2020', price: 'PHP 2000' }]
     }
 }
 
+const saveState = (state, action) => ({ ...action.payload.json })
 
 export default function varJson(state = initialState, action) {
-    return state
-    // switch (action.type) {
-    //     case value:
+    switch (action.type) {
+        case SAVE_VAR_JSON: return saveState(state, action)
 
-    //         break;
-
-    //     default:
-    //         return state
-    // }
+        default:
+            return state
+    }
 }
 

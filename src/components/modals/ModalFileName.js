@@ -1,46 +1,42 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import MainModal from './ModalMain'
-import { toggleFileName, renameFile } from '../../redux/actions'
-import { Typography, makeStyles } from '@material-ui/core';
+import { toggleFileName, renameFile } from 'redux/actions'
+import { makeStyles, Fade, TextField, Button } from '@material-ui/core';
 import { useHistory, useLocation } from 'react-router-dom'
+import { AddToPhotos } from '@material-ui/icons'
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        padding: '5px 10px',
-        border: '1px solid #525661',
-        display: 'flex',
-        alignItems: 'center',
-        paddingLeft: 30,
-        justifyContent: 'space-between',
-        cursor: 'pointer',
-        '&:hover': {
-            background: '#2a3040',
-            border: 'none'
-        },
-        '& > div': {
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-        },
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        position: 'absolute',
+        top: 0,
+        zIndex: '3',
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
     },
-    iconContainer: {
-        display: 'flex',
-        alignItems: 'center'
-    },
-    icon: {
-        fontSize: '15px',
-        color: '#b9b9b9',
+    contentContainer: {
+        width: '700px',
+        height: 350,
+        backgroundColor: '#fff',
+        borderRadius: "15px",
+        padding: "20px 40px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
     },
     text: {
-        fontSize: '14px',
-        margin: '0 15px',
-        fontWeight: 600,
-        color: '#b9b9b9',
+        margin: 0,
+        padding: 0,
+        fontSize: "20px",
+        margin: 0,
+        fontWeight: 200,
+        marginLeft: "10px",
     },
-    inputHolder: {
-        margin: '15px'
-    }
+
+
 }));
 
 const ModalFileName = () => {
@@ -62,14 +58,16 @@ const ModalFileName = () => {
     }
 
     const _handleSave = () => {
+        let locationSrt = location.pathname.substring(0, 5)
+
         if (!name.length) {
             setErr('Sorry Name cant be empty')
         } else {
             dispatch(renameFile(name))
             _handleClose()
-            // if (location.pathname !== '/newFile') {
-            //     history.push('/newFile')
-            // }
+            if (location.pathname !== '/newFile' && locationSrt !== '/file') {
+                history.push('/newFile')
+            }
         }
     }
 
@@ -81,25 +79,51 @@ const ModalFileName = () => {
         setName(e.target.value)
     }
 
-    const text = err ? err : 'You will create a new file, please choose a name'
+    const text = err ? err : 'Create New File'
 
     return (
-        <MainModal
-            open={open}
-            handleClose={_handleClose}
-            handleSave={_handleSave}
-            title={'File Name'}
-            body={
-                <>
-                    <Typography variant='h6' className={classes.text} style={{ color: err ? 'red' : '#b9b9b9' }}>
-                        {text}
-                    </Typography>
-                    <div className={classes.inputHolder}>
-                        <input name={'name'} type='text' onChange={_handleChange} value={name} />
+        <Fade in={open} >
+            <div className={classes.root}>
+
+                <div className={classes.contentContainer}>
+                    <div style={{ display: 'flex', alignItems: "center", }}>
+                        <AddToPhotos style={{
+                            fontSize: "30px",
+                            color: '#FBAA34',
+                        }} />
+                        <p className={classes.text}>Create New File</p>
                     </div>
-                </>
-            }
-        />
+                    <div>
+                        <TextField
+                            id="standard-basic"
+                            label="Name"
+                            style={{ width: '50%' }}
+                            onChange={_handleChange}
+                            value={name}
+                        />
+                    </div>
+                    <div style={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                    }}>
+                        <Button
+                            style={{ opacity: 0.5 }}
+                            onClick={_handleClose}
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            variant="contained"
+                            style={{ backgroundColor: '#49D846', color: '#fff' }}
+                            onClick={_handleSave}
+                        >
+                            Create
+                        </Button>
+                    </div>
+                </div>
+
+            </div>
+        </Fade>
     );
 };
 

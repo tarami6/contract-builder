@@ -38,7 +38,6 @@ export const logOut = () => {
 
 export const register = (payload) => async (dispatch) => {
     let response = await registerApi(payload) 
-    console.log('response', response)
     if(response?.data?.user){
         try {
             let payloadCopy = {...payload}

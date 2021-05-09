@@ -23,7 +23,6 @@ const Row = ({ row }) => {
             return dataToLoop.map((item, index) => (
                 <div style={{ ...row.style }}>
                     {row.columns.map((column, index) => {
-                        console.log('column', column)
                         if (column) {
                             return <Column key={column.id} column={column} />
                         } else {

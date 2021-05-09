@@ -32,7 +32,6 @@ export const setCurrentEditable = (element) => {
                 return false
         }
     }
-    console.log('isElement', isElement(type))
     const isColumn = type === ELEMENTTYPE.columns
     const isRow = type === ELEMENTTYPE.rows
 

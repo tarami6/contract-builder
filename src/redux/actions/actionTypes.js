@@ -25,6 +25,7 @@ export const TOGGLE_CHOOSE_IMG = "TOGGLE_CHOOSE_IMG";
 export const TOGGLE_COPY_HTML = "TOGGLE_COPY_HTML";
 export const TOGGLE_ADD_LOOP = "TOGGLE_ADD_LOOP";
 export const TOGGLE_FILE_NAME = "TOGGLE_FILE_NAME"
+export const TOGGLE_VAR_JSON = "TOGGLE_VAR_JSON"
 //auth
 export const LOGIN = "LOGIN"
 export const LOGOUT = "LOGOUT"
@@ -35,3 +36,6 @@ export const DELETE_FILE = "DELETE_FILE"
 export const UPDATE_FILE = "UPDATE_FILE"
 //notifiers
 export const TOGGLE_FILE_ADDED_NOTIFIER = "TOGGLE_FILE_ADDED_NOTIFIER"
+
+// varJson 
+export const SAVE_VAR_JSON = "SAVE_VAR_JSON"

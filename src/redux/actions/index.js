@@ -33,7 +33,8 @@ import {
     toggleChooseImg,
     toggleCopyHtml,
     toggleAddLoop,
-    toggleFileName
+    toggleFileName,
+    toggleVarJson
 } from './actionsModals'
 //files 
 import {
@@ -47,7 +48,9 @@ import {
 import {
     toggleFileAddedNotifier
 } from './actionsNotifiers'
+//varJson
 
+import {saveJson} from './actionsVarJson'
 
 
 export {
@@ -81,5 +84,7 @@ export {
     deleteFile,
     toggleFileAddedNotifier,
     setDom,
-    updateFile
+    updateFile,
+    saveJson,
+    toggleVarJson
 }

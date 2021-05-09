@@ -7,6 +7,13 @@ import { SmartLogo, OptimaLogo, SunLogo, PldtLogo, QrCode } from '../../assets';
 import { ELEMENTTYPE } from '../../redux/config/elementSchema'
 import MainModal from './ModalMain'
 
+const optimaLogo = 'https://zappa-mosh-social2.s3.eu-central-1.amazonaws.com/optimaLogo.jpg'
+const pldtLogo = 'https://zappa-mosh-social2.s3.eu-central-1.amazonaws.com/pldt.jpg'
+const qrCode = 'https://zappa-mosh-social2.s3.eu-central-1.amazonaws.com/qrCode.png'
+const smartLogo = 'https://zappa-mosh-social2.s3.eu-central-1.amazonaws.com/smartLogo.jpg'
+const sunLogog = 'https://zappa-mosh-social2.s3.eu-central-1.amazonaws.com/sunLogo.jpeg'
+const tntLogo = 'https://zappa-mosh-social2.s3.eu-central-1.amazonaws.com/tntLogo.jpg'
+
 const ModalChooseImg = () => {
     const { columnId, rowId } = useSelector(state => state.editable)
     const open = useSelector(state => state.modals.chooseImg)
@@ -44,9 +51,9 @@ const ModalChooseImg = () => {
                 alignItems: "center",
             }}>
                 {
-                    [SmartLogo, OptimaLogo, SunLogo, PldtLogo, QrCode].map((icon, index) => (
-                        <Row key={index} onClick={() => _addImg(icon)}>
-                            <img src={icon} alt={`${icon}Img`} width='100px' height={getHeigt(index)} />
+                    [optimaLogo, pldtLogo, qrCode, smartLogo, sunLogog, tntLogo].map((src, index) => (
+                        <Row key={index} onClick={() => _addImg(src)}>
+                            <img src={src} alt={`${src}Img`} width='100px' height={getHeigt(index)} />
                         </Row>
                     )
                     )

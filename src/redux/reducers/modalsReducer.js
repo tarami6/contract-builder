@@ -4,7 +4,8 @@ import {
     TOGGLE_COPY_HTML,
     TOGGLE_ADD_LOOP,
     LOGOUT,
-    TOGGLE_FILE_NAME
+    TOGGLE_FILE_NAME,
+    TOGGLE_VAR_JSON
 } from '../actions/actionTypes'
 
 const initialState = {
@@ -12,7 +13,8 @@ const initialState = {
     chooseImg: false,
     copyHtml: false,
     addLoop: false,
-    fileName: false
+    fileName: false,
+    varJson: false
 }
 
 const logOut = () => {
@@ -48,6 +50,11 @@ export default function modals(state = initialState, action) {
                 ...state,
                 fileName: !state.fileName
             }
+            case TOGGLE_VAR_JSON:
+                return {
+                    ...state,
+                    varJson: !state.varJson
+                }
         case LOGOUT: return logOut()
         default:
             return state
