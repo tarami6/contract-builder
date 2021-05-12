@@ -4,9 +4,10 @@ import { InsertDriveFile } from '@material-ui/icons';
 import { homeTableBG } from 'assets';
 import { trasformDate } from 'utils'
 import { deleteFile, toggleCopyHtml, setDom } from 'redux/actions'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import FilePrint from './helperComponents/FilePrint'
+import { uid } from 'uid'
 
 const useStyles = makeStyles({
     headCellContainer: {
@@ -65,7 +66,6 @@ export default function FileTable({ files }) {
     
 
     const _deleteFile = (id) => {
-        console.log('id', id)
         dispatch(deleteFile(id))
     }
 
@@ -97,7 +97,7 @@ export default function FileTable({ files }) {
                 <div>
                     {files.reverse().map((row => {
                         return (
-                            <div key={row.name} className={classes.rowContainer}>
+                            <div key={uid()}  className={classes.rowContainer}>
                                 <div className={classes.headCellContainer}>
                                     <div style={{
                                         backgroundColor: '#E9B31C',

@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import AppBarMat from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { amdocsLogo } from '../../../assets'
 

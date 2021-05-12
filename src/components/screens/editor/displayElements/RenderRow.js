@@ -3,6 +3,7 @@ import Row from './DisplayRow'
 import { useSelector } from 'react-redux'
 import { Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
+import { uid } from 'uid'
 
 const useStyle = makeStyles((theme) => ({
     title: {
@@ -24,7 +25,7 @@ const RenderRow = () => {
     if (!rows || !rows?.length)
         return <Typography variant='h6' className={classes.title}>Clean Paper</Typography>
     else { 
-        return rows?.map((rowId, index) => <Row key={rowId} index={index} rowId={rowId} />)
+        return rows?.map((rowId, index) => <Row key={uid()} index={index} rowId={rowId} />)
 
     }
 }

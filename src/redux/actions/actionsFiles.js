@@ -3,7 +3,6 @@ import {
     GET_ALL_FILES,
     SELECT_FILE,
     TOGGLE_FILE_ADDED_NOTIFIER,
-    UPDATE_FILE
 } from './actionTypes'
 
 import { getAllFilesApi, deleteFileApi, saveFileApi, updateFileApi } from '../api/apiCalls'

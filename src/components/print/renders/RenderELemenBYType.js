@@ -5,6 +5,7 @@ import Signature from '../components/Signature'
 import WysText from '../components/WysText'
 import Devider from '../components/Devider'
 import Code from '../components/Code'
+import Table from '../components/Table'
 import { ELEMENTTYPE } from '../../../redux/config/elementSchema'
 
 const RenderELemenBYType = ({ element }) => {
@@ -23,6 +24,8 @@ const RenderELemenBYType = ({ element }) => {
             return <Devider element={element} />
         case ELEMENTTYPE.code:
             return <Code element={element} />
+        case ELEMENTTYPE.table:
+            return <Table element={element}/>
         default:
             return <div />
     }

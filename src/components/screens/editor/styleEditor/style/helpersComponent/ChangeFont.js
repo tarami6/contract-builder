@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const ChangeFont = ({ onChange, sizeValue = '0', colorValue = '0', }) => {
+const ChangeFont = ({ onChange, sizeValue = '0', colorValue = '#000000', }) => {
     const classes = useStyles();
 
     return (

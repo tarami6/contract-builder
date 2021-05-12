@@ -4,7 +4,7 @@ import { CheckCircle, XCircle } from 'react-bootstrap-icons'
 import { Card } from '@material-ui/core'
 import { setCurrentEditable, editElementText } from 'redux/actions'
 
-const Text = ({ elementId }) => {
+const DisplayText = ({ elementId }) => {
     const dispatch = useDispatch()
     const _element = useSelector(state => state.contractDom.elements[elementId])
     const { currentId } = useSelector(state => state.editable)
@@ -25,7 +25,9 @@ const Text = ({ elementId }) => {
         setEditMode(!editMode)
     }
 
-    const _handleDoubleClick = () => {
+    const _handleDoubleClick = (e) => {
+        e.stopPropagation()
+        console.log('_handleDoubleClick')
         if (!editMode) {
             setEditMode(!editMode)
         }
@@ -38,8 +40,10 @@ const Text = ({ elementId }) => {
     }
 
     const editElement = (e) => {
+        console.log('editElement')
         e.stopPropagation()
-        dispatch(setCurrentEditable(_element))
+        if (elementId !== currentId)
+            dispatch(setCurrentEditable(_element))
     }
 
     const onLeave = (e) => {
@@ -56,10 +60,10 @@ const Text = ({ elementId }) => {
         <Card
             onClick={editElement}
             onDoubleClick={_handleDoubleClick}
-            style={{ width: 'fit-content',display: 'flex', alignItems: 'center', ..._element.style, fontSize: '' }}
+            style={{ width: 'fit-content', display: 'flex', alignItems: 'center', ..._element.style, fontSize: '' }}
             elevation={(elementId === currentId || hover) ? 3 : 0}
-            onMouseOver={onEnter}
-            onMouseOut={onLeave}
+        // onMouseOver={onEnter}
+        // onMouseOut={onLeave}
         >
             {editMode ?
                 <div style={{ display: 'flex' }}>
@@ -67,9 +71,9 @@ const Text = ({ elementId }) => {
                     <div onClick={_handleSave} style={{ margin: '0 5px' }}><CheckCircle width='20' height='20' /></div>
                     <div onClick={_close} style={{ margin: '0 5px' }}><XCircle width='20' height='20' /></div>
                 </div>
-                : <p style={{margin: '0', fontSize: _element.style.fontSize, color: _element.style.color}}>{_element.content}</p>}
+                : <p style={{ margin: '0', fontSize: _element.style.fontSize, color: _element.style.color }}>{_element.content}</p>}
         </Card>
     )
 }
 
-export default Text
+export default DisplayText

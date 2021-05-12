@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, useTheme, IconButton, Tooltip } from '@material-ui/core'
 import { Save as SaveIcon } from '@material-ui/icons'
-import { saveFile, toggleCopyHtml, updateFile } from 'redux/actions'
+import { saveFile, updateFile } from 'redux/actions'
 import { useLocation, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 

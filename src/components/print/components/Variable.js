@@ -1,33 +1,23 @@
 import React from 'react';
+import { useSelector } from 'react-redux'
 
 const Variable = ({ element }) => {
+    const _data = useSelector(state => state.varJson)
+    const _row = useSelector(state => state.contractDom.rows[element.rowId])
     const valueIt = () => {
         switch (element.key) {
             case 'empty':
                 return <span style={{ width: '50px', height: '1px', borderBottom: '1px solid black' }} />
-            case 'userName':
-                return 'Csr Agent'
-            case 'fullName':
-                return 'Estban Fernandez Gonzles'
-            case 'address':
-                return 'Estaka Mabini, street - Dondla, zip - 123342,  Philiphine'
-            case 'accountBalance':
-                return 'PHP 234.556'
-            case 'paymentNow':
-                return 'PHP 1000'
-            case 'product':
-                return 'Iphone 12 Black 128 Giga'
-            case 'storeName':
-                return 'Super Phones'
-            case 'agentName':
-                return 'Philipe Lopez'
-            case 'phone':
-                return '0542291101'
-            default:
-                return ''
+            default: {
+                if (_row?.loop) {
+                    return _data[_row?.loop][0][element.key]
+                } else {
+                    return _data[element.key]
+                }
+            }
         }
     }
-
+   
     return (
         <div style={{ display: "flex", alignItems: "flex-end", }}>
             <p style={{ ...element.style.title }} >{element.title}</p>

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { makeStyles, Button, Slide } from '@material-ui/core'
+import { makeStyles, Slide } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllFiles } from 'redux/actions'
 import FileTable from './FileTable'
@@ -39,7 +39,7 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(getAllFiles())
-    }, [])
+    }, [dispatch])
 
     const Circle = () => (
         <div style={{

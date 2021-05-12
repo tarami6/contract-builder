@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, useTheme, IconButton, Tooltip } from '@material-ui/core'
 import { DeveloperMode } from '@material-ui/icons'
-import { saveFile, toggleCopyHtml, updateFile } from 'redux/actions'
+import { toggleCopyHtml } from 'redux/actions'
 import { useDispatch } from 'react-redux'
 
 const useStyle = makeStyles((theme) => ({

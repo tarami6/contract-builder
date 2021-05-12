@@ -2,7 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentEditable } from 'redux/actions'
 import Column from './DisplayColumn'
-import { Card } from '@material-ui/core'
+import { Card, makeStyles } from '@material-ui/core'
+import { uid } from 'uid'
+
+const useStyles = props => makeStyles((theme) => ({
+    root: {
+        boxShadow: props.selected ? '0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%)' : 'none',
+        '&:hover': {
+            boxShadow: "0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%)",
+        }
+    }
+}))
 
 const Row = ({ rowId }) => {
     const dispatch = useDispatch()
@@ -10,7 +20,7 @@ const Row = ({ rowId }) => {
     const _row = useSelector(state => state.contractDom.rows[rowId])
     const _data = useSelector(state => state.varJson)
     const [dataToLoop, setDataToLoop] = useState(undefined)
-    const [hover, setHover] = useState(false)
+    const classes = useStyles({selected : rowId === currentId})()
 
     useEffect(() => {
         if (_row?.loop) {
@@ -18,56 +28,43 @@ const Row = ({ rowId }) => {
                 setDataToLoop([..._data[_row?.loop]])
             }
         }
-    }, [_row?.loop])
-
-
-    const onLeave = (e) => {
-        e.stopPropagation()
-        setHover(false)
-    }
-
-    const onEnter = (e) => {
-        e.stopPropagation()
-        setHover(true)
-    }
+    }, [_row?.loop, _data])
 
     const editRow = (e) => {
+        console.log('row e', e)
         e.stopPropagation()
         dispatch(setCurrentEditable(_row))
     }
 
     if (dataToLoop) {
-        return (dataToLoop.map((item, index) =>
+        return (dataToLoop.map(() =>
             <Card
+                className={classes.root}
                 style={{ ..._row.style }}
-                elevation={(rowId === currentId || hover) ? 3 : 0}
-                onClick={editRow}
-                onMouseOver={onEnter}
-                onMouseOut={onLeave}
-                key={_row.id + index + 3}
+                onClick={(e) => editRow(e)}
+                key={uid()}
             >
                 {
-                    _row.columns.map((columnId, index) => {
-                        return <Column key={columnId} columnId={columnId} />
+                    _row.columns.map((columnId) => {
+                        return <Column key={uid()} columnId={columnId} />
                     })
                 }
             </Card>))
     }
 
     return (
-        <Card
+        <div
+            className={classes.root}
             style={{ ..._row.style }}
-            elevation={(rowId === currentId || hover) ? 3 : 0}
             onClick={editRow}
-            onMouseOver={onEnter}
-            onMouseOut={onLeave}
+            key={uid()}
         >
             {
                 _row.columns.map((columnId, index) => {
-                    return <Column key={columnId + index + 5} columnId={columnId} />
+                    return <Column key={uid()} columnId={columnId} />
                 })
             }
-        </Card >
+        </div >
     )
 }
 

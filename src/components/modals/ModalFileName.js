@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "space-between",
     },
     text: {
-        margin: 0,
         padding: 0,
         fontSize: "20px",
         margin: 0,
@@ -91,7 +90,7 @@ const ModalFileName = () => {
                             fontSize: "30px",
                             color: '#FBAA34',
                         }} />
-                        <p className={classes.text}>Create New File</p>
+                        <p className={classes.text}>{text}</p>
                     </div>
                     <div>
                         <TextField

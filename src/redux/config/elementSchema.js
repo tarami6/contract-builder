@@ -89,7 +89,7 @@ export const textContstractor = (id, columnId, rowId) => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: "0",
+        padding: '0',
         margin: '0',
         width: 'fit-content',
         marginTop: '2px',
@@ -187,14 +187,13 @@ export const deviderContstractor = (id, columnId, rowId) => ({
     style: {
         width: '100%',
         height: '3px',
-        backgroundColor: '#000',
+        backgroundColor: '#000000',
         marginTop: '2px',
         marginBottom: '2px',
         marginLeft: '2px',
         marginRight: '2px',
     },
 })
-
 
 export const codeContstractor = (id, columnId, rowId) => ({
     id,
@@ -206,7 +205,6 @@ export const codeContstractor = (id, columnId, rowId) => ({
 
 export const tableContstractor = (id, columnId, rowId) => {
     let bodyRowArr = []
-    let bodyColumnArr = []
     let headerColArr = []
     let cellsContent = {}
     let headerContent = ['title','title','title']

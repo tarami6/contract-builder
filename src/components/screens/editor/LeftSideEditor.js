@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Card } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core'
 import Navigation from './editorNaviogation/Navigation'
 import ElementsBoard from './ElementsBoard'
 

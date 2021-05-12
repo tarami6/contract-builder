@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { makeStyles, Fade, TextField, Button } from '@material-ui/core';
+import React, { useState } from 'react';
+import { makeStyles, Fade, Button } from '@material-ui/core';
 import MonacoEditor from 'react-monaco-editor';
 import { useSelector, useDispatch } from 'react-redux'
 import { saveJson, toggleVarJson } from 'redux/actions'
@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "space-between",
     },
     text: {
-        margin: 0,
         padding: 0,
         fontSize: "20px",
         margin: 0,
@@ -42,23 +41,11 @@ const ModalJsonEditor = () => {
     const varJson = useSelector(state => state.varJson)
     const open = useSelector(state => state.modals.varJson)
 
-    const [code, setCode] = useState(`
-      { 
-          name: "test",
-          more: "example"
-        
-        }
-      `)
+    const [code, setCode] = useState(JSON.stringify(varJson, null, '\t'))
 
     const [error, setError] = useState('')
 
-    useEffect(() => {
-        const jsonString = JSON.stringify(varJson)
-        setCode(JSON.stringify(varJson, null, '\t'))
-    }, [])
-
     const _onChange = (newValue, e) => {
-        console.log('onChange', newValue)
         if (error.length) {
             setError('')
         }
@@ -68,7 +55,6 @@ const ModalJsonEditor = () => {
     const _handleSave = () => {
         try {
             const obj = JSON.parse(code)
-            console.log('obj', obj)
             dispatch(saveJson(obj))
             _handleClose()
         } catch (e) {
@@ -99,7 +85,6 @@ const ModalJsonEditor = () => {
                         value={code}
                         options={options}
                         onChange={_onChange}
-                        editorDidMount={(editor, monaco) => console.log('editorDidMount', editor, monaco)}
                     />
 
                     <div style={{
@@ -109,7 +94,7 @@ const ModalJsonEditor = () => {
                     }}>
                         <Button
                             style={{ opacity: 0.5 }}
-                        onClick={_handleClose}
+                            onClick={_handleClose}
                         >
                             Cancel
                     </Button>
