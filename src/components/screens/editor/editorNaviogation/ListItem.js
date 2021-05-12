@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { makeStyles } from '@material-ui/core'
 import { ELEMENTTYPE } from 'redux/config/elementSchema'
@@ -20,11 +20,10 @@ const ListItem = ({ itemId, indexOfrow }) => {
     const dispatch = useDispatch()
     const classes = useStyles()
     const _dom = useSelector(state => state.contractDom)
-    const { currentType, rowId, columnId, elementId } = useSelector(state => state.editable)
+    const { currentType } = useSelector(state => state.editable)
     const [type, setType] = useState()
-    const [currentElement, setElement] = useState()
 
-    const currentNode = () => {
+    const currentNode = useCallback(() => {
         switch (currentType) {
             case ELEMENTTYPE.text:
             case ELEMENTTYPE.wys:
@@ -42,11 +41,11 @@ const ListItem = ({ itemId, indexOfrow }) => {
             default:
                 return 'Rows'
         }
-    }
+    }, [currentType])
 
     useEffect(() => {
         setType(currentNode())
-    }, [currentType])
+    }, [currentType, currentNode])
 
 
 
@@ -66,6 +65,7 @@ const ListItem = ({ itemId, indexOfrow }) => {
                 break;
             case ELEMENTTYPE.rows: {
                 dispatch(setCurrentEditable(_dom.columns[itemId]))
+                break;
             }
             default: {
                 if (itemId && !currentType) {

@@ -12,13 +12,8 @@ const StyleElemenets = () => {
     const { getStyleValue, changeStyle } = useGetInputValue()
     const { currentType } = useSelector(state => state.editable)
     const isText = currentType === ELEMENTTYPE.text
-    const isEditor = currentType === ELEMENTTYPE.wys
-    const isVariable = currentType === ELEMENTTYPE.variable
     const isImg = currentType === ELEMENTTYPE.img
-    const isSignature = currentType === ELEMENTTYPE.signature
     const isDevider = currentType === ELEMENTTYPE.devider
-    const isCode = currentType === ELEMENTTYPE.code
-    const isTable = currentType === ELEMENTTYPE.table
 
     return (
         <div>

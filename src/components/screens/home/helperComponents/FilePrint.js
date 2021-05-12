@@ -1,9 +1,7 @@
 import React, { useRef } from 'react'
-import { Print as PrintIcon } from '@material-ui/icons'
-import { makeStyles, useTheme, IconButton, Tooltip } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core'
 import ReactToPrint from 'react-to-print';
 import ComponentToPrint from 'components/print/ComponentToPrint'
-import { useLocation, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { setDom, resetFile } from 'redux/actions'
 
@@ -58,7 +56,6 @@ const Print = ({ fileId }) => {
     const classes = useStyle()
     const componentRef = useRef();
     const dispatch = useDispatch()
-    const theme = useTheme()
     const currentFileArr = useSelector(state => state.files.data?.filter(file => file._id === fileId))
 
     const _setTheDom = () => {

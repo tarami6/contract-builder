@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { InsertDriveFile, Edit } from '@material-ui/icons';
-import { useHistory, useLocation } from 'react-router-dom'
-import { toggleFileName, renameFile, resetFile } from 'redux/actions'
+import { Edit } from '@material-ui/icons';
+import { useLocation } from 'react-router-dom'
+import { toggleFileName } from 'redux/actions'
 import { useDispatch, useSelector } from 'react-redux'
 
 const useStyles = makeStyles((theme) => ({
@@ -45,7 +45,6 @@ const EditName = () => {
     const editName = () => {
         dispatch(toggleFileName())
     }
-    console.log('_currentFile', location.pathname === '/newFile')
 
     if(locationSrt !== '/file' && location.pathname !== '/newFile'){
         return <></>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { ELEMENTTYPE } from 'redux/config/elementSchema'
 import { removeRow, removeColumn, removeElement, setCurrentEditable } from 'redux/actions'
@@ -25,38 +25,12 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const getCurrentElementText = (type) => {
-    switch (type) {
-        case ELEMENTTYPE.rows:
-            return 'Row'
-        case ELEMENTTYPE.columns:
-            return 'Column'
-        case ELEMENTTYPE.text:
-        case ELEMENTTYPE.wys:
-        case ELEMENTTYPE.variable:
-        case ELEMENTTYPE.img:
-        case ELEMENTTYPE.signature:
-        case ELEMENTTYPE.devider:
-        case ELEMENTTYPE.code:
-        case ELEMENTTYPE.table:
-            return 'Element'
-        default:
-            return ''
-    }
-}
-
 const DeletetBtn = () => {
     const classes = useStyles();
     const dispatch = useDispatch()
     const { rowId, columnId, currentType, elementId } = useSelector(state => state.editable)
     const _column = useSelector(state => state.contractDom.columns[columnId])
     const _row = useSelector(state => state.contractDom.rows[rowId])
-    const [currentDel, setCurrentDel] = useState(undefined)
-
-    useEffect(() => {
-        const text = getCurrentElementText(currentType)
-        setCurrentDel(text)
-    }, [currentType])
 
     const _resetEditble = () => {
         const reset = {

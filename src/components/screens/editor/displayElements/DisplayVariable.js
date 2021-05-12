@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { VARIABLETYPES } from 'redux/config/elementSchema'
-import { removeElement, editElementVariable, setCurrentEditable } from 'redux/actions'
-import { CheckCircle, XCircle, Trash2 } from 'react-bootstrap-icons'
+import { editElementVariable, setCurrentEditable } from 'redux/actions'
+import { CheckCircle, XCircle } from 'react-bootstrap-icons'
 import { Card } from '@material-ui/core'
+import { uid } from 'uid'
 
 const Variable = ({ elementId }) => {
     const dispatch = useDispatch()
     const _variable = useSelector(state => state.contractDom.elements[elementId])
     const _varJson = useSelector(state => state.varJson)
     const { currentId } = useSelector(state => state.editable)
+    const _row = useSelector(state => state.contractDom.rows[_variable?.rowId])
     const [editMode, setEditMode] = useState(false)
     const [selectValues, setSelectValues] = useState([])
     const [hover, setHover] = useState(false)
@@ -18,12 +19,21 @@ const Variable = ({ elementId }) => {
         key: _variable.key,
         value: _variable.value
     })
-
+    
     useEffect(() => {
         const selectValuesToArr = Object.keys(_varJson)
-        setSelectValues([...selectValuesToArr.filter(item => _varJson[item].constructor !== Array)])
-    }, [])
-
+        if(_row?.loop) {
+            const selectValuesFromArrToArr = Object.keys(_varJson[_row?.loop][0])
+        setSelectValues([...selectValuesFromArrToArr])
+        let newObj = { ...inputsValues }
+        newObj = { ...inputsValues, key: selectValuesFromArrToArr[0] }
+        setValue({ ...newObj })
+        // dispatch(editElementVariable(_variable.id, inputsValues))
+        } else {
+            setSelectValues([...selectValuesToArr.filter(item => _varJson[item].constructor !== Array)])
+        }
+    }, [ ])
+   
     const _handelChangeTitle = (e) => {
         e.preventDefault()
         const newObj = { ...inputsValues }
@@ -31,19 +41,18 @@ const Variable = ({ elementId }) => {
         setValue({ ...newObj })
     }
 
-
     const _handelChangeKey = (e) => {
         e.stopPropagation()
         e.preventDefault()
         let newObj = { ...inputsValues }
         newObj = { ...inputsValues, key: e.target.value }
+        console.log('newObj', newObj)
+        console.log('e.target.value', e.target.value)
         setValue({ ...newObj })
     }
 
     const _handleSave = () => {
-        // if (!inputsValues.title.length) {
-        //     return alert('text cant be empty')
-        // }
+        console.log('inputsValues', inputsValues)
         dispatch(editElementVariable(_variable.id, inputsValues))
         setEditMode(!editMode)
     }
@@ -58,10 +67,6 @@ const Variable = ({ elementId }) => {
         if (editMode) {
             setEditMode(!editMode)
         }
-    }
-
-    const _delete = () => {
-        dispatch(removeElement(_variable.id, _variable.columnId))
     }
 
     const editElement = (e) => {
@@ -95,11 +100,10 @@ const Variable = ({ elementId }) => {
                         <input name={_variable.id} onChange={_handelChangeTitle} placeholder={inputsValues.title} value={inputsValues.title} />
                         <div style={{ display: 'flex' }}>
                             <select onChange={_handelChangeKey} value={inputsValues.key} >
-                                {selectValues.map(option => <option key={Math.random() * 1000} >{option}</option>)}
+                                {selectValues.map(option => <option key={uid()} >{option}</option>)}
                             </select>
                             <div onClick={_handleSave} style={{ margin: '0 5px' }}><CheckCircle width='20' height='20' /></div>
                             <div onClick={_close} style={{ margin: '0 5px' }}><XCircle width='20' height='20' /></div>
-                            {/* <div onClick={_delete} style={{ margin: '0 5px' }}><Trash2 width='22' height='22' /></div> */}
                         </div>
                     </div>
                     : (

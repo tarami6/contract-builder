@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addElement } from '../../redux/actions/actionsContractDom'
 import { toggleChooseImg } from '../../redux/actions/actionsModals'
 import { Row, Container } from 'react-bootstrap'
-import { SmartLogo, OptimaLogo, SunLogo, PldtLogo, QrCode } from '../../assets';
 import { ELEMENTTYPE } from '../../redux/config/elementSchema'
 import MainModal from './ModalMain'
+import { uid } from 'uid'
 
 const optimaLogo = 'https://zappa-mosh-social2.s3.eu-central-1.amazonaws.com/optimaLogo.jpg'
 const pldtLogo = 'https://zappa-mosh-social2.s3.eu-central-1.amazonaws.com/pldt.jpg'
@@ -39,28 +39,28 @@ const ModalChooseImg = () => {
         }
     }
 
-    return(
+    return (
         <MainModal
-        open={open}
-        handleClose={_handleClose}
-        title={'Choose from library'}
-        body={
-            <Container style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-            }}>
-                {
-                    [optimaLogo, pldtLogo, qrCode, smartLogo, sunLogog, tntLogo].map((src, index) => (
-                        <Row key={index} onClick={() => _addImg(src)}>
-                            <img src={src} alt={`${src}Img`} width='100px' height={getHeigt(index)} />
-                        </Row>
-                    )
-                    )
-                }
-            </Container>
-        }
-    />
+            open={open}
+            handleClose={_handleClose}
+            title={'Choose from library'}
+            body={
+                <Container style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                }}>
+                    {
+                        [optimaLogo, pldtLogo, qrCode, smartLogo, sunLogog, tntLogo].map((src, index) => (
+                            <Row key={uid()} onClick={() => _addImg(src)}>
+                                <img src={src} alt={`${src}Img`} width='100px' height={getHeigt(index)} />
+                            </Row>
+                        )
+                        )
+                    }
+                </Container>
+            }
+        />
     )
 }
 

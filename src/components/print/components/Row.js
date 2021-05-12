@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Column from './Column'
 import {
     ELEMENTTYPE
-} from "../../../redux/config/elementSchema"
+} from "redux/config/elementSchema"
+import { uid } from 'uid'
+
 const Row = ({ row }) => {
     const _data = useSelector(state => state.varJson)
     const [dataToLoop, setDataToLoop] = useState(undefined)
@@ -14,19 +16,19 @@ const Row = ({ row }) => {
                 setDataToLoop([..._data[row?.loop]])
             }
         }
-    }, [row?.loop])
+    }, [row?.loop, _data])
 
 
     if (row.type === ELEMENTTYPE.rows) {
-        if (dataToLoop) {
 
+        if (dataToLoop) {
             return dataToLoop.map((item, index) => (
                 <div style={{ ...row.style }}>
                     {row.columns.map((column, index) => {
                         if (column) {
-                            return <Column key={column.id} column={column} />
+                            return <Column key={uid()} column={column} />
                         } else {
-                            return <div key={index} />
+                            return <div key={uid()} />
                         }
                     }
                     )}
@@ -34,17 +36,21 @@ const Row = ({ row }) => {
             ))
         }
 
+        else {
+            return (
+                <div style={{ ...row.style }}>
+                    {row.columns.map((column, index) => {
+                        if (column) {
+                            return <Column key={uid()} column={column} />
+                        } else {
+                            return <div key={uid()} />
+                        }
+                    }
+                    )}
+                </div>
+            )
+        }
 
-        return <div style={{ ...row.style }}>
-            {row.columns.map((column, index) => {
-                if (column) {
-                    return <Column key={column.id} column={column} />
-                } else {
-                    return <div key={index} />
-                }
-            }
-            )}
-        </div>
     } else {
         return <></>
     }

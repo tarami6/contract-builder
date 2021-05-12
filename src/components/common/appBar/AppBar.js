@@ -1,8 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import AppBarMat from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Menu from './Menu';
 import UserInfos from './UserInfos';
 import EditName from './EditName'
 
@@ -34,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 const AppBar = () => {
   const classes = useStyles();
+
   return (
     <div className={classes.root}>
       <div  className={classes.appBar}>

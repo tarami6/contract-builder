@@ -59,7 +59,7 @@ const Code = ({ elementId }) => {
         <Card
             onClick={editElement}
             onDoubleClick={_handleDoubleClick}
-            style={{ width: '100%', display: 'flex', alignItems: 'center', ..._element.style, fontSize: '', width: '100%' }}
+            style={{ display: 'flex', alignItems: 'center', ..._element.style, fontSize: '', width: '100%' }}
             elevation={(elementId === currentId || hover) ? 3 : 0}
             onMouseOver={onEnter}
             onMouseOut={onLeave}

@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const ChnageDeviderBorder = ({ onChange, valueWidth, valueColor }) => {
+const ChnageDeviderBorder = ({ onChange, valueWidth = '0', valueColor = '#000000' }) => {
     const classes = useStyles();
 
     return (

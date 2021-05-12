@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux'
-import { toggleFileName, setDom, resetFile } from 'redux/actions'
+import { useDispatch } from 'react-redux'
+import { resetFile } from 'redux/actions'
 import { makeStyles, Card } from '@material-ui/core'
 import RenderRows from './renders/RenderRows'
 
 const useStyle = makeStyles((theme) => ({
     root: {
-        width: '60%',
-       
+        width: "60%",
+        maxHeight: "80vh",
+        overflow: "scroll",
+        borderRadius: theme.container.borderRadius,
     },
     displayContainer: {
         width: '100%',
@@ -23,7 +25,7 @@ const EditorDispaly = () => {
 
     useEffect(() => {
         return () => dispatch(resetFile())
-    }, [])
+    }, [dispatch])
 
     return (
         <div className={classes.root}>

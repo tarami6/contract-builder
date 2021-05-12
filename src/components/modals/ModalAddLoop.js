@@ -4,6 +4,7 @@ import { Typography, makeStyles } from '@material-ui/core';
 import { setLoop } from '../../redux/actions/actionsEditable'
 import { toggleAddLoop } from '../../redux/actions/actionsModals'
 import MainModal from './ModalMain'
+
 const useStyles = makeStyles((theme) => ({
     root: {
         padding: '5px 10px',
@@ -45,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 const ModalAddLoop = () => {
     const classes = useStyles();
     const dispatch = useDispatch()
-    const { columnId, rowId } = useSelector(state => state.editable)
+    const { rowId } = useSelector(state => state.editable)
     const open = useSelector(state => state.modals.addLoop)
     const _row = useSelector(state => state.contractDom.rows[rowId])
 
@@ -58,7 +59,7 @@ const ModalAddLoop = () => {
                 setName(_row.loop)
             }
         }
-    }, [open])
+    }, [open, _row?.loop, name])
 
     const _handleChange = (e) => {
         setName(e.target.value)

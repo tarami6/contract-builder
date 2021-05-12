@@ -1,10 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Typography from '@material-ui/core/Typography';
-import {Build} from '@material-ui/icons';
-import { Avatar, Badge } from '@material-ui/core';
-import Image from '../../../assets/ramiAvatar.jpg';
+import { Build } from '@material-ui/icons';
 import ToolTip from './ToolTip';
 
 const useStyles = makeStyles((theme) => ({
@@ -17,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     position: 'relative',
-  
+
   },
   itemContainer: {
     display: 'flex',
@@ -55,20 +52,8 @@ const UserInfos = () => {
     <div className={classes.root}>
       <ClickAwayListener onClickAway={handleTooltipClose}>
         <div className={classes.row}>
-          {/* <Typography
-            variant='h6'
-            className={classes.text}
-            onClick={handleTooltipOpen}
-          >
-            Rami Talisveiber 
-          </Typography> */}
-          <Build style={{ color: '#666' }} onClick={handleTooltipOpen}/>
+          <Build style={{ color: '#666' }} onClick={handleTooltipOpen} />
           {open && <ToolTip />}
-          {/* <div className={classes.avatar}>
-            <Badge color='secondary' overlap='circle' badgeContent={1}>
-              <Avatar alt='Remy Sharp' src={Image} className={classes.large} />
-            </Badge>
-          </div> */}
         </div>
       </ClickAwayListener>
     </div>

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles, Button } from '@material-ui/core'
 import { AddToPhotos } from '@material-ui/icons'
-import { useDispatch, useSelector } from 'react-redux'
-import { toggleFileName, renameFile, resetFile } from 'redux/actions'
+import { useDispatch } from 'react-redux'
+import { toggleFileName } from 'redux/actions'
 
 
 const useStyle = makeStyles({

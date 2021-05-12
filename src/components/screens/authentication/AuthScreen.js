@@ -107,7 +107,9 @@ export default function SignIn() {
                         display: "inline-block",
                         width: "128px",
                         position: "relative",
-                    }} />
+                    }}
+                    alt={'Amdocs Logo'}
+                    />
                 </div>
                 <div style={{
                     width: "306px",

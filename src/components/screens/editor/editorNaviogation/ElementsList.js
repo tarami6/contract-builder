@@ -13,7 +13,7 @@ const useStyle = makeStyles((theme) => ({
 
 const ElementsList = ({ list }) => {
     const classes = useStyle()
-    console.log('list', list)
+    
     return (
         <div className={classes.navigationScroller}>
             {

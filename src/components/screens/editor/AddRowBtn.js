@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux'
 import { makeStyles, Tooltip, withStyles, Card } from '@material-ui/core'
 import { addRow } from 'redux/actions/actionsContractDom'
+import { uid } from 'uid'
 
 const useStyle = makeStyles({
     root: {
@@ -66,7 +67,7 @@ const AddRowBtn = () => {
             </div>
             {
                 titles.map((title, index) => (
-                    <HtmlTooltip key={index} title={title} interactive>
+                    <HtmlTooltip key={uid()}  title={title} interactive>
                         <div className={classes.rowItem} onClick={() => _addRow(index)}>
                             <p className={classes.text}>{`${index + 1}C`}</p>
                         </div>

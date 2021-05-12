@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const devBaseUrl = 'http://localhost:4001/api'
+// const devBaseUrl = 'http://localhost:4001/api'
 const testServerBaseUrl = 'https://shm-back-end.herokuapp.com/api/'
 
 axios.defaults.baseURL = testServerBaseUrl;// switch / dev / test / porduction

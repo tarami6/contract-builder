@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { makeStyles, Collapse, Grow } from '@material-ui/core'
+import React, { useEffect } from 'react';
+import { makeStyles, Grow } from '@material-ui/core'
 import { useLocation, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleFileName, setDom, resetFile } from 'redux/actions'
+import { setDom, resetFile } from 'redux/actions'
 import AddRowBtn from "./AddRowBtn"
 import TopMainActions from "./topActions/TopMainActions"
 import Body from './Body'
@@ -29,7 +29,6 @@ const useStyle = makeStyles({
     }
 })
 
-
 const Editor = () => {
     const classes = useStyle()
     const dispatch = useDispatch()
@@ -41,14 +40,14 @@ const Editor = () => {
    
     useEffect(() => {
         return () => dispatch(resetFile())
-    }, [])
+    }, [dispatch])
 
     useEffect(() => {
         let locationSrt = location.pathname.substring(0, 5)
         if(locationSrt === '/file' && currentFileArre.length){
             dispatch(setDom(currentFileArre[0]))
         }
-    }, [location])
+    }, [location, dispatch, currentFileArre])
 
     const TopEditorActions = () => {
         return (

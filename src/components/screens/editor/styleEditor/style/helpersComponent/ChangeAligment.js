@@ -34,13 +34,13 @@ const ChangeAligment = ({ onChange, value, show, selector }) => {
     return (
         <div className={classes.root} >
             <div onClick={() => setAligment('flex-start')} >
-                <FormatAlignLeft className={classes.icon} style={{ color: value === 'flex-start' ? '#000' : 'lightgray' }} />
+                <FormatAlignLeft className={classes.icon} style={{ color: value === 'flex-start' ? '#000000' : 'lightgray' }} />
             </div>
             <div onClick={() => setAligment('center')} >
-                <FormatAlignJustify className={classes.icon} style={{ color: value === 'center' ? '#000' : 'lightgray' }} />
+                <FormatAlignJustify className={classes.icon} style={{ color: value === 'center' ? '#000000' : 'lightgray' }} />
             </div>
             <div onClick={() => setAligment('flex-end')} >
-                <FormatAlignRight className={classes.icon} style={{ color: value === 'flex-end' ? '#000' : 'lightgray' }} />
+                <FormatAlignRight className={classes.icon} style={{ color: value === 'flex-end' ? '#000000' : 'lightgray' }} />
             </div>
         </div>
     );

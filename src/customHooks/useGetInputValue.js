@@ -33,7 +33,7 @@ const useGetInputValue = () => {
     const [hasStyle, setHasStyle] = useState(tempStyle.type === currentType)
 
     useEffect(() => {
-        _elements && setCurrentStyle({ ..._elements[currentId].style })
+        _elements && setCurrentStyle({ ..._elements[currentId]?.style })
     }, [currentType, _elements, currentId])
 
     useEffect(() => {

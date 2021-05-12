@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { makeStyles, Card, Grow } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import { ELEMENTTYPE } from 'redux/config/elementSchema'
@@ -42,25 +42,38 @@ const Navigation = () => {
     const _body = _dom?.body
     const _rows = _dom?.rows
     const _columns = _dom?.columns
-    const _elements = _dom?.elements
     const _currentRowElement = _rows[rowId]
     const _currentColElement = _columns[columnId]
-    const _currentElementElement = _elements[elementId]
 
     const [choosed, setChoosed] = useState()
     const [list, setList] = useState()
 
-    useEffect(() => {
-        setChoosed(currentNode())
+
+    const currentNode = useCallback(() => {
+        switch (currentType) {
+            case ELEMENTTYPE.text:
+            case ELEMENTTYPE.wys:
+            case ELEMENTTYPE.variable:
+            case ELEMENTTYPE.img:
+            case ELEMENTTYPE.signature:
+            case ELEMENTTYPE.devider:
+            case ELEMENTTYPE.code:
+            case ELEMENTTYPE.table:
+                return 'element'
+            case ELEMENTTYPE.columns:
+                return 'column'
+            case ELEMENTTYPE.rows:
+                return 'row'
+            default:
+                return ''
+        }
     }, [currentType])
 
     useEffect(() => {
-        console.log()
-        arrangeList()
-    }, [_dom, currentType ])
+        setChoosed(currentNode())
+    }, [currentType, currentNode])
 
-    const arrangeList = () => {
-        console.log('arrangeList', currentType)
+    const arrangeList = useCallback(() => {
         switch (currentType) {
             case ELEMENTTYPE.rows:
                 setList(_rows[rowId].columns)
@@ -82,27 +95,14 @@ const Navigation = () => {
                 setList(_body.rows)
                 break;
         }
-    }
+    }, [currentType, _body?.rows, columnId, _columns, rowId, _rows])
 
-    const currentNode = () => {
-        switch (currentType) {
-            case ELEMENTTYPE.text:
-            case ELEMENTTYPE.wys:
-            case ELEMENTTYPE.variable:
-            case ELEMENTTYPE.img:
-            case ELEMENTTYPE.signature:
-            case ELEMENTTYPE.devider:
-            case ELEMENTTYPE.code:
-            case ELEMENTTYPE.table:
-                return 'element'
-            case ELEMENTTYPE.columns:
-                return 'column'
-            case ELEMENTTYPE.rows:
-                return 'row'
-            default:
-                return ''
-        }
-    }
+    useEffect(() => {
+        arrangeList()
+    }, [_dom, arrangeList ])
+
+  
+
 
     const BreadCrumbs = () => {
         const rowIndex = () => _body?.rows.findIndex((id) => id === rowId)

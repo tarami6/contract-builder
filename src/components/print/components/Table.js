@@ -17,15 +17,15 @@ const useStyles = makeStyles({
 });
 
 
-const Header = ({table, headerData}) => {
+const Header = ({ table, headerData }) => {
     const [data, setData] = useState(table?.headerContent)
 
     useEffect(() => {
-        if(headerData?.length){
+        if (headerData?.length) {
             setData([...headerData])
         }
     }, [headerData])
-    
+
     return (
         < TableHead >
             <TableRow>
@@ -42,28 +42,28 @@ const Header = ({table, headerData}) => {
 
 }
 
-const Body = ({table, bodyData}) => {
+const Body = ({ table, bodyData }) => {
     const [data, setData] = useState(table?.headerContent)
 
     useEffect(() => {
-        if(bodyData?.length){
+        if (bodyData?.length) {
             setData([...bodyData])
         }
     }, [bodyData])
-    
+
     return (
         <TableBody>
             {data.map((row, index) => {
-                let toArrData = Object.keys(row) 
+                let toArrData = Object.keys(row)
                 return <TableRow key={uid()} >
                     {
-                        toArrData.map((cell, index) =>{
+                        toArrData.map((cell, index) => {
                             return (
                                 <TableCell key={uid()} >
                                     {row[cell]}
                                 </TableCell>
                             )
-                        } )
+                        })
                     }
                 </TableRow>
             })}
@@ -71,12 +71,11 @@ const Body = ({table, bodyData}) => {
     )
 }
 
-const DisplayTable = ({ elementId }) => {
-    const classes = useStyles();
-    const _element = useSelector(state => state.contractDom.elements[elementId])
-    const _table = _element?.table
-    const data = useSelector(state => state.varJson[_element.loop])
 
+const PrintTable = ({ element }) => {
+    const classes = useStyles();
+    const _table = element?.table
+    const data = useSelector(state => state.varJson[element.loop])
     return (
         <div style={{ width: "100%" }}>
             <TableContainer component={Paper}>
@@ -90,4 +89,4 @@ const DisplayTable = ({ elementId }) => {
     );
 };
 
-export default DisplayTable;
+export default PrintTable;

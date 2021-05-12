@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import useGetInputValue from 'customHooks/useGetInputValue'
 import { editStyleElement } from 'redux/actions'
 import TitleRow from './TitleRow'
 import ChangeFont from './ChangeFont'

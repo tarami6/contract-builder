@@ -3,7 +3,8 @@ import { makeStyles, Card, Grow } from '@material-ui/core'
 import { ELEMENTTYPE } from 'redux/config/elementSchema'
 import { TextFields, HelpOutline, ChromeReaderMode, AccountTree, Image, Gesture, FormatLineSpacing, Code, Web, Loop } from '@material-ui/icons'
 import { useSelector, useDispatch } from 'react-redux'
-import { addElement, toggleChooseImg } from 'redux/actions'
+import { addElement, toggleChooseImg, toggleAddLoop } from 'redux/actions'
+import { uid } from 'uid'
 
 const useStyle = makeStyles((theme) => ({
     boardContainer: {
@@ -45,6 +46,7 @@ const useStyle = makeStyles((theme) => ({
 
 const Icon = ({ iconType }) => {
     const classes = useStyle()
+    const dispatch = useDispatch()
 
     switch (iconType) {
         case ELEMENTTYPE.wys:
@@ -105,7 +107,7 @@ const Icon = ({ iconType }) => {
             )
         case 'loop':
             return (
-                <div className={classes.iconContainer}>
+                <div className={classes.iconContainer} onClick={() =>  dispatch(toggleAddLoop())}>
                     <Loop />
                     <p>Loop Row</p>
                 </div>
@@ -125,7 +127,7 @@ const ElementsBoard = () => {
     const classes = useStyle()
     const dispatch = useDispatch()
     const elementsList = Object.keys(ELEMENTTYPE).filter(item => { return (item !== 'rows' && item !== 'columns') })
-    const { currentId, columnId, rowId, currentType } = useSelector(state => state.editable)
+    const { columnId, rowId, currentType } = useSelector(state => state.editable)
     const isColumn = currentType === ELEMENTTYPE.columns
     const isRow = currentType === ELEMENTTYPE.rows
 
@@ -150,7 +152,7 @@ const ElementsBoard = () => {
                         <div className={classes.listContainer}>
                             {
                                 elementsList.map((item, index) => (
-                                    <div className={classes.elementContainer} onClick={() => _addElement(item)} key={index}>
+                                    <div className={classes.elementContainer} onClick={() => _addElement(item)} key={uid()} >
                                         <Icon iconType={item} />
                                     </div>
                                 ))

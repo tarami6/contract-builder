@@ -23,12 +23,16 @@ class EditorConvertToJSON extends Component {
   }
 
   componentDidMount() {
+    const contentState = ContentState.createFromBlockArray(htmlToDraft(this.props.elements[this.props.elementId].content));
+    const editorState = EditorState.createWithContent(contentState);
     this.setState({
       ...this.state,
+      editorState,
       elementId: this.props.elementId,
       currentElement: this.props.elements[this.props.elementId]
     })
   }
+
   componentDidUpdate(prevProps) {
     if (prevProps.elements[this.props.elementId].content !== this.props.elements[this.props.elementId].content) {
       const contentState = ContentState.createFromBlockArray(htmlToDraft(this.props.elements[this.props.elementId].content));
@@ -42,7 +46,9 @@ class EditorConvertToJSON extends Component {
     }
   }
 
-  onEditorStateChange = (editorState) => {
+  onEditorStateChange = (editorState, e) => {
+
+    console.log('onEditorStateChange', e)
     this.setState({
       editorState,
     });
@@ -52,18 +58,18 @@ class EditorConvertToJSON extends Component {
     const { editMode, currentElement } = this.state;
     const { columns } = this.props
     this.setState({ editMode: !editMode })
-
+    console.log('double click')
     let newWidth = {
       ...columns[currentElement.columnId].style,
     }
 
-    if (!editMode) {
-      newWidth.minWidth = '95%'
-      this.props.dispatchStyle(currentElement.columnId, newWidth)
-    } else {
-      newWidth.minWidth = '0%'
-      this.props.dispatchStyle(currentElement.columnId, newWidth)
-    }
+    // if (editMode) {
+    //   newWidth.minWidth = '95%'
+    //   this.props.dispatchStyle(currentElement.columnId, newWidth)
+    // } else {
+    //   newWidth.minWidth = '0%'
+    //   this.props.dispatchStyle(currentElement.columnId, newWidth)
+    // }
   }
 
   save = () => {
@@ -76,7 +82,9 @@ class EditorConvertToJSON extends Component {
   setEditable = (e) => {
     const { currentElement } = this.state
     e.stopPropagation()
-    this.props.setEditable(currentElement)
+    if(currentElement?.id !== this.props.editable.currentId){
+      this.props.setEditable(currentElement)
+    }
   }
 
   onLeave = (e) => {
@@ -94,10 +102,10 @@ class EditorConvertToJSON extends Component {
     const { editable } = this.props
     return (
       <Card
-        onMouseOver={this.onEnter}
-        onMouseOut={this.onLeave}
-        style={{ ...currentElement?.style, minHeight: editMode ? '300px' : 'inherit', display: 'flex' }}
-        elevation={(elementId === editable.currentId || hover) ? 3 : 0}
+        // onMouseOver={this.onEnter}
+        // onMouseOut={this.onLeave}
+        style={{ ...currentElement?.style, minHeight: editMode ? '300px' : 'inherit', display: 'flex', width: '100%' }}
+        // elevation={(elementId === editable.currentId || hover) ? 3 : 0}
       >
         { editMode ?
           <>
